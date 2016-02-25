@@ -21,5 +21,10 @@ namespace Camera_Configuration_File_Editor
         {
 
         }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
