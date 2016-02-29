@@ -26,5 +26,9 @@ namespace Camera_Configuration_File_Editor
         {
 
         }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+                    }
     }
 }
