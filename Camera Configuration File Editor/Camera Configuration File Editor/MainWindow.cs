@@ -17,18 +17,34 @@ namespace Camera_Configuration_File_Editor
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void MainWindow_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void progressBar1_Click(object sender, EventArgs e)
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                    }
+
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loadDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
