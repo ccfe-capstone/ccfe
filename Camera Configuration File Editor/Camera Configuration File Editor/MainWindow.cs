@@ -19,7 +19,7 @@ namespace Camera_Configuration_File_Editor
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -29,7 +29,10 @@ namespace Camera_Configuration_File_Editor
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if(openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                
+            }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
