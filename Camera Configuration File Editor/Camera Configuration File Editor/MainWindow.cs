@@ -49,5 +49,60 @@ namespace Camera_Configuration_File_Editor
         {
 
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            overlapTrackBarValueLabel.Text = overlapTrackBar.Value.ToString();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void knownHalAltitudeValue_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void triggerDistanceValue_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void knownHalAltitudeUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
