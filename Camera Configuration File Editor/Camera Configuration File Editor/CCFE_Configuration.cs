@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Camera_Configuration_File_Editor
 {
     class CCFE_Configuration
     {
-        List<CCFE_ConfigurationProperty> propertyList;
+        public List<CCFE_ConfigurationProperty> propertyList;
     }
 }

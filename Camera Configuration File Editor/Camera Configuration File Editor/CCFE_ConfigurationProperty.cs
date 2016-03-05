@@ -8,6 +8,7 @@ namespace Camera_Configuration_File_Editor
 {
     class CCFE_ConfigurationProperty
     {
-        string name;
+        public string name;
+        public string value;
     }
 }

@@ -48,9 +48,6 @@
   <ItemGroup>
     <Compile Include="CCFE_Configuration.cs" />
     <Compile Include="CCFE_ConfigurationProperty.cs" />
-    <Compile Include="CCFE_ConfigurationPropertyDouble.cs" />
-    <Compile Include="CCFE_ConfigurationPropertyInteger.cs" />
-    <Compile Include="CCFE_ConfigurationPropertyString.cs" />
     <Compile Include="CCFE_DisplayController.cs" />
     <Compile Include="CCFE_FileHandler.cs" />
     <Compile Include="CCFE_FileIO.cs" />
