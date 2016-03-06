@@ -8,7 +8,7 @@ namespace Camera_Configuration_File_Editor
 {
     public class CCFE_FileHandler
     {
-        //Constants
+        #region property constants
         const string PROPERTY_TRIGGERMODE = "TriggerMode";
         const string PROPERTY_OVERLAPPERCENT = "OverlapPercent";
         const string PROPERTY_KNOWNHALALTITUDEUNITS = "KnownHalAltitudeUnits";
@@ -17,7 +17,8 @@ namespace Camera_Configuration_File_Editor
         const string PROPERTY_DISTANCE = "Distance";
         const string PROPERTY_WAITFORGPSFIX = "WaitForGpsFix";
         const string PROPERTY_VERSION = "Version";
-
+        #endregion
+        #region property comment constants
         const string COMMENTS_TRIGGERMODE = 
             "# TriggerMode\n" +
             "# 0: Time (for systems without GPS only)\n" +
@@ -50,8 +51,9 @@ namespace Camera_Configuration_File_Editor
         const string COMMENTS_VERSION =
             "# Indicates version of this file, to know what fields are available\n" +
             "# Minor number increments when new fields are added\n";
-        //End of Constants
+        #endregion
 
+        #region variables
         private string fileLocation;
 
         public string FileLocation
@@ -66,14 +68,16 @@ namespace Camera_Configuration_File_Editor
                 fileLocation = value;
             }
         }
+        #endregion
 
-        //constructors
+        #region constructors
         public CCFE_FileHandler(string fileLocation)
         {
             this.FileLocation = fileLocation;
         }
+        #endregion
 
-        //methods
+        #region public methods
         public void save(CCFE_Configuration configuration)
         {
             string configurationFileText;
@@ -115,7 +119,9 @@ namespace Camera_Configuration_File_Editor
 
             return propertyList;
         }
+        #endregion
 
+        #region private methods
         private string appendProperty(CCFE_ConfigurationProperty property)
         {
             string appendText = "";
@@ -163,5 +169,6 @@ namespace Camera_Configuration_File_Editor
 
             return appendText;
         }
+        #endregion
     }
 }

@@ -9,11 +9,7 @@ namespace Camera_Configuration_File_Editor
 {
     public class CCFE_Configuration
     {
-        public CCFE_Configuration()
-        {
-            propertyList = new List<CCFE_ConfigurationProperty>();
-        }
-
+        #region variables
         private List<CCFE_ConfigurationProperty> propertyList;
 
         public List<CCFE_ConfigurationProperty> PropertyList
@@ -28,10 +24,20 @@ namespace Camera_Configuration_File_Editor
                 propertyList = value;
             }
         }
+        #endregion
 
+        #region constructors
+        public CCFE_Configuration()
+        {
+            propertyList = new List<CCFE_ConfigurationProperty>();
+        }
+        #endregion
+
+        #region public methods
         public void addProperty(CCFE_ConfigurationProperty property)
         {
             propertyList.Add(property);
         }
+        #endregion
     }
 }

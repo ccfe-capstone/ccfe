@@ -8,6 +8,7 @@ namespace Camera_Configuration_File_Editor
 {
     public class CCFE_ConfigurationProperty
     {
+        #region variables
         public CCFE_ConfigurationProperty(string name, string value)
         {
             this.Name = name;
@@ -41,5 +42,6 @@ namespace Camera_Configuration_File_Editor
                 this.value = value;
             }
         }
+        #endregion
     }
 }

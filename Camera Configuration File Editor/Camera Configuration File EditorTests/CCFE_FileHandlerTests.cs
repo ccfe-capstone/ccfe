@@ -11,6 +11,7 @@ namespace Camera_Configuration_File_Editor.Tests
     [TestClass()]
     public class CCFE_FileHandlerTests
     {
+        #region constants
         const int UserSettingsPropertyCount = 8;
         const string UserSettingsTestData =
             "[UserSettings]\n" +
@@ -51,6 +52,7 @@ namespace Camera_Configuration_File_Editor.Tests
             "# Indicates version of this file, to know what fields are available\n" +
             "# Minor number increments when new fields are added\n" +
             "Version=1.0\n";
+        #endregion
 
         [TestMethod()]
         public void CCFE_FileHandlerTest()
