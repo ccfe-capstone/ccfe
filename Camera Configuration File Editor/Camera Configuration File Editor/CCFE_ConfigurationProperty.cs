@@ -10,11 +10,36 @@ namespace Camera_Configuration_File_Editor
     {
         public CCFE_ConfigurationProperty(string name, string value)
         {
-            this.name = name;
-            this.value = value;
+            this.Name = name;
+            this.Value = value;
         }
 
-        public string name;
-        public string value;
+        private string name;
+        private string value;
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
+        }
+        public string Value
+        {
+            get
+            {
+                return value;
+            }
+
+            set
+            {
+                this.value = value;
+            }
+        }
     }
 }

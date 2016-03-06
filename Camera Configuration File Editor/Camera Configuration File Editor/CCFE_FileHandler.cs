@@ -15,7 +15,7 @@ namespace Camera_Configuration_File_Editor
         const string PROPERTY_KNOWNHALALTITUDE = "KnownHalAltitude";
         const string PROPERTY_TIME = "Time";
         const string PROPERTY_DISTANCE = "Distance";
-        const string PROPERTY_WAITFORGPSFIX = "WaitForGPSFix";
+        const string PROPERTY_WAITFORGPSFIX = "WaitForGpsFix";
         const string PROPERTY_VERSION = "Version";
 
         const string COMMENTS_TRIGGERMODE = 
@@ -52,25 +52,40 @@ namespace Camera_Configuration_File_Editor
             "# Minor number increments when new fields are added\n";
         //End of Constants
 
-        public string fileLocation;
+        private string fileLocation;
 
-        public CCFE_FileHandler(string fileLocation)
+        public string FileLocation
         {
-            this.fileLocation = fileLocation;
+            get
+            {
+                return fileLocation;
+            }
+
+            set
+            {
+                fileLocation = value;
+            }
         }
 
+        //constructors
+        public CCFE_FileHandler(string fileLocation)
+        {
+            this.FileLocation = fileLocation;
+        }
+
+        //methods
         public void save(CCFE_Configuration configuration)
         {
             string configurationFileText;
 
             configurationFileText = "[UserSettings]\n";
 
-            foreach (CCFE_ConfigurationProperty property in configuration.propertyList)
+            foreach (CCFE_ConfigurationProperty property in configuration.PropertyList)
             {
                 configurationFileText = configurationFileText + appendProperty(property);
             }
 
-            CCFE_FileIO.writeFile(fileLocation, configurationFileText);
+            CCFE_FileIO.writeFile(FileLocation, configurationFileText);
         }
 
         public List<CCFE_ConfigurationProperty> parse()
@@ -78,13 +93,13 @@ namespace Camera_Configuration_File_Editor
             List<CCFE_ConfigurationProperty> propertyList = new List<CCFE_ConfigurationProperty>();
 
             //read in file data as string
-            string fileText = CCFE_FileIO.readFile(fileLocation);
+            string fileText = CCFE_FileIO.readFile(FileLocation);
 
             //create StringReader to parse string
             System.IO.StringReader stringReader = new System.IO.StringReader(fileText);
 
             string line;
-            string propertyPattern = "/^([A-Z])([A-z])+=\\S+/";
+            string propertyPattern = "^([A-Z])([A-z])+=\\S+";
             string[] propertyValues;
             while ((line = stringReader.ReadLine()) != null)
             {
@@ -101,49 +116,49 @@ namespace Camera_Configuration_File_Editor
             return propertyList;
         }
 
-        string appendProperty(CCFE_ConfigurationProperty property)
+        private string appendProperty(CCFE_ConfigurationProperty property)
         {
             string appendText = "";
 
-            if (property.name.Equals(PROPERTY_TRIGGERMODE))
+            if (property.Name.Equals(PROPERTY_TRIGGERMODE))
             {
                 appendText = COMMENTS_TRIGGERMODE;
-                appendText = appendText + property.value + "=" + property.value + "\n";
+                appendText = appendText + property.Name + "=" + property.Value + "\n";
             }
-            else if (property.name.Equals(PROPERTY_OVERLAPPERCENT))
+            else if (property.Name.Equals(PROPERTY_OVERLAPPERCENT))
             {
-                appendText = COMMENTS_OVERLAPPERCENT;
-                appendText = appendText + property.value + "=" + property.value + "\n";
+                appendText = "\n" + COMMENTS_OVERLAPPERCENT;
+                appendText = appendText + property.Name + "=" + property.Value + "\n";
             }
-            else if (property.name.Equals(PROPERTY_KNOWNHALALTITUDEUNITS))
+            else if (property.Name.Equals(PROPERTY_KNOWNHALALTITUDEUNITS))
             {
-                appendText = COMMENTS_KNOWNHALALTITUDEUNITS;
-                appendText = appendText + property.value + "=" + property.value + "\n";
+                appendText = "\n" + COMMENTS_KNOWNHALALTITUDEUNITS;
+                appendText = appendText + property.Name + "=" + property.Value + "\n";
             }
-            else if (property.name.Equals(PROPERTY_KNOWNHALALTITUDE))
+            else if (property.Name.Equals(PROPERTY_KNOWNHALALTITUDE))
             {
                 appendText = COMMENTS_KNOWNHALALTITUDE;
-                appendText = appendText + property.value + "=" + property.value + "\n";
+                appendText = appendText + property.Name + "=" + property.Value + "\n";
             }
-            else if (property.name.Equals(PROPERTY_TIME))
+            else if (property.Name.Equals(PROPERTY_TIME))
             {
-                appendText = COMMENTS_TIME;
-                appendText = appendText + property.value + "=" + property.value + "\n";
+                appendText = "\n" + COMMENTS_TIME;
+                appendText = appendText + property.Name + "=" + property.Value + "\n";
             }
-            else if (property.name.Equals(PROPERTY_DISTANCE))
+            else if (property.Name.Equals(PROPERTY_DISTANCE))
             {
-                appendText = COMMENTS_DISTANCE;
-                appendText = appendText + property.value + "=" + property.value + "\n";
+                appendText = "\n" + COMMENTS_DISTANCE;
+                appendText = appendText + property.Name + "=" + property.Value + "\n";
             }
-            else if (property.name.Equals(PROPERTY_WAITFORGPSFIX))
+            else if (property.Name.Equals(PROPERTY_WAITFORGPSFIX))
             {
-                appendText = COMMENTS_WAITFORGPSFIX;
-                appendText = appendText + property.value + "=" + property.value + "\n";
+                appendText = "\n" + COMMENTS_WAITFORGPSFIX;
+                appendText = appendText + property.Name + "=" + property.Value + "\n";
             }
-            else if (property.name.Equals(PROPERTY_VERSION))
+            else if (property.Name.Equals(PROPERTY_VERSION))
             {
-                appendText = COMMENTS_VERSION;
-                appendText = appendText + property.value + "=" + property.value + "\n";
+                appendText = "\n" + COMMENTS_VERSION;
+                appendText = appendText + property.Name + "=" + property.Value + "\n";
             }
 
             return appendText;

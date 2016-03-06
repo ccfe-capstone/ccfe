@@ -9,6 +9,29 @@ namespace Camera_Configuration_File_Editor
 {
     public class CCFE_Configuration
     {
-        public List<CCFE_ConfigurationProperty> propertyList;
+        public CCFE_Configuration()
+        {
+            propertyList = new List<CCFE_ConfigurationProperty>();
+        }
+
+        private List<CCFE_ConfigurationProperty> propertyList;
+
+        public List<CCFE_ConfigurationProperty> PropertyList
+        {
+            get
+            {
+                return propertyList;
+            }
+
+            set
+            {
+                propertyList = value;
+            }
+        }
+
+        public void addProperty(CCFE_ConfigurationProperty property)
+        {
+            propertyList.Add(property);
+        }
     }
 }
