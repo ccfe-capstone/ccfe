@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Camera_Configuration_File_Editor
 {
-    class CCFE_ConfigurationProperty
+    public class CCFE_ConfigurationProperty
     {
+        public CCFE_ConfigurationProperty(string name, string value)
+        {
+            this.name = name;
+            this.value = value;
+        }
+
         public string name;
         public string value;
     }

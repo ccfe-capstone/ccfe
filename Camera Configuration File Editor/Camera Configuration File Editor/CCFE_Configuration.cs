@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Camera_Configuration_File_Editor
 {
-    class CCFE_Configuration
+    public class CCFE_Configuration
     {
         public List<CCFE_ConfigurationProperty> propertyList;
     }

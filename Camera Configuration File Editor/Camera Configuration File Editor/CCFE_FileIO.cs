@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Camera_Configuration_File_Editor
 {
-    class CCFE_FileIO
+    public class CCFE_FileIO
     {
         public static void writeFile(string fileLocation, string configurationFileText)
         {

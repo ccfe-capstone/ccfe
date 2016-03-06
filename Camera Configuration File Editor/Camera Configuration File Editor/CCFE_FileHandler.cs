@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Camera_Configuration_File_Editor
 {
-    class CCFE_FileHandler
+    public class CCFE_FileHandler
     {
         //Constants
         const string PROPERTY_TRIGGERMODE = "TriggerMode";
@@ -75,7 +75,30 @@ namespace Camera_Configuration_File_Editor
 
         public List<CCFE_ConfigurationProperty> parse()
         {
-            return new List<CCFE_ConfigurationProperty>(); //TODO
+            List<CCFE_ConfigurationProperty> propertyList = new List<CCFE_ConfigurationProperty>();
+
+            //read in file data as string
+            string fileText = CCFE_FileIO.readFile(fileLocation);
+
+            //create StringReader to parse string
+            System.IO.StringReader stringReader = new System.IO.StringReader(fileText);
+
+            string line;
+            string propertyPattern = "/^([A-Z])([A-z])+=\\S+/";
+            string[] propertyValues;
+            while ((line = stringReader.ReadLine()) != null)
+            {
+                //check if line is a property using regex
+                if (System.Text.RegularExpressions.Regex.IsMatch(line, propertyPattern))
+                {
+                    //break string into 'name' and 'value' parts
+                    propertyValues = line.Split('=');
+                    propertyList.Add(new CCFE_ConfigurationProperty(propertyValues[0], propertyValues[1]));
+                }
+            }
+            stringReader.Close();
+
+            return propertyList;
         }
 
         string appendProperty(CCFE_ConfigurationProperty property)
