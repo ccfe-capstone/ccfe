@@ -52,7 +52,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CCFE_FileHandlerTests.cs" />
-    <Compile Include="CCFE_FileIOTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

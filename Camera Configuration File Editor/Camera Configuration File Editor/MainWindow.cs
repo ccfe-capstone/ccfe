@@ -12,6 +12,8 @@ namespace Camera_Configuration_File_Editor
 {
     public partial class MainWindow : Form
     {
+        CCFE_Configuration configuration;
+
         public MainWindow()
         {
             InitializeComponent();

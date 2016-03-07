@@ -89,7 +89,7 @@ namespace Camera_Configuration_File_Editor
                 configurationFileText = configurationFileText + appendProperty(property);
             }
 
-            CCFE_FileIO.writeFile(FileLocation, configurationFileText);
+            System.IO.File.WriteAllText(FileLocation, configurationFileText);
         }
 
         public List<CCFE_ConfigurationProperty> parse()
@@ -97,7 +97,7 @@ namespace Camera_Configuration_File_Editor
             List<CCFE_ConfigurationProperty> propertyList = new List<CCFE_ConfigurationProperty>();
 
             //read in file data as string
-            string fileText = CCFE_FileIO.readFile(FileLocation);
+            string fileText = System.IO.File.ReadAllText(FileLocation);
 
             //create StringReader to parse string
             System.IO.StringReader stringReader = new System.IO.StringReader(fileText);
