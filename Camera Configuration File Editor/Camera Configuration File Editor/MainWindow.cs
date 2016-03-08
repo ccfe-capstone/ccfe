@@ -36,6 +36,26 @@ namespace Camera_Configuration_File_Editor
             {
                 fileHandler = new CCFE_FileHandler(openFileDialog.FileName);
                 configuration = new CCFE_Configuration(fileHandler.parse());
+
+                triggerModeComboBox.SelectedIndex = Convert.ToInt32(configuration.getValue(CCFE_Configuration.PROPERTY_TRIGGERMODE));
+                overlapTrackBar.Value = Convert.ToInt32(configuration.getValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT));
+
+                gpsFixCheckBox.Checked = (bool)configuration.getValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX).Equals("yes");
+                knownHalAltitudeValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDE);
+                
+                //sets the known hal altitude unit
+                if(configuration.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS).Equals("feet"))
+                {
+                    //feet
+                    knownHalAltitudeUnit.SelectedIndex = 0;
+                }
+                else
+                {
+                    //meters
+                    knownHalAltitudeUnit.SelectedIndex = 1;
+                }
+                triggerPeriodValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_TIME);
+                triggerDistanceValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_DISTANCE);
             }
         }
 
@@ -135,7 +155,8 @@ namespace Camera_Configuration_File_Editor
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            overlapTrackBarValueLabel.Text = overlapTrackBar.Value.ToString();
+            overlapTrackBarValueLabel.Text = overlapTrackBar.Value.ToString() + "%";
+            overlapTrackBarValueLabel.Location = new Point(determineXCordOfTrackBar(overlapTrackBar.Value), 35);
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -181,6 +202,23 @@ namespace Camera_Configuration_File_Editor
         private void saveConfigurationButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void overlapTrackBarValueLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //needed to move the trackbarLabel with the trackbar as it scrolls horizontally
+        public int determineXCordOfTrackBar(int trackbarValue)
+        {
+            int xValue;
+            if (trackbarValue == 0)
+            {
+                xValue = 101;
+            }
+            xValue = 100 + (trackbarValue * 3);
+            return xValue;
         }
     }
 }

@@ -60,10 +60,11 @@
             this.knownHalAltitudeUnit = new System.Windows.Forms.ComboBox();
             this.overlapPanel = new System.Windows.Forms.Panel();
             this.overlapLabel = new System.Windows.Forms.Label();
-            this.overlapTrackBarValueLabel = new System.Windows.Forms.Label();
-            this.maxTrackBarValue = new System.Windows.Forms.Label();
+            this.overlapTrackBarMinLabel = new System.Windows.Forms.Label();
+            this.overlapTrackBarMaxLabel = new System.Windows.Forms.Label();
             this.overlapTrackBar = new System.Windows.Forms.TrackBar();
             this.saveConfigurationButton = new System.Windows.Forms.Button();
+            this.overlapTrackBarValueLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.TriggerModeGroupBox.SuspendLayout();
             this.TriggerOptionsGroupBox.SuspendLayout();
@@ -351,9 +352,10 @@
             // 
             // overlapPanel
             // 
-            this.overlapPanel.Controls.Add(this.overlapLabel);
             this.overlapPanel.Controls.Add(this.overlapTrackBarValueLabel);
-            this.overlapPanel.Controls.Add(this.maxTrackBarValue);
+            this.overlapPanel.Controls.Add(this.overlapLabel);
+            this.overlapPanel.Controls.Add(this.overlapTrackBarMinLabel);
+            this.overlapPanel.Controls.Add(this.overlapTrackBarMaxLabel);
             this.overlapPanel.Controls.Add(this.overlapTrackBar);
             this.overlapPanel.Location = new System.Drawing.Point(6, 19);
             this.overlapPanel.Name = "overlapPanel";
@@ -372,25 +374,25 @@
             this.overlapLabel.Text = "Overlap %:";
             this.overlapLabel.Click += new System.EventHandler(this.label1_Click);
             // 
-            // overlapTrackBarValueLabel
+            // overlapTrackBarMinLabel
             // 
-            this.overlapTrackBarValueLabel.AutoSize = true;
-            this.overlapTrackBarValueLabel.Location = new System.Drawing.Point(75, 11);
-            this.overlapTrackBarValueLabel.Name = "overlapTrackBarValueLabel";
-            this.overlapTrackBarValueLabel.Size = new System.Drawing.Size(13, 13);
-            this.overlapTrackBarValueLabel.TabIndex = 2;
-            this.overlapTrackBarValueLabel.Text = "0";
-            this.overlapTrackBarValueLabel.Click += new System.EventHandler(this.label2_Click);
+            this.overlapTrackBarMinLabel.AutoSize = true;
+            this.overlapTrackBarMinLabel.Location = new System.Drawing.Point(75, 11);
+            this.overlapTrackBarMinLabel.Name = "overlapTrackBarMinLabel";
+            this.overlapTrackBarMinLabel.Size = new System.Drawing.Size(21, 13);
+            this.overlapTrackBarMinLabel.TabIndex = 2;
+            this.overlapTrackBarMinLabel.Text = "0%";
+            this.overlapTrackBarMinLabel.Click += new System.EventHandler(this.label2_Click);
             // 
-            // maxTrackBarValue
+            // overlapTrackBarMaxLabel
             // 
-            this.maxTrackBarValue.AutoSize = true;
-            this.maxTrackBarValue.Location = new System.Drawing.Point(427, 11);
-            this.maxTrackBarValue.Name = "maxTrackBarValue";
-            this.maxTrackBarValue.Size = new System.Drawing.Size(25, 13);
-            this.maxTrackBarValue.TabIndex = 3;
-            this.maxTrackBarValue.Text = "100";
-            this.maxTrackBarValue.Click += new System.EventHandler(this.label3_Click);
+            this.overlapTrackBarMaxLabel.AutoSize = true;
+            this.overlapTrackBarMaxLabel.Location = new System.Drawing.Point(427, 11);
+            this.overlapTrackBarMaxLabel.Name = "overlapTrackBarMaxLabel";
+            this.overlapTrackBarMaxLabel.Size = new System.Drawing.Size(33, 13);
+            this.overlapTrackBarMaxLabel.TabIndex = 3;
+            this.overlapTrackBarMaxLabel.Text = "100%";
+            this.overlapTrackBarMaxLabel.Click += new System.EventHandler(this.label3_Click);
             // 
             // overlapTrackBar
             // 
@@ -411,6 +413,16 @@
             this.saveConfigurationButton.Text = "Save";
             this.saveConfigurationButton.UseVisualStyleBackColor = true;
             this.saveConfigurationButton.Click += new System.EventHandler(this.saveConfigurationButton_Click);
+            // 
+            // overlapTrackBarValueLabel
+            // 
+            this.overlapTrackBarValueLabel.AutoSize = true;
+            this.overlapTrackBarValueLabel.Location = new System.Drawing.Point(101, 35);
+            this.overlapTrackBarValueLabel.Name = "overlapTrackBarValueLabel";
+            this.overlapTrackBarValueLabel.Size = new System.Drawing.Size(21, 13);
+            this.overlapTrackBarValueLabel.TabIndex = 4;
+            this.overlapTrackBarValueLabel.Text = "0%";
+            this.overlapTrackBarValueLabel.Click += new System.EventHandler(this.overlapTrackBarValueLabel_Click);
             // 
             // MainWindow
             // 
@@ -463,8 +475,8 @@
         private System.Windows.Forms.ComboBox triggerModeComboBox;
         private System.Windows.Forms.GroupBox TriggerOptionsGroupBox;
         private System.Windows.Forms.TrackBar overlapTrackBar;
-        private System.Windows.Forms.Label maxTrackBarValue;
-        private System.Windows.Forms.Label overlapTrackBarValueLabel;
+        private System.Windows.Forms.Label overlapTrackBarMaxLabel;
+        private System.Windows.Forms.Label overlapTrackBarMinLabel;
         private System.Windows.Forms.Label overlapLabel;
         private System.Windows.Forms.CheckBox gpsFixCheckBox;
         private System.Windows.Forms.Panel overlapPanel;
@@ -482,6 +494,7 @@
         private System.Windows.Forms.Panel knownHalAltPanel;
         private System.Windows.Forms.Panel triggerDistancePanel;
         private System.Windows.Forms.Button saveConfigurationButton;
+        private System.Windows.Forms.Label overlapTrackBarValueLabel;
     }
 }
 
