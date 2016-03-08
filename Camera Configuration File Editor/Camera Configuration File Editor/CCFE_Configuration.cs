@@ -9,6 +9,10 @@ namespace Camera_Configuration_File_Editor
 {
     public class CCFE_Configuration
     {
+        #region constants
+        const string NOVALUE = "";
+        #endregion
+
         #region variables
         private List<CCFE_ConfigurationProperty> propertyList;
 
@@ -60,7 +64,21 @@ namespace Camera_Configuration_File_Editor
             propertyList.Add(property);
         }
 
-        public void updateValue(string propertyName, string value)
+        public string getValue(string propertyName)
+        {
+            foreach (CCFE_ConfigurationProperty property in propertyList)
+            {
+                if (property.Name.Equals(propertyName))
+                {
+                    return property.Value;
+                }
+            }
+
+            //we didn't find anything
+            return NOVALUE;
+        }
+
+        public void setValue(string propertyName, string value)
         {
             foreach (CCFE_ConfigurationProperty property in propertyList)
             {
