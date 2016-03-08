@@ -214,28 +214,26 @@ namespace Camera_Configuration_File_Editor
         private void setTrackBarLabelLocationAndText()
         {
             overlapTrackBarValueLabel.Text = overlapTrackBar.Value.ToString() + "%";
-            overlapTrackBarValueLabel.Location = new Point(determineXCordOfTrackBar(overlapTrackBar.Value), 35);
+            overlapTrackBarValueLabel.Location = determineCoordsOfOverlapTrackBar();
         }
 
         //needed to move the trackbarLabel with the trackbar as it scrolls horizontally
-        private int determineXCordOfTrackBar(int trackbarValue)
+        private Point determineCoordsOfOverlapTrackBar()
         {
             int xValue;
-            if (trackbarValue < 10)
+            if (overlapTrackBar.Value < 10)
             {
-                xValue = 101 + (trackbarValue * 3);
-                return xValue;
+                xValue = (overlapTrackBar.Location.X + 7);
             }
-            else if (trackbarValue >= 10 && trackbarValue < 100)
+            else if (overlapTrackBar.Value >= 10 && overlapTrackBar.Value < 100)
             {
-                xValue = 98 + (trackbarValue * 3);
-                return xValue;
+                xValue = (overlapTrackBar.Location.X + 4);
             }
             else
             {
-                xValue = 395;
-                return xValue;
+                xValue = overlapTrackBar.Location.X + 1;
             }
+            return new Point(xValue + (overlapTrackBar.Value * 3), overlapTrackBarValueLabel.Location.Y);
         }
     }
 }
