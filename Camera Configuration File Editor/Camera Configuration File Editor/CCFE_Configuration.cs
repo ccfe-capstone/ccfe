@@ -11,6 +11,15 @@ namespace Camera_Configuration_File_Editor
     {
         #region constants
         const string NOVALUE = "";
+
+        public const string PROPERTY_TRIGGERMODE = "TriggerMode";
+        public const string PROPERTY_OVERLAPPERCENT = "OverlapPercent";
+        public const string PROPERTY_KNOWNHALALTITUDEUNITS = "KnownHalAltitudeUnits";
+        public const string PROPERTY_KNOWNHALALTITUDE = "KnownHalAltitude";
+        public const string PROPERTY_TIME = "Time";
+        public const string PROPERTY_DISTANCE = "Distance";
+        public const string PROPERTY_WAITFORGPSFIX = "WaitForGpsFix";
+        public const string PROPERTY_VERSION = "Version";
         #endregion
 
         #region variables
