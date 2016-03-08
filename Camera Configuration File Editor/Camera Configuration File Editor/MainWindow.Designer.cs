@@ -44,26 +44,35 @@
             this.triggerModeComboBox = new System.Windows.Forms.ComboBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.TriggerOptionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.triggerDistancePanel = new System.Windows.Forms.Panel();
+            this.triggerDistanceUnit = new System.Windows.Forms.Label();
+            this.triggerDistanceLabel = new System.Windows.Forms.Label();
+            this.triggerDistanceValue = new System.Windows.Forms.TextBox();
+            this.triggerPeriodPanel = new System.Windows.Forms.Panel();
+            this.triggerPeriodLabel = new System.Windows.Forms.Label();
+            this.triggerPeriodUnit = new System.Windows.Forms.Label();
+            this.triggerPeriodValue = new System.Windows.Forms.TextBox();
+            this.waitForGpsFixPanel = new System.Windows.Forms.Panel();
             this.gpsFixCheckBox = new System.Windows.Forms.CheckBox();
-            this.maxTrackBarValue = new System.Windows.Forms.Label();
-            this.overlapTrackBarValueLabel = new System.Windows.Forms.Label();
-            this.overlapTrackBar = new System.Windows.Forms.TrackBar();
-            this.overlapLabel = new System.Windows.Forms.Label();
-            this.triggerOptionsPanel = new System.Windows.Forms.Panel();
+            this.knownHalAltPanel = new System.Windows.Forms.Panel();
             this.knownHalLabel = new System.Windows.Forms.Label();
             this.knownHalAltitudeValue = new System.Windows.Forms.TextBox();
             this.knownHalAltitudeUnit = new System.Windows.Forms.ComboBox();
-            this.triggerPeriodLabel = new System.Windows.Forms.Label();
-            this.triggerDistanceLabel = new System.Windows.Forms.Label();
-            this.triggerPeriodValue = new System.Windows.Forms.TextBox();
-            this.triggerDistanceValue = new System.Windows.Forms.TextBox();
-            this.triggerPeriodUnit = new System.Windows.Forms.Label();
-            this.triggerDistanceUnit = new System.Windows.Forms.Label();
+            this.overlapPanel = new System.Windows.Forms.Panel();
+            this.overlapLabel = new System.Windows.Forms.Label();
+            this.overlapTrackBarValueLabel = new System.Windows.Forms.Label();
+            this.maxTrackBarValue = new System.Windows.Forms.Label();
+            this.overlapTrackBar = new System.Windows.Forms.TrackBar();
+            this.saveConfigurationButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.TriggerModeGroupBox.SuspendLayout();
             this.TriggerOptionsGroupBox.SuspendLayout();
+            this.triggerDistancePanel.SuspendLayout();
+            this.triggerPeriodPanel.SuspendLayout();
+            this.waitForGpsFixPanel.SuspendLayout();
+            this.knownHalAltPanel.SuspendLayout();
+            this.overlapPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.overlapTrackBar)).BeginInit();
-            this.triggerOptionsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -163,7 +172,7 @@
             this.TriggerModeGroupBox.Controls.Add(this.triggerModeComboBox);
             this.TriggerModeGroupBox.Location = new System.Drawing.Point(13, 28);
             this.TriggerModeGroupBox.Name = "TriggerModeGroupBox";
-            this.TriggerModeGroupBox.Size = new System.Drawing.Size(526, 105);
+            this.TriggerModeGroupBox.Size = new System.Drawing.Size(526, 58);
             this.TriggerModeGroupBox.TabIndex = 4;
             this.TriggerModeGroupBox.TabStop = false;
             this.TriggerModeGroupBox.Text = "Trigger Mode";
@@ -181,7 +190,7 @@
             "GPS Time",
             "GPS Overlap - Auto Detect Altitude",
             "GPS Overlap - Known Altitude"});
-            this.triggerModeComboBox.Location = new System.Drawing.Point(38, 44);
+            this.triggerModeComboBox.Location = new System.Drawing.Point(43, 19);
             this.triggerModeComboBox.Name = "triggerModeComboBox";
             this.triggerModeComboBox.Size = new System.Drawing.Size(197, 21);
             this.triggerModeComboBox.TabIndex = 0;
@@ -194,13 +203,12 @@
             // 
             // TriggerOptionsGroupBox
             // 
-            this.TriggerOptionsGroupBox.Controls.Add(this.triggerOptionsPanel);
-            this.TriggerOptionsGroupBox.Controls.Add(this.gpsFixCheckBox);
-            this.TriggerOptionsGroupBox.Controls.Add(this.maxTrackBarValue);
-            this.TriggerOptionsGroupBox.Controls.Add(this.overlapTrackBarValueLabel);
-            this.TriggerOptionsGroupBox.Controls.Add(this.overlapLabel);
-            this.TriggerOptionsGroupBox.Controls.Add(this.overlapTrackBar);
-            this.TriggerOptionsGroupBox.Location = new System.Drawing.Point(13, 152);
+            this.TriggerOptionsGroupBox.Controls.Add(this.triggerDistancePanel);
+            this.TriggerOptionsGroupBox.Controls.Add(this.triggerPeriodPanel);
+            this.TriggerOptionsGroupBox.Controls.Add(this.waitForGpsFixPanel);
+            this.TriggerOptionsGroupBox.Controls.Add(this.knownHalAltPanel);
+            this.TriggerOptionsGroupBox.Controls.Add(this.overlapPanel);
+            this.TriggerOptionsGroupBox.Location = new System.Drawing.Point(13, 92);
             this.TriggerOptionsGroupBox.Name = "TriggerOptionsGroupBox";
             this.TriggerOptionsGroupBox.Size = new System.Drawing.Size(526, 270);
             this.TriggerOptionsGroupBox.TabIndex = 5;
@@ -208,78 +216,114 @@
             this.TriggerOptionsGroupBox.Text = "Trigger Options";
             this.TriggerOptionsGroupBox.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // triggerDistancePanel
+            // 
+            this.triggerDistancePanel.Controls.Add(this.triggerDistanceUnit);
+            this.triggerDistancePanel.Controls.Add(this.triggerDistanceLabel);
+            this.triggerDistancePanel.Controls.Add(this.triggerDistanceValue);
+            this.triggerDistancePanel.Location = new System.Drawing.Point(6, 214);
+            this.triggerDistancePanel.Name = "triggerDistancePanel";
+            this.triggerDistancePanel.Size = new System.Drawing.Size(216, 37);
+            this.triggerDistancePanel.TabIndex = 8;
+            // 
+            // triggerDistanceUnit
+            // 
+            this.triggerDistanceUnit.AutoSize = true;
+            this.triggerDistanceUnit.Location = new System.Drawing.Point(167, 11);
+            this.triggerDistanceUnit.Name = "triggerDistanceUnit";
+            this.triggerDistanceUnit.Size = new System.Drawing.Size(47, 13);
+            this.triggerDistanceUnit.TabIndex = 8;
+            this.triggerDistanceUnit.Text = "seconds";
+            // 
+            // triggerDistanceLabel
+            // 
+            this.triggerDistanceLabel.AutoSize = true;
+            this.triggerDistanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.triggerDistanceLabel.Location = new System.Drawing.Point(3, 9);
+            this.triggerDistanceLabel.Name = "triggerDistanceLabel";
+            this.triggerDistanceLabel.Size = new System.Drawing.Size(100, 15);
+            this.triggerDistanceLabel.TabIndex = 4;
+            this.triggerDistanceLabel.Text = "Trigger Distance:";
+            // 
+            // triggerDistanceValue
+            // 
+            this.triggerDistanceValue.Location = new System.Drawing.Point(109, 8);
+            this.triggerDistanceValue.Name = "triggerDistanceValue";
+            this.triggerDistanceValue.Size = new System.Drawing.Size(52, 20);
+            this.triggerDistanceValue.TabIndex = 6;
+            this.triggerDistanceValue.TextChanged += new System.EventHandler(this.triggerDistanceValue_TextChanged);
+            // 
+            // triggerPeriodPanel
+            // 
+            this.triggerPeriodPanel.Controls.Add(this.triggerPeriodLabel);
+            this.triggerPeriodPanel.Controls.Add(this.triggerPeriodUnit);
+            this.triggerPeriodPanel.Controls.Add(this.triggerPeriodValue);
+            this.triggerPeriodPanel.Location = new System.Drawing.Point(6, 161);
+            this.triggerPeriodPanel.Name = "triggerPeriodPanel";
+            this.triggerPeriodPanel.Size = new System.Drawing.Size(204, 37);
+            this.triggerPeriodPanel.TabIndex = 7;
+            // 
+            // triggerPeriodLabel
+            // 
+            this.triggerPeriodLabel.AutoSize = true;
+            this.triggerPeriodLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.triggerPeriodLabel.Location = new System.Drawing.Point(3, 9);
+            this.triggerPeriodLabel.Name = "triggerPeriodLabel";
+            this.triggerPeriodLabel.Size = new System.Drawing.Size(88, 15);
+            this.triggerPeriodLabel.TabIndex = 3;
+            this.triggerPeriodLabel.Text = "Trigger Period:";
+            // 
+            // triggerPeriodUnit
+            // 
+            this.triggerPeriodUnit.AutoSize = true;
+            this.triggerPeriodUnit.Location = new System.Drawing.Point(152, 11);
+            this.triggerPeriodUnit.Name = "triggerPeriodUnit";
+            this.triggerPeriodUnit.Size = new System.Drawing.Size(47, 13);
+            this.triggerPeriodUnit.TabIndex = 7;
+            this.triggerPeriodUnit.Text = "seconds";
+            this.triggerPeriodUnit.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // triggerPeriodValue
+            // 
+            this.triggerPeriodValue.Location = new System.Drawing.Point(94, 8);
+            this.triggerPeriodValue.Name = "triggerPeriodValue";
+            this.triggerPeriodValue.Size = new System.Drawing.Size(52, 20);
+            this.triggerPeriodValue.TabIndex = 5;
+            // 
+            // waitForGpsFixPanel
+            // 
+            this.waitForGpsFixPanel.Controls.Add(this.gpsFixCheckBox);
+            this.waitForGpsFixPanel.Location = new System.Drawing.Point(6, 87);
+            this.waitForGpsFixPanel.Name = "waitForGpsFixPanel";
+            this.waitForGpsFixPanel.Size = new System.Drawing.Size(134, 25);
+            this.waitForGpsFixPanel.TabIndex = 7;
+            // 
             // gpsFixCheckBox
             // 
             this.gpsFixCheckBox.AutoSize = true;
             this.gpsFixCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpsFixCheckBox.Location = new System.Drawing.Point(38, 87);
+            this.gpsFixCheckBox.Location = new System.Drawing.Point(6, 3);
             this.gpsFixCheckBox.Name = "gpsFixCheckBox";
             this.gpsFixCheckBox.Size = new System.Drawing.Size(118, 19);
             this.gpsFixCheckBox.TabIndex = 4;
             this.gpsFixCheckBox.Text = "Wait For GPS Fix";
             this.gpsFixCheckBox.UseVisualStyleBackColor = true;
             // 
-            // maxTrackBarValue
+            // knownHalAltPanel
             // 
-            this.maxTrackBarValue.AutoSize = true;
-            this.maxTrackBarValue.Location = new System.Drawing.Point(456, 41);
-            this.maxTrackBarValue.Name = "maxTrackBarValue";
-            this.maxTrackBarValue.Size = new System.Drawing.Size(25, 13);
-            this.maxTrackBarValue.TabIndex = 3;
-            this.maxTrackBarValue.Text = "100";
-            this.maxTrackBarValue.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // overlapTrackBarValueLabel
-            // 
-            this.overlapTrackBarValueLabel.AutoSize = true;
-            this.overlapTrackBarValueLabel.Location = new System.Drawing.Point(104, 41);
-            this.overlapTrackBarValueLabel.Name = "overlapTrackBarValueLabel";
-            this.overlapTrackBarValueLabel.Size = new System.Drawing.Size(13, 13);
-            this.overlapTrackBarValueLabel.TabIndex = 2;
-            this.overlapTrackBarValueLabel.Text = "0";
-            this.overlapTrackBarValueLabel.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // overlapTrackBar
-            // 
-            this.overlapTrackBar.Location = new System.Drawing.Point(123, 36);
-            this.overlapTrackBar.Maximum = 100;
-            this.overlapTrackBar.Name = "overlapTrackBar";
-            this.overlapTrackBar.Size = new System.Drawing.Size(327, 45);
-            this.overlapTrackBar.TabIndex = 0;
-            this.overlapTrackBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
-            // overlapLabel
-            // 
-            this.overlapLabel.AutoSize = true;
-            this.overlapLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.overlapLabel.Location = new System.Drawing.Point(35, 39);
-            this.overlapLabel.Name = "overlapLabel";
-            this.overlapLabel.Size = new System.Drawing.Size(66, 15);
-            this.overlapLabel.TabIndex = 1;
-            this.overlapLabel.Text = "Overlap %:";
-            this.overlapLabel.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // triggerOptionsPanel
-            // 
-            this.triggerOptionsPanel.Controls.Add(this.triggerDistanceUnit);
-            this.triggerOptionsPanel.Controls.Add(this.triggerPeriodUnit);
-            this.triggerOptionsPanel.Controls.Add(this.triggerDistanceValue);
-            this.triggerOptionsPanel.Controls.Add(this.triggerPeriodValue);
-            this.triggerOptionsPanel.Controls.Add(this.triggerDistanceLabel);
-            this.triggerOptionsPanel.Controls.Add(this.triggerPeriodLabel);
-            this.triggerOptionsPanel.Controls.Add(this.knownHalAltitudeUnit);
-            this.triggerOptionsPanel.Controls.Add(this.knownHalAltitudeValue);
-            this.triggerOptionsPanel.Controls.Add(this.knownHalLabel);
-            this.triggerOptionsPanel.Location = new System.Drawing.Point(6, 121);
-            this.triggerOptionsPanel.Name = "triggerOptionsPanel";
-            this.triggerOptionsPanel.Size = new System.Drawing.Size(514, 143);
-            this.triggerOptionsPanel.TabIndex = 5;
+            this.knownHalAltPanel.Controls.Add(this.knownHalLabel);
+            this.knownHalAltPanel.Controls.Add(this.knownHalAltitudeValue);
+            this.knownHalAltPanel.Controls.Add(this.knownHalAltitudeUnit);
+            this.knownHalAltPanel.Location = new System.Drawing.Point(6, 112);
+            this.knownHalAltPanel.Name = "knownHalAltPanel";
+            this.knownHalAltPanel.Size = new System.Drawing.Size(514, 43);
+            this.knownHalAltPanel.TabIndex = 6;
             // 
             // knownHalLabel
             // 
             this.knownHalLabel.AutoSize = true;
             this.knownHalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.knownHalLabel.Location = new System.Drawing.Point(29, 14);
+            this.knownHalLabel.Location = new System.Drawing.Point(3, 16);
             this.knownHalLabel.Name = "knownHalLabel";
             this.knownHalLabel.Size = new System.Drawing.Size(113, 15);
             this.knownHalLabel.TabIndex = 0;
@@ -287,7 +331,7 @@
             // 
             // knownHalAltitudeValue
             // 
-            this.knownHalAltitudeValue.Location = new System.Drawing.Point(145, 13);
+            this.knownHalAltitudeValue.Location = new System.Drawing.Point(122, 16);
             this.knownHalAltitudeValue.Name = "knownHalAltitudeValue";
             this.knownHalAltitudeValue.Size = new System.Drawing.Size(43, 20);
             this.knownHalAltitudeValue.TabIndex = 1;
@@ -299,65 +343,74 @@
             this.knownHalAltitudeUnit.Items.AddRange(new object[] {
             "feet",
             "meters"});
-            this.knownHalAltitudeUnit.Location = new System.Drawing.Point(194, 12);
+            this.knownHalAltitudeUnit.Location = new System.Drawing.Point(171, 16);
             this.knownHalAltitudeUnit.Name = "knownHalAltitudeUnit";
             this.knownHalAltitudeUnit.Size = new System.Drawing.Size(63, 21);
             this.knownHalAltitudeUnit.TabIndex = 2;
             this.knownHalAltitudeUnit.SelectedIndexChanged += new System.EventHandler(this.knownHalAltitudeUnit_SelectedIndexChanged);
             // 
-            // triggerPeriodLabel
+            // overlapPanel
             // 
-            this.triggerPeriodLabel.AutoSize = true;
-            this.triggerPeriodLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.triggerPeriodLabel.Location = new System.Drawing.Point(29, 52);
-            this.triggerPeriodLabel.Name = "triggerPeriodLabel";
-            this.triggerPeriodLabel.Size = new System.Drawing.Size(88, 15);
-            this.triggerPeriodLabel.TabIndex = 3;
-            this.triggerPeriodLabel.Text = "Trigger Period:";
+            this.overlapPanel.Controls.Add(this.overlapLabel);
+            this.overlapPanel.Controls.Add(this.overlapTrackBarValueLabel);
+            this.overlapPanel.Controls.Add(this.maxTrackBarValue);
+            this.overlapPanel.Controls.Add(this.overlapTrackBar);
+            this.overlapPanel.Location = new System.Drawing.Point(6, 19);
+            this.overlapPanel.Name = "overlapPanel";
+            this.overlapPanel.Size = new System.Drawing.Size(514, 62);
+            this.overlapPanel.TabIndex = 5;
+            this.overlapPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.overlapPanel_Paint);
             // 
-            // triggerDistanceLabel
+            // overlapLabel
             // 
-            this.triggerDistanceLabel.AutoSize = true;
-            this.triggerDistanceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.triggerDistanceLabel.Location = new System.Drawing.Point(29, 95);
-            this.triggerDistanceLabel.Name = "triggerDistanceLabel";
-            this.triggerDistanceLabel.Size = new System.Drawing.Size(100, 15);
-            this.triggerDistanceLabel.TabIndex = 4;
-            this.triggerDistanceLabel.Text = "Trigger Distance:";
+            this.overlapLabel.AutoSize = true;
+            this.overlapLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.overlapLabel.Location = new System.Drawing.Point(3, 9);
+            this.overlapLabel.Name = "overlapLabel";
+            this.overlapLabel.Size = new System.Drawing.Size(66, 15);
+            this.overlapLabel.TabIndex = 1;
+            this.overlapLabel.Text = "Overlap %:";
+            this.overlapLabel.Click += new System.EventHandler(this.label1_Click);
             // 
-            // triggerPeriodValue
+            // overlapTrackBarValueLabel
             // 
-            this.triggerPeriodValue.Location = new System.Drawing.Point(130, 51);
-            this.triggerPeriodValue.Name = "triggerPeriodValue";
-            this.triggerPeriodValue.Size = new System.Drawing.Size(52, 20);
-            this.triggerPeriodValue.TabIndex = 5;
+            this.overlapTrackBarValueLabel.AutoSize = true;
+            this.overlapTrackBarValueLabel.Location = new System.Drawing.Point(75, 11);
+            this.overlapTrackBarValueLabel.Name = "overlapTrackBarValueLabel";
+            this.overlapTrackBarValueLabel.Size = new System.Drawing.Size(13, 13);
+            this.overlapTrackBarValueLabel.TabIndex = 2;
+            this.overlapTrackBarValueLabel.Text = "0";
+            this.overlapTrackBarValueLabel.Click += new System.EventHandler(this.label2_Click);
             // 
-            // triggerDistanceValue
+            // maxTrackBarValue
             // 
-            this.triggerDistanceValue.Location = new System.Drawing.Point(130, 95);
-            this.triggerDistanceValue.Name = "triggerDistanceValue";
-            this.triggerDistanceValue.Size = new System.Drawing.Size(52, 20);
-            this.triggerDistanceValue.TabIndex = 6;
-            this.triggerDistanceValue.TextChanged += new System.EventHandler(this.triggerDistanceValue_TextChanged);
+            this.maxTrackBarValue.AutoSize = true;
+            this.maxTrackBarValue.Location = new System.Drawing.Point(427, 11);
+            this.maxTrackBarValue.Name = "maxTrackBarValue";
+            this.maxTrackBarValue.Size = new System.Drawing.Size(25, 13);
+            this.maxTrackBarValue.TabIndex = 3;
+            this.maxTrackBarValue.Text = "100";
+            this.maxTrackBarValue.Click += new System.EventHandler(this.label3_Click);
             // 
-            // triggerPeriodUnit
+            // overlapTrackBar
             // 
-            this.triggerPeriodUnit.AutoSize = true;
-            this.triggerPeriodUnit.Location = new System.Drawing.Point(188, 54);
-            this.triggerPeriodUnit.Name = "triggerPeriodUnit";
-            this.triggerPeriodUnit.Size = new System.Drawing.Size(47, 13);
-            this.triggerPeriodUnit.TabIndex = 7;
-            this.triggerPeriodUnit.Text = "seconds";
-            this.triggerPeriodUnit.Click += new System.EventHandler(this.label5_Click);
+            this.overlapTrackBar.Location = new System.Drawing.Point(94, 9);
+            this.overlapTrackBar.Maximum = 100;
+            this.overlapTrackBar.Name = "overlapTrackBar";
+            this.overlapTrackBar.Size = new System.Drawing.Size(327, 45);
+            this.overlapTrackBar.TabIndex = 0;
+            this.overlapTrackBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
-            // triggerDistanceUnit
+            // saveConfigurationButton
             // 
-            this.triggerDistanceUnit.AutoSize = true;
-            this.triggerDistanceUnit.Location = new System.Drawing.Point(188, 98);
-            this.triggerDistanceUnit.Name = "triggerDistanceUnit";
-            this.triggerDistanceUnit.Size = new System.Drawing.Size(47, 13);
-            this.triggerDistanceUnit.TabIndex = 8;
-            this.triggerDistanceUnit.Text = "seconds";
+            this.saveConfigurationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveConfigurationButton.Location = new System.Drawing.Point(231, 388);
+            this.saveConfigurationButton.Name = "saveConfigurationButton";
+            this.saveConfigurationButton.Size = new System.Drawing.Size(96, 34);
+            this.saveConfigurationButton.TabIndex = 6;
+            this.saveConfigurationButton.Text = "Save";
+            this.saveConfigurationButton.UseVisualStyleBackColor = true;
+            this.saveConfigurationButton.Click += new System.EventHandler(this.saveConfigurationButton_Click);
             // 
             // MainWindow
             // 
@@ -365,6 +418,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(562, 434);
+            this.Controls.Add(this.saveConfigurationButton);
             this.Controls.Add(this.TriggerOptionsGroupBox);
             this.Controls.Add(this.TriggerModeGroupBox);
             this.Controls.Add(this.menuStrip1);
@@ -376,10 +430,17 @@
             this.menuStrip1.PerformLayout();
             this.TriggerModeGroupBox.ResumeLayout(false);
             this.TriggerOptionsGroupBox.ResumeLayout(false);
-            this.TriggerOptionsGroupBox.PerformLayout();
+            this.triggerDistancePanel.ResumeLayout(false);
+            this.triggerDistancePanel.PerformLayout();
+            this.triggerPeriodPanel.ResumeLayout(false);
+            this.triggerPeriodPanel.PerformLayout();
+            this.waitForGpsFixPanel.ResumeLayout(false);
+            this.waitForGpsFixPanel.PerformLayout();
+            this.knownHalAltPanel.ResumeLayout(false);
+            this.knownHalAltPanel.PerformLayout();
+            this.overlapPanel.ResumeLayout(false);
+            this.overlapPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.overlapTrackBar)).EndInit();
-            this.triggerOptionsPanel.ResumeLayout(false);
-            this.triggerOptionsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -406,7 +467,7 @@
         private System.Windows.Forms.Label overlapTrackBarValueLabel;
         private System.Windows.Forms.Label overlapLabel;
         private System.Windows.Forms.CheckBox gpsFixCheckBox;
-        private System.Windows.Forms.Panel triggerOptionsPanel;
+        private System.Windows.Forms.Panel overlapPanel;
         private System.Windows.Forms.ComboBox knownHalAltitudeUnit;
         private System.Windows.Forms.TextBox knownHalAltitudeValue;
         private System.Windows.Forms.Label knownHalLabel;
@@ -416,6 +477,11 @@
         private System.Windows.Forms.Label triggerPeriodLabel;
         private System.Windows.Forms.Label triggerDistanceUnit;
         private System.Windows.Forms.Label triggerPeriodUnit;
+        private System.Windows.Forms.Panel triggerPeriodPanel;
+        private System.Windows.Forms.Panel waitForGpsFixPanel;
+        private System.Windows.Forms.Panel knownHalAltPanel;
+        private System.Windows.Forms.Panel triggerDistancePanel;
+        private System.Windows.Forms.Button saveConfigurationButton;
     }
 }
 

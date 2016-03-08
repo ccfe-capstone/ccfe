@@ -13,6 +13,7 @@ namespace Camera_Configuration_File_Editor
     public partial class MainWindow : Form
     {
         CCFE_Configuration configuration;
+        CCFE_FileHandler fileHandler;
 
         public MainWindow()
         {
@@ -33,7 +34,8 @@ namespace Camera_Configuration_File_Editor
         {
             if(openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                
+                fileHandler = new CCFE_FileHandler(openFileDialog.FileName);
+                configuration = new CCFE_Configuration(fileHandler.parse());
             }
         }
 
@@ -59,6 +61,70 @@ namespace Camera_Configuration_File_Editor
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if ((string)triggerModeComboBox.SelectedItem == "Time (for systems without GPS only)")
+            {
+                overlapPanel.Enabled = false;
+                knownHalAltPanel.Enabled = false;
+                triggerPeriodPanel.Enabled = true;
+                triggerDistancePanel.Enabled = false;
+                waitForGpsFixPanel.Enabled = false;
+            }
+            else if ((string)triggerModeComboBox.SelectedItem == "Network")
+            {
+                overlapPanel.Enabled = false;
+                knownHalAltPanel.Enabled = false;
+                triggerPeriodPanel.Enabled = false;
+                triggerDistancePanel.Enabled = false;
+                waitForGpsFixPanel.Enabled = false;
+            }
+            else if ((string)triggerModeComboBox.SelectedItem == "MAVlink")
+            {
+                overlapPanel.Enabled = false;
+                knownHalAltPanel.Enabled = false;
+                triggerPeriodPanel.Enabled = false;
+                triggerDistancePanel.Enabled = false;
+                waitForGpsFixPanel.Enabled = false;
+            }
+            else if ((string)triggerModeComboBox.SelectedItem == "GPS Distance")
+            {
+                overlapPanel.Enabled = false;
+                knownHalAltPanel.Enabled = false;
+                triggerPeriodPanel.Enabled = false;
+                triggerDistancePanel.Enabled = true;
+                waitForGpsFixPanel.Enabled = true;
+            }
+            else if ((string)triggerModeComboBox.SelectedItem == "GPS Time")
+            {
+                overlapPanel.Enabled = false;
+                knownHalAltPanel.Enabled = false;
+                triggerPeriodPanel.Enabled = true;
+                triggerDistancePanel.Enabled = false;
+                waitForGpsFixPanel.Enabled = true;
+            }
+            else if ((string)triggerModeComboBox.SelectedItem == "GPS Overlap - Auto Detect Altitude")
+            {
+                overlapPanel.Enabled = true;
+                knownHalAltPanel.Enabled = false;
+                triggerPeriodPanel.Enabled = false;
+                triggerDistancePanel.Enabled = false;
+                waitForGpsFixPanel.Enabled = true;
+            }
+            else if ((string)triggerModeComboBox.SelectedItem == "GPS Overlap - Known Altitude")
+            {
+                overlapPanel.Enabled = true;
+                knownHalAltPanel.Enabled = true;
+                triggerPeriodPanel.Enabled = false;
+                triggerDistancePanel.Enabled = false;
+                waitForGpsFixPanel.Enabled = true;
+            }
+            else
+            {
+                overlapPanel.Enabled = true;
+                knownHalAltPanel.Enabled = true;
+                triggerPeriodPanel.Enabled = true;
+                triggerDistancePanel.Enabled = true;
+                waitForGpsFixPanel.Enabled = true;
+            }
 
         }
 
@@ -103,6 +169,16 @@ namespace Camera_Configuration_File_Editor
         }
 
         private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void overlapPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void saveConfigurationButton_Click(object sender, EventArgs e)
         {
 
         }
