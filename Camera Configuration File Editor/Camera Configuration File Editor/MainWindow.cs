@@ -57,6 +57,10 @@ namespace Camera_Configuration_File_Editor
                 triggerPeriodValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_TIME);
                 triggerDistanceValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_DISTANCE);
             }
+
+            //needed to move the trackbar label to its spot under the trackbar when a file is opened and parsed
+            overlapTrackBarValueLabel.Text = overlapTrackBar.Value.ToString() + "%";
+            overlapTrackBarValueLabel.Location = new Point(determineXCordOfTrackBar(overlapTrackBar.Value), 35);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
