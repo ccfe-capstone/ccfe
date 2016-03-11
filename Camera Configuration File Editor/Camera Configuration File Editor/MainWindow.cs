@@ -65,7 +65,6 @@ namespace Camera_Configuration_File_Editor
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveConfiguration();
-            MessageBox.Show("Configurations saved successfully!");
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -204,8 +203,12 @@ namespace Camera_Configuration_File_Editor
 
         private void saveConfigurationButton_Click(object sender, EventArgs e)
         {
+            if (configuration == null || fileHandler == null)
+            {
+                MessageBox.Show("Please open a configuration document or create a new file.");
+                return;
+            }
             saveConfiguration();
-            MessageBox.Show("Configurations saved successfully!");
         }
 
         private void overlapTrackBarValueLabel_Click(object sender, EventArgs e)
@@ -280,6 +283,7 @@ namespace Camera_Configuration_File_Editor
             configuration.setValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX, waitForGpsFixValue.Checked ? "yes" : "no");
 
             fileHandler.save(configuration);
+            MessageBox.Show("Configurations saved successfully!");
         }
     }
 }
