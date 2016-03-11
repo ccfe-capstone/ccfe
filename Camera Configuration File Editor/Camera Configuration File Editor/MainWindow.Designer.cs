@@ -53,18 +53,18 @@
             this.triggerPeriodUnit = new System.Windows.Forms.Label();
             this.triggerPeriodValue = new System.Windows.Forms.TextBox();
             this.waitForGpsFixPanel = new System.Windows.Forms.Panel();
-            this.gpsFixCheckBox = new System.Windows.Forms.CheckBox();
+            this.waitForGpsFixValue = new System.Windows.Forms.CheckBox();
             this.knownHalAltPanel = new System.Windows.Forms.Panel();
             this.knownHalLabel = new System.Windows.Forms.Label();
             this.knownHalAltitudeValue = new System.Windows.Forms.TextBox();
             this.knownHalAltitudeUnit = new System.Windows.Forms.ComboBox();
             this.overlapPanel = new System.Windows.Forms.Panel();
+            this.overlapTrackBarValueLabel = new System.Windows.Forms.Label();
             this.overlapLabel = new System.Windows.Forms.Label();
             this.overlapTrackBarMinLabel = new System.Windows.Forms.Label();
             this.overlapTrackBarMaxLabel = new System.Windows.Forms.Label();
             this.overlapTrackBar = new System.Windows.Forms.TrackBar();
             this.saveConfigurationButton = new System.Windows.Forms.Button();
-            this.overlapTrackBarValueLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.TriggerModeGroupBox.SuspendLayout();
             this.TriggerOptionsGroupBox.SuspendLayout();
@@ -293,22 +293,22 @@
             // 
             // waitForGpsFixPanel
             // 
-            this.waitForGpsFixPanel.Controls.Add(this.gpsFixCheckBox);
+            this.waitForGpsFixPanel.Controls.Add(this.waitForGpsFixValue);
             this.waitForGpsFixPanel.Location = new System.Drawing.Point(6, 87);
             this.waitForGpsFixPanel.Name = "waitForGpsFixPanel";
             this.waitForGpsFixPanel.Size = new System.Drawing.Size(134, 25);
             this.waitForGpsFixPanel.TabIndex = 7;
             // 
-            // gpsFixCheckBox
+            // waitForGpsFixValue
             // 
-            this.gpsFixCheckBox.AutoSize = true;
-            this.gpsFixCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpsFixCheckBox.Location = new System.Drawing.Point(6, 3);
-            this.gpsFixCheckBox.Name = "gpsFixCheckBox";
-            this.gpsFixCheckBox.Size = new System.Drawing.Size(118, 19);
-            this.gpsFixCheckBox.TabIndex = 4;
-            this.gpsFixCheckBox.Text = "Wait For GPS Fix";
-            this.gpsFixCheckBox.UseVisualStyleBackColor = true;
+            this.waitForGpsFixValue.AutoSize = true;
+            this.waitForGpsFixValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waitForGpsFixValue.Location = new System.Drawing.Point(6, 3);
+            this.waitForGpsFixValue.Name = "waitForGpsFixValue";
+            this.waitForGpsFixValue.Size = new System.Drawing.Size(118, 19);
+            this.waitForGpsFixValue.TabIndex = 4;
+            this.waitForGpsFixValue.Text = "Wait For GPS Fix";
+            this.waitForGpsFixValue.UseVisualStyleBackColor = true;
             // 
             // knownHalAltPanel
             // 
@@ -340,6 +340,7 @@
             // 
             // knownHalAltitudeUnit
             // 
+            this.knownHalAltitudeUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.knownHalAltitudeUnit.FormattingEnabled = true;
             this.knownHalAltitudeUnit.Items.AddRange(new object[] {
             "feet",
@@ -362,6 +363,16 @@
             this.overlapPanel.Size = new System.Drawing.Size(514, 62);
             this.overlapPanel.TabIndex = 5;
             this.overlapPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.overlapPanel_Paint);
+            // 
+            // overlapTrackBarValueLabel
+            // 
+            this.overlapTrackBarValueLabel.AutoSize = true;
+            this.overlapTrackBarValueLabel.Location = new System.Drawing.Point(101, 35);
+            this.overlapTrackBarValueLabel.Name = "overlapTrackBarValueLabel";
+            this.overlapTrackBarValueLabel.Size = new System.Drawing.Size(21, 13);
+            this.overlapTrackBarValueLabel.TabIndex = 4;
+            this.overlapTrackBarValueLabel.Text = "0%";
+            this.overlapTrackBarValueLabel.Click += new System.EventHandler(this.overlapTrackBarValueLabel_Click);
             // 
             // overlapLabel
             // 
@@ -413,16 +424,6 @@
             this.saveConfigurationButton.Text = "Save";
             this.saveConfigurationButton.UseVisualStyleBackColor = true;
             this.saveConfigurationButton.Click += new System.EventHandler(this.saveConfigurationButton_Click);
-            // 
-            // overlapTrackBarValueLabel
-            // 
-            this.overlapTrackBarValueLabel.AutoSize = true;
-            this.overlapTrackBarValueLabel.Location = new System.Drawing.Point(101, 35);
-            this.overlapTrackBarValueLabel.Name = "overlapTrackBarValueLabel";
-            this.overlapTrackBarValueLabel.Size = new System.Drawing.Size(21, 13);
-            this.overlapTrackBarValueLabel.TabIndex = 4;
-            this.overlapTrackBarValueLabel.Text = "0%";
-            this.overlapTrackBarValueLabel.Click += new System.EventHandler(this.overlapTrackBarValueLabel_Click);
             // 
             // MainWindow
             // 
@@ -478,7 +479,7 @@
         private System.Windows.Forms.Label overlapTrackBarMaxLabel;
         private System.Windows.Forms.Label overlapTrackBarMinLabel;
         private System.Windows.Forms.Label overlapLabel;
-        private System.Windows.Forms.CheckBox gpsFixCheckBox;
+        private System.Windows.Forms.CheckBox waitForGpsFixValue;
         private System.Windows.Forms.Panel overlapPanel;
         private System.Windows.Forms.ComboBox knownHalAltitudeUnit;
         private System.Windows.Forms.TextBox knownHalAltitudeValue;

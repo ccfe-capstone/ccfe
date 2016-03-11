@@ -40,7 +40,7 @@ namespace Camera_Configuration_File_Editor
                 triggerModeComboBox.SelectedIndex = Convert.ToInt32(configuration.getValue(CCFE_Configuration.PROPERTY_TRIGGERMODE));
                 overlapTrackBar.Value = Convert.ToInt32(configuration.getValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT));
 
-                gpsFixCheckBox.Checked = (bool)configuration.getValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX).Equals("yes");
+                waitForGpsFixValue.Checked = (bool)configuration.getValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX).Equals("yes");
                 knownHalAltitudeValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDE);
                 
                 //sets the known hal altitude unit
@@ -64,7 +64,8 @@ namespace Camera_Configuration_File_Editor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            saveConfiguration();
+            MessageBox.Show("Configurations saved successfully!");
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -203,7 +204,8 @@ namespace Camera_Configuration_File_Editor
 
         private void saveConfigurationButton_Click(object sender, EventArgs e)
         {
-
+            saveConfiguration();
+            MessageBox.Show("Configurations saved successfully!");
         }
 
         private void overlapTrackBarValueLabel_Click(object sender, EventArgs e)
@@ -234,6 +236,50 @@ namespace Camera_Configuration_File_Editor
                 xValue = overlapTrackBar.Location.X + 1;
             }
             return new Point(xValue + (overlapTrackBar.Value * 3), overlapTrackBarValueLabel.Location.Y);
+        }
+
+        private void saveConfiguration()
+        {
+            //sanitize inputs
+            double knownHalAltitude;
+            double triggerPeriod;
+            double triggerDistance;
+            bool kHA;
+            bool tP;
+            bool tD;
+
+            kHA = Double.TryParse(knownHalAltitudeValue.Text, out knownHalAltitude);
+            tP = Double.TryParse(triggerPeriodValue.Text, out triggerPeriod);
+            tD = Double.TryParse(triggerDistanceValue.Text, out triggerDistance);
+
+            if(!kHA || !tP || !tD)
+            {
+                String message = "The following values were inputted incorrectly:\n\n";
+                if(!kHA)
+                {
+                    message += "KnownHalAltitude Value\n";
+                }
+                if (!tP)
+                {
+                    message += "Trigger Time Period Value\n";
+                }
+                if(!tD)
+                {
+                    message += "Trigger Distance Value";
+                }
+                MessageBox.Show(message);
+                return;
+            }
+
+            configuration.setValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDE, knownHalAltitude.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_TIME, triggerPeriod.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_DISTANCE, triggerDistance.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_TRIGGERMODE, triggerModeComboBox.SelectedIndex.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT, overlapTrackBar.Value.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS, knownHalAltitudeUnit.SelectedIndex.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX, waitForGpsFixValue.Checked ? "yes" : "no");
+
+            fileHandler.save(configuration);
         }
     }
 }
