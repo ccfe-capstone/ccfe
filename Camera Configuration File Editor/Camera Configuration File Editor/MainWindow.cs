@@ -283,7 +283,7 @@ namespace Camera_Configuration_File_Editor
             configuration.setValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX, waitForGpsFixValue.Checked ? "yes" : "no");
 
             fileHandler.save(configuration);
-            MessageBox.Show("Configurations saved successfully!");
+            MessageBox.Show("Configuration saved successfully!");
         }
     }
 }
