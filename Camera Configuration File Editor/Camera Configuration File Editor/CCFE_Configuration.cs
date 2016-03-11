@@ -47,11 +47,16 @@ namespace Camera_Configuration_File_Editor
 
         public CCFE_Configuration(List<CCFE_ConfigurationProperty> propertyList)
         {
-            PropertyList = propertyList;
+            PropertyList = new List<CCFE_ConfigurationProperty>();
+            foreach (CCFE_ConfigurationProperty property in propertyList)
+            {
+                PropertyList.Add(new CCFE_ConfigurationProperty(property.Name, property.Value));
+            }
         }
 
         public CCFE_Configuration(string configurationVersion)
         {
+            PropertyList = new List<CCFE_ConfigurationProperty>();
             if (configurationVersion.Equals("1.0"))
             {
                 //TODO: create properties with default values for configuration version
@@ -70,33 +75,34 @@ namespace Camera_Configuration_File_Editor
         #region public methods
         public void addProperty(CCFE_ConfigurationProperty property)
         {
-            propertyList.Add(property);
+            if (PropertyList.Exists(x => x.Name.Equals(property.Name)))
+            {
+                //property already exists
+            }
+            else
+            {
+                propertyList.Add(new CCFE_ConfigurationProperty(property.Name, property.Value));
+            }
         }
 
         public string getValue(string propertyName)
         {
-            foreach (CCFE_ConfigurationProperty property in propertyList)
-            {
-                if (property.Name.Equals(propertyName))
-                {
-                    return property.Value;
-                }
-            }
+            CCFE_ConfigurationProperty property = propertyList.Find(x => x.Name.Equals(propertyName));
 
-            //we didn't find anything
-            return NOVALUE;
+            if(property != null)
+            {
+                return property.Value;
+            }
+            else
+            {
+                //we didn't find anything
+                return NOVALUE;
+            }
         }
 
         public void setValue(string propertyName, string value)
         {
-            foreach (CCFE_ConfigurationProperty property in propertyList)
-            {
-                if (property.Name.Equals(propertyName))
-                {
-                    property.Value = value;
-                    return;
-                }
-            }
+            propertyList.Find(x => x.Name.Equals(propertyName)).Value = value;
         }
         #endregion
     }

@@ -59,10 +59,9 @@ namespace Camera_Configuration_File_Editor.Tests
         {
             //ARRANGE
             string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "/" + "UserSettings.txt";
-            CCFE_FileHandler fileHandler = new CCFE_FileHandler(filePath);
 
             //ACT
-
+            CCFE_FileHandler fileHandler = new CCFE_FileHandler(filePath);
 
             //ASSERT
             Assert.IsTrue(fileHandler.FileLocation.Equals(filePath));
@@ -127,36 +126,37 @@ namespace Camera_Configuration_File_Editor.Tests
             //check if all properties are there
             Assert.IsTrue(configuration.PropertyList.Count == UserSettingsPropertyCount);
             //check if all properties have correct values
-            for (int i = 0; i < configuration.PropertyList.Count; i++)
+            foreach (CCFE_ConfigurationProperty property in configuration.PropertyList)
             {
-                switch (configuration.PropertyList[i].Name)
+                switch (property.Name)
                 {
                     case "TriggerMode":
-                        Assert.IsTrue(configuration.PropertyList[i].Value.Equals("5"));
+                        Assert.IsTrue(property.Value.Equals("5"));
                         break;
                     case "OverlapPercent":
-                        Assert.IsTrue(configuration.PropertyList[i].Value.Equals("75"));
+                        Assert.IsTrue(property.Value.Equals("75"));
                         break;
                     case "KnownHalAltitudeUnits":
-                        Assert.IsTrue(configuration.PropertyList[i].Value.Equals("feet"));
+                        Assert.IsTrue(property.Value.Equals("feet"));
                         break;
                     case "KnownHalAltitude":
-                        Assert.IsTrue(configuration.PropertyList[i].Value.Equals("400"));
+                        Assert.IsTrue(property.Value.Equals("400"));
                         break;
                     case "Time":
-                        Assert.IsTrue(configuration.PropertyList[i].Value.Equals("3.8"));
+                        Assert.IsTrue(property.Value.Equals("3.8"));
                         break;
                     case "Distance":
-                        Assert.IsTrue(configuration.PropertyList[i].Value.Equals("10"));
+                        Assert.IsTrue(property.Value.Equals("10"));
                         break;
                     case "WaitForGpsFix":
-                        Assert.IsTrue(configuration.PropertyList[i].Value.Equals("yes"));
+                        Assert.IsTrue(property.Value.Equals("yes"));
                         break;
                     case "Version":
-                        Assert.IsTrue(configuration.PropertyList[i].Value.Equals("1.0"));
+                        Assert.IsTrue(property.Value.Equals("1.0"));
                         break;
                     default:
-                        //unknown property, can't check
+                        //unknown property, can't check, something parsed wrong
+                        Assert.Fail();
                         break;
                 }
             }
