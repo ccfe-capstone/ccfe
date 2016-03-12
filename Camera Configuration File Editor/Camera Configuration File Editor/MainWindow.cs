@@ -279,7 +279,7 @@ namespace Camera_Configuration_File_Editor
             configuration.setValue(CCFE_Configuration.PROPERTY_DISTANCE, triggerDistance.ToString());
             configuration.setValue(CCFE_Configuration.PROPERTY_TRIGGERMODE, triggerModeComboBox.SelectedIndex.ToString());
             configuration.setValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT, overlapTrackBar.Value.ToString());
-            configuration.setValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS, knownHalAltitudeUnit.SelectedIndex.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS, knownHalAltitudeUnit.Text);
             configuration.setValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX, waitForGpsFixValue.Checked ? "yes" : "no");
 
             fileHandler.save(configuration);
