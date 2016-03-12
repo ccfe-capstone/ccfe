@@ -73,7 +73,7 @@ namespace Camera_Configuration_File_Editor
         #region constructors
         public CCFE_FileHandler(string fileLocation)
         {
-            this.FileLocation = fileLocation;
+            FileLocation = String.Copy(fileLocation);
         }
         #endregion
 

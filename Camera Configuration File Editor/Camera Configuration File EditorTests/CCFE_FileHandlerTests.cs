@@ -62,9 +62,11 @@ namespace Camera_Configuration_File_Editor.Tests
 
             //ACT
             CCFE_FileHandler fileHandler = new CCFE_FileHandler(filePath);
+            //check deep copy
+            filePath = "AlternateValue";
 
             //ASSERT
-            Assert.IsTrue(fileHandler.FileLocation.Equals(filePath));
+            Assert.IsTrue(fileHandler.FileLocation.Equals(System.AppDomain.CurrentDomain.BaseDirectory + "/" + "UserSettings.txt"));
         }
 
         [TestMethod()]
