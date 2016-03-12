@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CCFE_ConfigurationPropertyTests.cs" />
     <Compile Include="CCFE_ConfigurationTests.cs" />
     <Compile Include="CCFE_FileHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
