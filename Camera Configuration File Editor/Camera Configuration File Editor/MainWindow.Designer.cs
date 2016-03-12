@@ -232,9 +232,9 @@
             this.triggerDistanceUnit.AutoSize = true;
             this.triggerDistanceUnit.Location = new System.Drawing.Point(167, 11);
             this.triggerDistanceUnit.Name = "triggerDistanceUnit";
-            this.triggerDistanceUnit.Size = new System.Drawing.Size(47, 13);
+            this.triggerDistanceUnit.Size = new System.Drawing.Size(38, 13);
             this.triggerDistanceUnit.TabIndex = 8;
-            this.triggerDistanceUnit.Text = "seconds";
+            this.triggerDistanceUnit.Text = "meters";
             // 
             // triggerDistanceLabel
             // 
