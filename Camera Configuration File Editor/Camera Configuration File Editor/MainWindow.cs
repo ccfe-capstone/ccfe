@@ -259,7 +259,9 @@ namespace Camera_Configuration_File_Editor
             fileHandler.save(configuration);
             MessageBox.Show("Configuration saved successfully!");
         }
-        
+
+        //checks to see if either of the filehandler or configuration objects have been created
+        //meaning a new file has been made or a file location was set
         public bool checkSave()
         {
             if (configuration == null || fileHandler == null)
@@ -270,6 +272,7 @@ namespace Camera_Configuration_File_Editor
             return true;
         }
 
+        //allows the user to select the settings and begins the parsing
         public void fileSearch()
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
