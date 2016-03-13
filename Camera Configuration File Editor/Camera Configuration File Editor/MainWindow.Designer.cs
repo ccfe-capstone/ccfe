@@ -65,6 +65,7 @@
             this.overlapTrackBarMaxLabel = new System.Windows.Forms.Label();
             this.overlapTrackBar = new System.Windows.Forms.TrackBar();
             this.saveConfigurationButton = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.TriggerModeGroupBox.SuspendLayout();
             this.TriggerOptionsGroupBox.SuspendLayout();
@@ -199,6 +200,8 @@
             // 
             // openFileDialog
             // 
+            this.openFileDialog.DefaultExt = "txt";
+            this.openFileDialog.Filter = "Configuration Files|*.txt|All Files|*.*";
             this.openFileDialog.InitialDirectory = "C:\\";
             this.openFileDialog.Title = "Open Configuration File";
             // 
@@ -425,6 +428,11 @@
             this.saveConfigurationButton.UseVisualStyleBackColor = true;
             this.saveConfigurationButton.Click += new System.EventHandler(this.saveConfigurationButton_Click);
             // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "txt";
+            this.saveFileDialog.Title = "Save Configuration File";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,6 +504,7 @@
         private System.Windows.Forms.Panel triggerDistancePanel;
         private System.Windows.Forms.Button saveConfigurationButton;
         private System.Windows.Forms.Label overlapTrackBarValueLabel;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 

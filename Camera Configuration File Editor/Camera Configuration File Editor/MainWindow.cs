@@ -266,8 +266,18 @@ namespace Camera_Configuration_File_Editor
         {
             if (configuration == null || fileHandler == null)
             {
-                fileSearch();
-                return false;
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    fileHandler = new CCFE_FileHandler(saveFileDialog.FileName);
+                    //TODO: create configuration using actual selected version
+                    //this is fine for now
+                    configuration = new CCFE_Configuration("1.0");
+                }
+                //they canceled or input something wrong
+                else
+                {
+                    return false;
+                }
             }
             return true;
         }
