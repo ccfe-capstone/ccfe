@@ -22,12 +22,15 @@ namespace Camera_Configuration_File_Editor
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            
+            newConfiguration("1.0");
+            loadConfiguration(configuration);
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            fileHandler = null;
+            newConfiguration("1.0");
+            loadConfiguration(configuration);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,12 +48,21 @@ namespace Camera_Configuration_File_Editor
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileHandler = new CCFE_FileHandler(saveFileDialog.FileName);
+                if (checkSave())
+                {
+                    saveConfiguration();
+                }
+            }
         }
 
         private void loadDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //TODO: support different versions
+            newConfiguration("1.0");
+            loadConfiguration(configuration);
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -217,36 +229,14 @@ namespace Camera_Configuration_File_Editor
 
         private void saveConfiguration()
         {
-            //sanitize inputs
+            //sanitize inputs (remove separators, etc)
             double knownHalAltitude;
             double triggerPeriod;
             double triggerDistance;
-            bool kHA;
-            bool tP;
-            bool tD;
 
-            kHA = Double.TryParse(knownHalAltitudeValue.Text, out knownHalAltitude);
-            tP = Double.TryParse(triggerPeriodValue.Text, out triggerPeriod);
-            tD = Double.TryParse(triggerDistanceValue.Text, out triggerDistance);
-
-            if(!kHA || !tP || !tD)
-            {
-                String message = "The following values were inputted incorrectly:\n\n";
-                if(!kHA)
-                {
-                    message += "KnownHalAltitude Value\n";
-                }
-                if (!tP)
-                {
-                    message += "Trigger Time Period Value\n";
-                }
-                if(!tD)
-                {
-                    message += "Trigger Distance Value";
-                }
-                MessageBox.Show(message);
-                return;
-            }
+            Double.TryParse(knownHalAltitudeValue.Text, out knownHalAltitude);
+            Double.TryParse(triggerPeriodValue.Text, out triggerPeriod);
+            Double.TryParse(triggerDistanceValue.Text, out triggerDistance);
 
             configuration.setValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDE, knownHalAltitude.ToString());
             configuration.setValue(CCFE_Configuration.PROPERTY_TIME, triggerPeriod.ToString());
@@ -264,6 +254,55 @@ namespace Camera_Configuration_File_Editor
         //meaning a new file has been made or a file location was set
         public bool checkSave()
         {
+            //sanitize inputs to eliminate possible blanks
+            double knownHalAltitude;
+            double triggerPeriod;
+            double triggerDistance;
+            bool kHA;
+            bool tP;
+            bool tD;
+
+            kHA = Double.TryParse(knownHalAltitudeValue.Text, out knownHalAltitude);
+            tP = Double.TryParse(triggerPeriodValue.Text, out triggerPeriod);
+            tD = Double.TryParse(triggerDistanceValue.Text, out triggerDistance);
+
+            if (!kHA || !tP || !tD)
+            {
+                String message = "The following settings were left blank:\n\n";
+                if (!kHA)
+                {
+                    message += "Known Hal Altitude\n";
+                }
+                if (!tP)
+                {
+                    message += "Trigger Period\n";
+                }
+                if (!tD)
+                {
+                    message += "Trigger Distance\n";
+                }
+                message += "\nProceed with these values set to 0?";
+                if (MessageBox.Show(message, "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) != DialogResult.OK)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (!kHA)
+                    {
+                        knownHalAltitudeValue.Text = "0";
+                    }
+                    if (!tP)
+                    {
+                        triggerPeriodValue.Text = "0";
+                    }
+                    if (!tD)
+                    {
+                        triggerDistanceValue.Text = "0";
+                    }
+                }
+            }
+
             if (configuration == null || fileHandler == null)
             {
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -290,28 +329,38 @@ namespace Camera_Configuration_File_Editor
                 fileHandler = new CCFE_FileHandler(openFileDialog.FileName);
                 configuration = new CCFE_Configuration(fileHandler.parse());
 
-                triggerModeComboBox.SelectedIndex = Convert.ToInt32(configuration.getValue(CCFE_Configuration.PROPERTY_TRIGGERMODE));
-                overlapTrackBar.Value = Convert.ToInt32(configuration.getValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT));
-
-                waitForGpsFixValue.Checked = (bool)configuration.getValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX).Equals("yes");
-                knownHalAltitudeValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDE);
-
-                //sets the known hal altitude unit
-                if (configuration.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS).Equals("feet"))
-                {
-                    //feet
-                    knownHalAltitudeUnit.SelectedIndex = 0;
-                }
-                else
-                {
-                    //meters
-                    knownHalAltitudeUnit.SelectedIndex = 1;
-                }
-                triggerPeriodValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_TIME);
-                triggerDistanceValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_DISTANCE);
+                loadConfiguration(configuration);
             }
+        }
 
-            //needed to move the trackbar label to its spot under the trackbar when a file is opened and parsed
+        public void newConfiguration(string version)
+        {
+            configuration = new CCFE_Configuration("1.0");
+            loadConfiguration(configuration);
+        }
+
+        public void loadConfiguration(CCFE_Configuration config)
+        {
+            triggerModeComboBox.SelectedIndex = Convert.ToInt32(config.getValue(CCFE_Configuration.PROPERTY_TRIGGERMODE));
+            overlapTrackBar.Value = Convert.ToInt32(config.getValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT));
+            waitForGpsFixValue.Checked = (bool)config.getValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX).Equals("yes");
+            knownHalAltitudeValue.Text = config.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDE);
+
+            //sets the known hal altitude unit
+            if (config.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS).Equals("feet"))
+            {
+                //feet
+                knownHalAltitudeUnit.SelectedIndex = 0;
+            }
+            else
+            {
+                //meters
+                knownHalAltitudeUnit.SelectedIndex = 1;
+            }
+            triggerPeriodValue.Text = config.getValue(CCFE_Configuration.PROPERTY_TIME);
+            triggerDistanceValue.Text = config.getValue(CCFE_Configuration.PROPERTY_DISTANCE);
+
+            //needed to move the trackbar label to its spot under the trackbar
             setTrackBarLabelLocationAndText();
         }
     }

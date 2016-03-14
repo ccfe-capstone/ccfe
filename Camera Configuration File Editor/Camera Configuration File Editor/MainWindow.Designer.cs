@@ -431,6 +431,7 @@
             // saveFileDialog
             // 
             this.saveFileDialog.DefaultExt = "txt";
+            this.saveFileDialog.Filter = "Configuration Files|*.txt|All Files|*.*";
             this.saveFileDialog.Title = "Save Configuration File";
             // 
             // MainWindow
