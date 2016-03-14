@@ -335,7 +335,7 @@ namespace Camera_Configuration_File_Editor
 
         public void newConfiguration(string version)
         {
-            configuration = new CCFE_Configuration("1.0");
+            configuration = new CCFE_Configuration(version);
             loadConfiguration(configuration);
         }
 
