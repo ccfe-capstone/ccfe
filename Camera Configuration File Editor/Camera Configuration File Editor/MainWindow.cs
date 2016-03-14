@@ -66,11 +66,6 @@ namespace Camera_Configuration_File_Editor
             loadConfiguration(configuration);
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((string)triggerModeComboBox.SelectedItem == "Time (for systems without GPS only)")
@@ -140,29 +135,9 @@ namespace Camera_Configuration_File_Editor
 
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             setTrackBarLabelLocationAndText();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void knownHalAltitudeValue_TextChanged(object sender, EventArgs e)
@@ -180,27 +155,12 @@ namespace Camera_Configuration_File_Editor
 
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void overlapPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void saveConfigurationButton_Click(object sender, EventArgs e)
         {
             if(checkSave())
             {
                 saveConfiguration();
             }
-        }
-
-        private void overlapTrackBarValueLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void setTrackBarLabelLocationAndText()
