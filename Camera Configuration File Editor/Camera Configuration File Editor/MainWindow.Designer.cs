@@ -178,7 +178,6 @@
             this.TriggerModeGroupBox.TabIndex = 4;
             this.TriggerModeGroupBox.TabStop = false;
             this.TriggerModeGroupBox.Text = "Trigger Mode";
-            this.TriggerModeGroupBox.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // triggerModeComboBox
             // 
@@ -218,7 +217,6 @@
             this.TriggerOptionsGroupBox.TabIndex = 5;
             this.TriggerOptionsGroupBox.TabStop = false;
             this.TriggerOptionsGroupBox.Text = "Trigger Options";
-            this.TriggerOptionsGroupBox.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // triggerDistancePanel
             // 
@@ -285,7 +283,6 @@
             this.triggerPeriodUnit.Size = new System.Drawing.Size(47, 13);
             this.triggerPeriodUnit.TabIndex = 7;
             this.triggerPeriodUnit.Text = "seconds";
-            this.triggerPeriodUnit.Click += new System.EventHandler(this.label5_Click);
             // 
             // triggerPeriodValue
             // 
@@ -365,7 +362,6 @@
             this.overlapPanel.Name = "overlapPanel";
             this.overlapPanel.Size = new System.Drawing.Size(514, 62);
             this.overlapPanel.TabIndex = 5;
-            this.overlapPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.overlapPanel_Paint);
             // 
             // overlapTrackBarValueLabel
             // 
@@ -375,7 +371,6 @@
             this.overlapTrackBarValueLabel.Size = new System.Drawing.Size(21, 13);
             this.overlapTrackBarValueLabel.TabIndex = 4;
             this.overlapTrackBarValueLabel.Text = "0%";
-            this.overlapTrackBarValueLabel.Click += new System.EventHandler(this.overlapTrackBarValueLabel_Click);
             // 
             // overlapLabel
             // 
@@ -386,7 +381,6 @@
             this.overlapLabel.Size = new System.Drawing.Size(66, 15);
             this.overlapLabel.TabIndex = 1;
             this.overlapLabel.Text = "Overlap %:";
-            this.overlapLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // overlapTrackBarMinLabel
             // 
@@ -396,7 +390,6 @@
             this.overlapTrackBarMinLabel.Size = new System.Drawing.Size(21, 13);
             this.overlapTrackBarMinLabel.TabIndex = 2;
             this.overlapTrackBarMinLabel.Text = "0%";
-            this.overlapTrackBarMinLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // overlapTrackBarMaxLabel
             // 
@@ -406,7 +399,6 @@
             this.overlapTrackBarMaxLabel.Size = new System.Drawing.Size(33, 13);
             this.overlapTrackBarMaxLabel.TabIndex = 3;
             this.overlapTrackBarMaxLabel.Text = "100%";
-            this.overlapTrackBarMaxLabel.Click += new System.EventHandler(this.label3_Click);
             // 
             // overlapTrackBar
             // 
