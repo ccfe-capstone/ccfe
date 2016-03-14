@@ -31,6 +31,7 @@ namespace Camera_Configuration_File_Editor
             fileHandler = null;
             newConfiguration("1.0");
             loadConfiguration(configuration);
+            MessageBox.Show("A new Configuration page has been created");
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
