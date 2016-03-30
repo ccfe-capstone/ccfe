@@ -8,13 +8,15 @@ namespace Camera_Configuration_File_Editor
 {
     public class CCFE_ConfigurationProperty
     {
-        #region variables
+        #region constructors
         public CCFE_ConfigurationProperty(string name, string value)
         {
-            this.Name = name;
-            this.Value = value;
+            Name = String.Copy(name);
+            Value = String.Copy(value);
         }
+        #endregion
 
+        #region variables
         private string name;
         private string value;
 

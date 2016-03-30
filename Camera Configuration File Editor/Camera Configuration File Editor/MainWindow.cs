@@ -22,64 +22,48 @@ namespace Camera_Configuration_File_Editor
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            
+            newConfiguration("1.0");
+            loadConfiguration(configuration);
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            fileHandler = null;
+            newConfiguration("1.0");
+            loadConfiguration(configuration);
+            MessageBox.Show("A new Configuration page has been created");
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                fileHandler = new CCFE_FileHandler(openFileDialog.FileName);
-                configuration = new CCFE_Configuration(fileHandler.parse());
-
-                triggerModeComboBox.SelectedIndex = Convert.ToInt32(configuration.getValue(CCFE_Configuration.PROPERTY_TRIGGERMODE));
-                overlapTrackBar.Value = Convert.ToInt32(configuration.getValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT));
-
-                waitForGpsFixValue.Checked = (bool)configuration.getValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX).Equals("yes");
-                knownHalAltitudeValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDE);
-                
-                //sets the known hal altitude unit
-                if(configuration.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS).Equals("feet"))
-                {
-                    //feet
-                    knownHalAltitudeUnit.SelectedIndex = 0;
-                }
-                else
-                {
-                    //meters
-                    knownHalAltitudeUnit.SelectedIndex = 1;
-                }
-                triggerPeriodValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_TIME);
-                triggerDistanceValue.Text = configuration.getValue(CCFE_Configuration.PROPERTY_DISTANCE);
-            }
-
-            //needed to move the trackbar label to its spot under the trackbar when a file is opened and parsed
-            setTrackBarLabelLocationAndText();
+            fileSearch();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveConfiguration();
+            if (checkSave())
+            {
+                saveConfiguration();
+            }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileHandler = new CCFE_FileHandler(saveFileDialog.FileName);
+                if (checkSave())
+                {
+                    saveConfiguration();
+                }
+            }
         }
 
         private void loadDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
+            //TODO: support different versions
+            newConfiguration("1.0");
+            loadConfiguration(configuration);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -151,29 +135,9 @@ namespace Camera_Configuration_File_Editor
 
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             setTrackBarLabelLocationAndText();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void knownHalAltitudeValue_TextChanged(object sender, EventArgs e)
@@ -191,29 +155,12 @@ namespace Camera_Configuration_File_Editor
 
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void overlapPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void saveConfigurationButton_Click(object sender, EventArgs e)
         {
-            if (configuration == null || fileHandler == null)
+            if(checkSave())
             {
-                MessageBox.Show("Please open a configuration document or create a new file.");
-                return;
+                saveConfiguration();
             }
-            saveConfiguration();
-        }
-
-        private void overlapTrackBarValueLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void setTrackBarLabelLocationAndText()
@@ -243,7 +190,32 @@ namespace Camera_Configuration_File_Editor
 
         private void saveConfiguration()
         {
-            //sanitize inputs
+            //sanitize inputs (remove separators, etc)
+            double knownHalAltitude;
+            double triggerPeriod;
+            double triggerDistance;
+
+            Double.TryParse(knownHalAltitudeValue.Text, out knownHalAltitude);
+            Double.TryParse(triggerPeriodValue.Text, out triggerPeriod);
+            Double.TryParse(triggerDistanceValue.Text, out triggerDistance);
+
+            configuration.setValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDE, knownHalAltitude.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_TIME, triggerPeriod.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_DISTANCE, triggerDistance.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_TRIGGERMODE, triggerModeComboBox.SelectedIndex.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT, overlapTrackBar.Value.ToString());
+            configuration.setValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS, knownHalAltitudeUnit.Text);
+            configuration.setValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX, waitForGpsFixValue.Checked ? "yes" : "no");
+
+            fileHandler.save(configuration);
+            MessageBox.Show("Configuration saved successfully!");
+        }
+
+        //checks to see if either of the filehandler or configuration objects have been created
+        //meaning a new file has been made or a file location was set
+        public bool checkSave()
+        {
+            //sanitize inputs to eliminate possible blanks
             double knownHalAltitude;
             double triggerPeriod;
             double triggerDistance;
@@ -255,35 +227,102 @@ namespace Camera_Configuration_File_Editor
             tP = Double.TryParse(triggerPeriodValue.Text, out triggerPeriod);
             tD = Double.TryParse(triggerDistanceValue.Text, out triggerDistance);
 
-            if(!kHA || !tP || !tD)
+            if (!kHA || !tP || !tD)
             {
-                String message = "The following values were inputted incorrectly:\n\n";
-                if(!kHA)
+                String message = "The following settings were left blank:\n\n";
+                if (!kHA)
                 {
-                    message += "KnownHalAltitude Value\n";
+                    message += "Known Hal Altitude\n";
                 }
                 if (!tP)
                 {
-                    message += "Trigger Time Period Value\n";
+                    message += "Trigger Period\n";
                 }
-                if(!tD)
+                if (!tD)
                 {
-                    message += "Trigger Distance Value";
+                    message += "Trigger Distance\n";
                 }
-                MessageBox.Show(message);
-                return;
+                message += "\nProceed with these values set to 0?";
+                if (MessageBox.Show(message, "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) != DialogResult.OK)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (!kHA)
+                    {
+                        knownHalAltitudeValue.Text = "0";
+                    }
+                    if (!tP)
+                    {
+                        triggerPeriodValue.Text = "0";
+                    }
+                    if (!tD)
+                    {
+                        triggerDistanceValue.Text = "0";
+                    }
+                }
             }
 
-            configuration.setValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDE, knownHalAltitude.ToString());
-            configuration.setValue(CCFE_Configuration.PROPERTY_TIME, triggerPeriod.ToString());
-            configuration.setValue(CCFE_Configuration.PROPERTY_DISTANCE, triggerDistance.ToString());
-            configuration.setValue(CCFE_Configuration.PROPERTY_TRIGGERMODE, triggerModeComboBox.SelectedIndex.ToString());
-            configuration.setValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT, overlapTrackBar.Value.ToString());
-            configuration.setValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS, knownHalAltitudeUnit.SelectedIndex.ToString());
-            configuration.setValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX, waitForGpsFixValue.Checked ? "yes" : "no");
+            if (configuration == null || fileHandler == null)
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    fileHandler = new CCFE_FileHandler(saveFileDialog.FileName);
+                    //TODO: create configuration using actual selected version
+                    //this is fine for now
+                    configuration = new CCFE_Configuration("1.0");
+                }
+                //they canceled or input something wrong
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
-            fileHandler.save(configuration);
-            MessageBox.Show("Configuration saved successfully!");
+        //allows the user to select the settings and begins the parsing
+        public void fileSearch()
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileHandler = new CCFE_FileHandler(openFileDialog.FileName);
+                configuration = new CCFE_Configuration(fileHandler.parse());
+
+                loadConfiguration(configuration);
+            }
+        }
+
+        public void newConfiguration(string version)
+        {
+            configuration = new CCFE_Configuration(version);
+            loadConfiguration(configuration);
+        }
+
+        public void loadConfiguration(CCFE_Configuration config)
+        {
+            triggerModeComboBox.SelectedIndex = Convert.ToInt32(config.getValue(CCFE_Configuration.PROPERTY_TRIGGERMODE));
+            overlapTrackBar.Value = Convert.ToInt32(config.getValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT));
+            waitForGpsFixValue.Checked = (bool)config.getValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX).Equals("yes");
+            knownHalAltitudeValue.Text = config.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDE);
+
+            //sets the known hal altitude unit
+            if (config.getValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS).Equals("feet"))
+            {
+                //feet
+                knownHalAltitudeUnit.SelectedIndex = 0;
+            }
+            else
+            {
+                //meters
+                knownHalAltitudeUnit.SelectedIndex = 1;
+            }
+            triggerPeriodValue.Text = config.getValue(CCFE_Configuration.PROPERTY_TIME);
+            triggerDistanceValue.Text = config.getValue(CCFE_Configuration.PROPERTY_DISTANCE);
+
+            //needed to move the trackbar label to its spot under the trackbar
+            setTrackBarLabelLocationAndText();
         }
     }
 }

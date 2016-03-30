@@ -65,6 +65,7 @@
             this.overlapTrackBarMaxLabel = new System.Windows.Forms.Label();
             this.overlapTrackBar = new System.Windows.Forms.TrackBar();
             this.saveConfigurationButton = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.TriggerModeGroupBox.SuspendLayout();
             this.TriggerOptionsGroupBox.SuspendLayout();
@@ -177,7 +178,6 @@
             this.TriggerModeGroupBox.TabIndex = 4;
             this.TriggerModeGroupBox.TabStop = false;
             this.TriggerModeGroupBox.Text = "Trigger Mode";
-            this.TriggerModeGroupBox.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // triggerModeComboBox
             // 
@@ -199,6 +199,8 @@
             // 
             // openFileDialog
             // 
+            this.openFileDialog.DefaultExt = "txt";
+            this.openFileDialog.Filter = "Configuration Files|*.txt|All Files|*.*";
             this.openFileDialog.InitialDirectory = "C:\\";
             this.openFileDialog.Title = "Open Configuration File";
             // 
@@ -215,7 +217,6 @@
             this.TriggerOptionsGroupBox.TabIndex = 5;
             this.TriggerOptionsGroupBox.TabStop = false;
             this.TriggerOptionsGroupBox.Text = "Trigger Options";
-            this.TriggerOptionsGroupBox.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // triggerDistancePanel
             // 
@@ -232,9 +233,9 @@
             this.triggerDistanceUnit.AutoSize = true;
             this.triggerDistanceUnit.Location = new System.Drawing.Point(167, 11);
             this.triggerDistanceUnit.Name = "triggerDistanceUnit";
-            this.triggerDistanceUnit.Size = new System.Drawing.Size(47, 13);
+            this.triggerDistanceUnit.Size = new System.Drawing.Size(38, 13);
             this.triggerDistanceUnit.TabIndex = 8;
-            this.triggerDistanceUnit.Text = "seconds";
+            this.triggerDistanceUnit.Text = "meters";
             // 
             // triggerDistanceLabel
             // 
@@ -282,7 +283,6 @@
             this.triggerPeriodUnit.Size = new System.Drawing.Size(47, 13);
             this.triggerPeriodUnit.TabIndex = 7;
             this.triggerPeriodUnit.Text = "seconds";
-            this.triggerPeriodUnit.Click += new System.EventHandler(this.label5_Click);
             // 
             // triggerPeriodValue
             // 
@@ -362,7 +362,6 @@
             this.overlapPanel.Name = "overlapPanel";
             this.overlapPanel.Size = new System.Drawing.Size(514, 62);
             this.overlapPanel.TabIndex = 5;
-            this.overlapPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.overlapPanel_Paint);
             // 
             // overlapTrackBarValueLabel
             // 
@@ -372,7 +371,6 @@
             this.overlapTrackBarValueLabel.Size = new System.Drawing.Size(21, 13);
             this.overlapTrackBarValueLabel.TabIndex = 4;
             this.overlapTrackBarValueLabel.Text = "0%";
-            this.overlapTrackBarValueLabel.Click += new System.EventHandler(this.overlapTrackBarValueLabel_Click);
             // 
             // overlapLabel
             // 
@@ -383,7 +381,6 @@
             this.overlapLabel.Size = new System.Drawing.Size(66, 15);
             this.overlapLabel.TabIndex = 1;
             this.overlapLabel.Text = "Overlap %:";
-            this.overlapLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // overlapTrackBarMinLabel
             // 
@@ -393,7 +390,6 @@
             this.overlapTrackBarMinLabel.Size = new System.Drawing.Size(21, 13);
             this.overlapTrackBarMinLabel.TabIndex = 2;
             this.overlapTrackBarMinLabel.Text = "0%";
-            this.overlapTrackBarMinLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // overlapTrackBarMaxLabel
             // 
@@ -403,7 +399,6 @@
             this.overlapTrackBarMaxLabel.Size = new System.Drawing.Size(33, 13);
             this.overlapTrackBarMaxLabel.TabIndex = 3;
             this.overlapTrackBarMaxLabel.Text = "100%";
-            this.overlapTrackBarMaxLabel.Click += new System.EventHandler(this.label3_Click);
             // 
             // overlapTrackBar
             // 
@@ -424,6 +419,12 @@
             this.saveConfigurationButton.Text = "Save";
             this.saveConfigurationButton.UseVisualStyleBackColor = true;
             this.saveConfigurationButton.Click += new System.EventHandler(this.saveConfigurationButton_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "txt";
+            this.saveFileDialog.Filter = "Configuration Files|*.txt|All Files|*.*";
+            this.saveFileDialog.Title = "Save Configuration File";
             // 
             // MainWindow
             // 
@@ -496,6 +497,7 @@
         private System.Windows.Forms.Panel triggerDistancePanel;
         private System.Windows.Forms.Button saveConfigurationButton;
         private System.Windows.Forms.Label overlapTrackBarValueLabel;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
