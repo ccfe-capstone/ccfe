@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="CCFE_Configuration.cs" />
     <Compile Include="CCFE_ConfigurationProperty.cs" />
+    <Compile Include="CCFE_Default.cs" />
     <Compile Include="CCFE_FileHandler.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
