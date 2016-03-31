@@ -63,6 +63,9 @@
     </Compile>
     <Compile Include="CCFE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GSDWindow.resx">
+      <DependentUpon>GSDWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
