@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Camera_Configuration_File_Editor
 {
-    class CCFE_Default
+    public class CCFE_Default
     {
         public static List<CCFE_ConfigurationProperty> getDefaultProperties(string configurationVersion)
         {
