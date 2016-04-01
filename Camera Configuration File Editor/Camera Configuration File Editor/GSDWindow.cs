@@ -39,7 +39,7 @@ namespace Camera_Configuration_File_Editor
 
         private void setTextBox_TextChange(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)
             {
                 if (Convert.ToInt32(altitudeTrackBarValueTextBox.Text) > 500)
                 {
@@ -52,6 +52,7 @@ namespace Camera_Configuration_File_Editor
                 }
                 altitudeTrackBar.Value = Convert.ToInt32(altitudeTrackBarValueTextBox.Text);
             }
+            e.Handled = !(char.IsNumber(e.KeyChar) || char.IsControl(e.KeyChar));
         }
 
         private void altitudeTrackBarValueTextBox_TextChanged(object sender, EventArgs e)
