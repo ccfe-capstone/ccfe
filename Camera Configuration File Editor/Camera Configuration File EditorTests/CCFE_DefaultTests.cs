@@ -13,6 +13,7 @@ namespace Camera_Configuration_File_Editor.Tests
     public class CCFE_DefaultTests
     {
         #region constants
+        const int hardcodedVersionCount = 1;
         const string UserSettingsTestData =
             "[UserSettings]\n" +
             "# TriggerMode\n" +
@@ -60,7 +61,7 @@ namespace Camera_Configuration_File_Editor.Tests
             //ARRANGE
             List<CCFE_ConfigurationProperty> propertyList;
             //delete test file if one exists
-            string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "/config";
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "/config";
             if (File.Exists(filePath + "1.0.txt"))
             {
                 File.Delete(filePath + "/1.0.txt");
@@ -85,7 +86,7 @@ namespace Camera_Configuration_File_Editor.Tests
         {
             //ARRANGE
             List<CCFE_ConfigurationProperty> propertyList;
-            string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "/config";
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "/config";
             Directory.CreateDirectory(filePath);
             File.WriteAllText(filePath + "/1.0.txt", UserSettingsTestData);
 
@@ -112,7 +113,7 @@ namespace Camera_Configuration_File_Editor.Tests
             //ARRANGE
             CCFE_Configuration configuration;
             //delete test file if one exists
-            string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "/config";
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "/config";
             if (File.Exists(filePath + "1.0.txt"))
             {
                 File.Delete(filePath + "/1.0.txt");
@@ -137,7 +138,7 @@ namespace Camera_Configuration_File_Editor.Tests
         {
             //ARRANGE
             CCFE_Configuration configuration;
-            string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "/config";
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "/config";
             Directory.CreateDirectory(filePath);
             File.WriteAllText(filePath + "/1.0.txt", UserSettingsTestData);
 
@@ -157,5 +158,77 @@ namespace Camera_Configuration_File_Editor.Tests
             //CLEANUP
             File.Delete(filePath + "/1.0.txt");
         }
+
+        [TestMethod()]
+        public void getVersionsTest_NoConfigFolder()
+        {
+            //ARRANGE
+            List<string> versionList;
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "/config";
+            //delete test folder if one exists
+            if (Directory.Exists(filePath))
+            {
+                Directory.Delete(filePath, true);
+            }
+
+            //ACT
+            versionList = CCFE_Default.getVersions();
+
+            //ASSERT
+            Assert.IsTrue(versionList.Count == hardcodedVersionCount);
+            foreach(string hardVersion in CCFE_Default.hardVersions)
+            {
+                Assert.IsTrue(versionList.Exists(x => x.Equals(hardVersion)));
+            }
+        }
+        
+        [TestMethod()]
+        public void getVersionsTest_NoConfigs()
+        {
+            //ARRANGE
+            List<string> versionList;
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "/config";
+            Directory.CreateDirectory(filePath);
+
+            //ACT
+            versionList = CCFE_Default.getVersions();
+
+            //ASSERT
+            Assert.IsTrue(versionList.Count == hardcodedVersionCount);
+            foreach (string hardVersion in CCFE_Default.hardVersions)
+            {
+                Assert.IsTrue(versionList.Exists(x => x.Equals(hardVersion)));
+            }
+        }
+        
+        [TestMethod()]
+        public void getVersionsTest_SomeConfigsMissing()
+        {
+            //ARRANGE
+            List<string> versionList;
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "/config";
+            //delete test folder (and files) if exists
+            if (Directory.Exists(filePath))
+            {
+                Directory.Delete(filePath, true);
+            }
+            Directory.CreateDirectory(filePath);
+            File.WriteAllText(filePath + "/9000.1.txt", UserSettingsTestData);
+
+            //ACT
+            versionList = CCFE_Default.getVersions();
+
+            //ASSERT
+            Assert.IsTrue(versionList.Count == hardcodedVersionCount + 1);
+            foreach (string hardVersion in CCFE_Default.hardVersions)
+            {
+                Assert.IsTrue(versionList.Exists(x => x.Equals(hardVersion)));
+            }
+            Assert.IsTrue(versionList.Exists(x => x.Equals("9000.1")));
+
+            //CLEANUP
+            File.Delete(filePath + "/9000.1.txt");
+        }
+        
     }
 }
