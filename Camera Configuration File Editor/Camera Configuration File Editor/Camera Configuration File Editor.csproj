@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>senteraIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,7 +51,11 @@
   <ItemGroup>
     <Compile Include="CCFE_Configuration.cs" />
     <Compile Include="CCFE_ConfigurationProperty.cs" />
+    <Compile Include="CCFE_Default.cs" />
     <Compile Include="CCFE_FileHandler.cs" />
+    <Compile Include="CCFE_GenericPropertyPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GSDWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="senteraIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

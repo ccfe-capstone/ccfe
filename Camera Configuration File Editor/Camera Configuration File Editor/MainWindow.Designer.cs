@@ -66,6 +66,9 @@
             this.overlapTrackBar = new System.Windows.Forms.TrackBar();
             this.saveConfigurationButton = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripComboBox();
+            this.triggerOptionsPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.TriggerModeGroupBox.SuspendLayout();
             this.TriggerOptionsGroupBox.SuspendLayout();
@@ -75,17 +78,19 @@
             this.knownHalAltPanel.SuspendLayout();
             this.overlapPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.overlapTrackBar)).BeginInit();
+            this.triggerOptionsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.verToolStripMenuItem,
             this.gSDToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(562, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(553, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -171,10 +176,12 @@
             // 
             // TriggerModeGroupBox
             // 
+            this.TriggerModeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TriggerModeGroupBox.Controls.Add(this.triggerModeComboBox);
             this.TriggerModeGroupBox.Location = new System.Drawing.Point(13, 28);
             this.TriggerModeGroupBox.Name = "TriggerModeGroupBox";
-            this.TriggerModeGroupBox.Size = new System.Drawing.Size(526, 58);
+            this.TriggerModeGroupBox.Size = new System.Drawing.Size(528, 58);
             this.TriggerModeGroupBox.TabIndex = 4;
             this.TriggerModeGroupBox.TabStop = false;
             this.TriggerModeGroupBox.Text = "Trigger Mode";
@@ -206,24 +213,24 @@
             // 
             // TriggerOptionsGroupBox
             // 
-            this.TriggerOptionsGroupBox.Controls.Add(this.triggerDistancePanel);
-            this.TriggerOptionsGroupBox.Controls.Add(this.triggerPeriodPanel);
-            this.TriggerOptionsGroupBox.Controls.Add(this.waitForGpsFixPanel);
-            this.TriggerOptionsGroupBox.Controls.Add(this.knownHalAltPanel);
-            this.TriggerOptionsGroupBox.Controls.Add(this.overlapPanel);
+            this.TriggerOptionsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TriggerOptionsGroupBox.Controls.Add(this.triggerOptionsPanel);
             this.TriggerOptionsGroupBox.Location = new System.Drawing.Point(13, 92);
             this.TriggerOptionsGroupBox.Name = "TriggerOptionsGroupBox";
-            this.TriggerOptionsGroupBox.Size = new System.Drawing.Size(526, 270);
+            this.TriggerOptionsGroupBox.Size = new System.Drawing.Size(528, 252);
             this.TriggerOptionsGroupBox.TabIndex = 5;
             this.TriggerOptionsGroupBox.TabStop = false;
             this.TriggerOptionsGroupBox.Text = "Trigger Options";
             // 
             // triggerDistancePanel
             // 
+            this.triggerDistancePanel.AutoSize = true;
             this.triggerDistancePanel.Controls.Add(this.triggerDistanceUnit);
             this.triggerDistancePanel.Controls.Add(this.triggerDistanceLabel);
             this.triggerDistancePanel.Controls.Add(this.triggerDistanceValue);
-            this.triggerDistancePanel.Location = new System.Drawing.Point(6, 214);
+            this.triggerDistancePanel.Location = new System.Drawing.Point(3, 186);
             this.triggerDistancePanel.Name = "triggerDistancePanel";
             this.triggerDistancePanel.Size = new System.Drawing.Size(216, 37);
             this.triggerDistancePanel.TabIndex = 8;
@@ -260,7 +267,7 @@
             this.triggerPeriodPanel.Controls.Add(this.triggerPeriodLabel);
             this.triggerPeriodPanel.Controls.Add(this.triggerPeriodUnit);
             this.triggerPeriodPanel.Controls.Add(this.triggerPeriodValue);
-            this.triggerPeriodPanel.Location = new System.Drawing.Point(6, 161);
+            this.triggerPeriodPanel.Location = new System.Drawing.Point(3, 143);
             this.triggerPeriodPanel.Name = "triggerPeriodPanel";
             this.triggerPeriodPanel.Size = new System.Drawing.Size(204, 37);
             this.triggerPeriodPanel.TabIndex = 7;
@@ -294,7 +301,7 @@
             // waitForGpsFixPanel
             // 
             this.waitForGpsFixPanel.Controls.Add(this.waitForGpsFixValue);
-            this.waitForGpsFixPanel.Location = new System.Drawing.Point(6, 87);
+            this.waitForGpsFixPanel.Location = new System.Drawing.Point(3, 63);
             this.waitForGpsFixPanel.Name = "waitForGpsFixPanel";
             this.waitForGpsFixPanel.Size = new System.Drawing.Size(134, 25);
             this.waitForGpsFixPanel.TabIndex = 7;
@@ -315,9 +322,9 @@
             this.knownHalAltPanel.Controls.Add(this.knownHalLabel);
             this.knownHalAltPanel.Controls.Add(this.knownHalAltitudeValue);
             this.knownHalAltPanel.Controls.Add(this.knownHalAltitudeUnit);
-            this.knownHalAltPanel.Location = new System.Drawing.Point(6, 112);
+            this.knownHalAltPanel.Location = new System.Drawing.Point(3, 94);
             this.knownHalAltPanel.Name = "knownHalAltPanel";
-            this.knownHalAltPanel.Size = new System.Drawing.Size(514, 43);
+            this.knownHalAltPanel.Size = new System.Drawing.Size(242, 43);
             this.knownHalAltPanel.TabIndex = 6;
             // 
             // knownHalLabel
@@ -358,9 +365,9 @@
             this.overlapPanel.Controls.Add(this.overlapTrackBarMinLabel);
             this.overlapPanel.Controls.Add(this.overlapTrackBarMaxLabel);
             this.overlapPanel.Controls.Add(this.overlapTrackBar);
-            this.overlapPanel.Location = new System.Drawing.Point(6, 19);
+            this.overlapPanel.Location = new System.Drawing.Point(3, 3);
             this.overlapPanel.Name = "overlapPanel";
-            this.overlapPanel.Size = new System.Drawing.Size(514, 62);
+            this.overlapPanel.Size = new System.Drawing.Size(468, 56);
             this.overlapPanel.TabIndex = 5;
             // 
             // overlapTrackBarValueLabel
@@ -411,8 +418,10 @@
             // 
             // saveConfigurationButton
             // 
+            this.saveConfigurationButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.saveConfigurationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveConfigurationButton.Location = new System.Drawing.Point(231, 388);
+            this.saveConfigurationButton.Location = new System.Drawing.Point(227, 350);
+            this.saveConfigurationButton.MaximumSize = new System.Drawing.Size(96, 34);
             this.saveConfigurationButton.Name = "saveConfigurationButton";
             this.saveConfigurationButton.Size = new System.Drawing.Size(96, 34);
             this.saveConfigurationButton.TabIndex = 6;
@@ -426,17 +435,48 @@
             this.saveFileDialog.Filter = "Configuration Files|*.txt|All Files|*.*";
             this.saveFileDialog.Title = "Save Configuration File";
             // 
+            // verToolStripMenuItem
+            // 
+            this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.versionToolStripMenuItem});
+            this.verToolStripMenuItem.Name = "verToolStripMenuItem";
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.verToolStripMenuItem.Text = "Version";
+            // 
+            // versionToolStripMenuItem
+            // 
+            this.versionToolStripMenuItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(152, 23);
+            this.versionToolStripMenuItem.SelectedIndexChanged += new System.EventHandler(this.versionToolStripMenuItem_SelectedIndexChanged);
+            // 
+            // triggerOptionsPanel
+            // 
+            this.triggerOptionsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.triggerOptionsPanel.AutoScroll = true;
+            this.triggerOptionsPanel.Controls.Add(this.triggerDistancePanel);
+            this.triggerOptionsPanel.Controls.Add(this.overlapPanel);
+            this.triggerOptionsPanel.Controls.Add(this.waitForGpsFixPanel);
+            this.triggerOptionsPanel.Controls.Add(this.triggerPeriodPanel);
+            this.triggerOptionsPanel.Controls.Add(this.knownHalAltPanel);
+            this.triggerOptionsPanel.Location = new System.Drawing.Point(6, 19);
+            this.triggerOptionsPanel.Name = "triggerOptionsPanel";
+            this.triggerOptionsPanel.Size = new System.Drawing.Size(516, 227);
+            this.triggerOptionsPanel.TabIndex = 9;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(562, 434);
+            this.ClientSize = new System.Drawing.Size(553, 391);
             this.Controls.Add(this.saveConfigurationButton);
             this.Controls.Add(this.TriggerOptionsGroupBox);
             this.Controls.Add(this.TriggerModeGroupBox);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(569, 430);
             this.Name = "MainWindow";
             this.Text = "Sentera Camera Configurator";
             this.Load += new System.EventHandler(this.MainWindow_Load);
@@ -455,6 +495,8 @@
             this.overlapPanel.ResumeLayout(false);
             this.overlapPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.overlapTrackBar)).EndInit();
+            this.triggerOptionsPanel.ResumeLayout(false);
+            this.triggerOptionsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -498,6 +540,9 @@
         private System.Windows.Forms.Button saveConfigurationButton;
         private System.Windows.Forms.Label overlapTrackBarValueLabel;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem verToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox versionToolStripMenuItem;
+        private System.Windows.Forms.Panel triggerOptionsPanel;
     }
 }
 
