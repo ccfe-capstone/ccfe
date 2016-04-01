@@ -396,5 +396,11 @@ namespace Camera_Configuration_File_Editor
             //add extra panels to the group box
             triggerOptionsPanel.Controls.AddRange(genericPropertyPanels.ToArray());
         }
+
+        private void gSDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GSDWindow groundSampleDistaceWindow = new GSDWindow();
+            groundSampleDistaceWindow.Show();
+        }
     }
 }

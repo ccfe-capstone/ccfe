@@ -66,7 +66,7 @@
             this.altitudeTrackBarValueTextBox.TabIndex = 2;
             this.altitudeTrackBarValueTextBox.Text = "0";
             this.altitudeTrackBarValueTextBox.TextChanged += new System.EventHandler(this.altitudeTrackBarValueTextBox_TextChanged);
-            this.altitudeTrackBarValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.setTextBox_TextChange);
+            this.altitudeTrackBarValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.altitudeTrackBarValueTextBox_KeyPress);
             // 
             // cameraResComboBox
             // 
