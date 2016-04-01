@@ -15,6 +15,8 @@ namespace Camera_Configuration_File_Editor
         CCFE_Configuration configuration;
         CCFE_FileHandler fileHandler;
 
+        List<CCFE_GenericPropertyPanel> genericPropertyPanels;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -22,14 +24,16 @@ namespace Camera_Configuration_File_Editor
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            newConfiguration("1.0");
+            genericPropertyPanels = new List<CCFE_GenericPropertyPanel>();
+            populateVersions();
+            newConfiguration(versionToolStripMenuItem.SelectedText);
             loadConfiguration(configuration);
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fileHandler = null;
-            newConfiguration("1.0");
+            newConfiguration(versionToolStripMenuItem.Text);
             loadConfiguration(configuration);
             MessageBox.Show("A new Configuration page has been created");
         }
@@ -61,8 +65,7 @@ namespace Camera_Configuration_File_Editor
 
         private void loadDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO: support different versions
-            newConfiguration("1.0");
+            newConfiguration(versionToolStripMenuItem.Text);
             loadConfiguration(configuration);
         }
 
@@ -206,6 +209,7 @@ namespace Camera_Configuration_File_Editor
             configuration.setValue(CCFE_Configuration.PROPERTY_OVERLAPPERCENT, overlapTrackBar.Value.ToString());
             configuration.setValue(CCFE_Configuration.PROPERTY_KNOWNHALALTITUDEUNITS, knownHalAltitudeUnit.Text);
             configuration.setValue(CCFE_Configuration.PROPERTY_WAITFORGPSFIX, waitForGpsFixValue.Checked ? "yes" : "no");
+            configuration.setValue(CCFE_Configuration.PROPERTY_VERSION, versionToolStripMenuItem.Text);
 
             fileHandler.save(configuration);
             MessageBox.Show("Configuration saved successfully!");
@@ -269,9 +273,7 @@ namespace Camera_Configuration_File_Editor
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     fileHandler = new CCFE_FileHandler(saveFileDialog.FileName);
-                    //TODO: create configuration using actual selected version
-                    //this is fine for now
-                    configuration = new CCFE_Configuration("1.0");
+                    configuration = new CCFE_Configuration(versionToolStripMenuItem.Text);
                 }
                 //they canceled or input something wrong
                 else
@@ -323,6 +325,76 @@ namespace Camera_Configuration_File_Editor
 
             //needed to move the trackbar label to its spot under the trackbar
             setTrackBarLabelLocationAndText();
+        }
+
+        public void populateVersions()
+        {
+            List<string> versions = CCFE_Default.getVersions();
+            versions.Sort();
+            //versions.Reverse();
+            versionToolStripMenuItem.Items.Clear();
+            foreach(string version in versions)
+            {
+                versionToolStripMenuItem.Items.Add(version);
+            }
+            versionToolStripMenuItem.SelectedIndex = 0;
+        }
+
+        private void versionToolStripMenuItem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            verToolStripMenuItem.Text = "v" + versionToolStripMenuItem.Text;
+
+            List<CCFE_ConfigurationProperty> defaultProperties = CCFE_Default.getDefaultProperties(versionToolStripMenuItem.Text);
+            List<CCFE_ConfigurationProperty> extraProperties = new List<CCFE_ConfigurationProperty>();
+
+            //if extra property still exists in this version, keep the value
+            foreach (CCFE_GenericPropertyPanel genericPanel in genericPropertyPanels)
+            {
+                if (defaultProperties.Exists(x => x.Name.Equals(genericPanel.getPropertyName())))
+                {
+                    extraProperties.Add(new CCFE_ConfigurationProperty(genericPanel.getPropertyName(), genericPanel.getPropertyValue()));
+                }
+            }
+
+            //remove old extra properties
+            foreach (CCFE_GenericPropertyPanel genericPanel in genericPropertyPanels)
+            {
+                triggerOptionsPanel.Controls.Remove(genericPanel);
+                genericPanel.Dispose();
+            }
+            genericPropertyPanels.Clear();
+
+            //find and create extra properties needed
+            foreach(CCFE_ConfigurationProperty property in defaultProperties)
+            {
+                if (!property.Name.Equals("TriggerMode") &&
+                    !property.Name.Equals("OverlapPercent") &&
+                    !property.Name.Equals("KnownHalAltitudeUnits") &&
+                    !property.Name.Equals("KnownHalAltitude") &&
+                    !property.Name.Equals("Time") &&
+                    !property.Name.Equals("Distance") &&
+                    !property.Name.Equals("WaitForGpsFix") &&
+                    !property.Name.Equals("Version") &&
+                    !genericPropertyPanels.Exists(x => x.getPropertyName().Equals(property.Name)))
+                {
+                    string propertyValue;
+                    Point newPanelLocation = new Point(triggerDistancePanel.Location.X, (triggerDistancePanel.Location.Y + triggerDistancePanel.Size.Height + 6) + genericPropertyPanels.Count * (triggerDistancePanel.Size.Height + 6));
+                    if (extraProperties.Exists(x => x.Name.Equals(property.Name)))
+                    {
+                        propertyValue = extraProperties.Find(x => x.Name.Equals(property.Name)).Value;
+                    }
+                    else
+                    {
+                        propertyValue = property.Value;
+                    }
+                    CCFE_GenericPropertyPanel newPanel = new CCFE_GenericPropertyPanel(newPanelLocation, property.Name, propertyValue);
+                    newPanel.Name = "GenericPropertyPanel" + genericPropertyPanels.Count;
+                    genericPropertyPanels.Add(newPanel);
+                }
+            }
+
+            //add extra panels to the group box
+            triggerOptionsPanel.Controls.AddRange(genericPropertyPanels.ToArray());
         }
     }
 }

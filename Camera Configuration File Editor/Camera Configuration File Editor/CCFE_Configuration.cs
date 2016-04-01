@@ -57,18 +57,7 @@ namespace Camera_Configuration_File_Editor
         public CCFE_Configuration(string configurationVersion)
         {
             PropertyList = new List<CCFE_ConfigurationProperty>();
-            if (configurationVersion.Equals("1.0"))
-            {
-                //TODO: create properties with default values for configuration version
-                propertyList.Add(new CCFE_ConfigurationProperty("TriggerMode", "5"));
-                propertyList.Add(new CCFE_ConfigurationProperty("OverlapPercent", "75"));
-                propertyList.Add(new CCFE_ConfigurationProperty("KnownHalAltitudeUnits", "feet"));
-                propertyList.Add(new CCFE_ConfigurationProperty("KnownHalAltitude", "400"));
-                propertyList.Add(new CCFE_ConfigurationProperty("Time", "3.8"));
-                propertyList.Add(new CCFE_ConfigurationProperty("Distance", "10"));
-                propertyList.Add(new CCFE_ConfigurationProperty("WaitForGpsFix", "yes"));
-                propertyList.Add(new CCFE_ConfigurationProperty("Version", configurationVersion));
-            }
+            PropertyList = CCFE_Default.getDefaultProperties(configurationVersion);
         }
         #endregion
 
