@@ -26,7 +26,7 @@ namespace Camera_Configuration_File_Editor
         {
             genericPropertyPanels = new List<CCFE_GenericPropertyPanel>();
             populateVersions();
-            newConfiguration(versionToolStripMenuItem.SelectedText);
+            newConfiguration(versionToolStripMenuItem.Text);
             loadConfiguration(configuration);
         }
 
