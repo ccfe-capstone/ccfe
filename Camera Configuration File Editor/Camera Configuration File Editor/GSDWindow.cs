@@ -41,13 +41,17 @@ namespace Camera_Configuration_File_Editor
         {
             if(e.KeyChar == (char)Keys.Enter)
             {
+                if (Convert.ToInt32(altitudeTrackBarValueTextBox.Text) > 500)
+                {
+                    altitudeTrackBarValueTextBox.Text = "500";
+                }
                 altitudeTrackBar.Value = Convert.ToInt32(altitudeTrackBarValueTextBox.Text);
             }
         }
 
         private void altitudeTrackBarValueTextBox_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
