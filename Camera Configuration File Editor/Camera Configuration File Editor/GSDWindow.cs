@@ -15,6 +15,7 @@ namespace Camera_Configuration_File_Editor
         public GSDWindow()
         {
             InitializeComponent();
+            setTrackBarTextBoxLocationAndText();
         }
 
         private void altitudeTrackBar_Scroll(object sender, EventArgs e)
@@ -36,7 +37,15 @@ namespace Camera_Configuration_File_Editor
             return new Point(altitudeTrackBarValueTextBox.Location.X, yValue - (int)(altitudeTrackBar.Value * .745));
         }
 
-        private void setTrackBarTextBoxLocationAndText(object sender, EventArgs e)
+        private void setTextBox_TextChange(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.Enter)
+            {
+                altitudeTrackBar.Value = Convert.ToInt32(altitudeTrackBarValueTextBox.Text);
+            }
+        }
+
+        private void altitudeTrackBarValueTextBox_TextChanged(object sender, EventArgs e)
         {
 
         }

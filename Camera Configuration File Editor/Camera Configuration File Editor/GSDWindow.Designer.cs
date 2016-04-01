@@ -47,7 +47,7 @@
             this.altitudeTrackBar.Size = new System.Drawing.Size(45, 399);
             this.altitudeTrackBar.TabIndex = 0;
             this.altitudeTrackBar.Scroll += new System.EventHandler(this.altitudeTrackBar_Scroll);
-            this.altitudeTrackBar.ValueChanged += new System.EventHandler(this.setTrackBarTextBoxLocationAndText);
+            this.altitudeTrackBar.ValueChanged += new System.EventHandler(this.altitudeTrackBar_Scroll);
             // 
             // altitudeLabel
             // 
@@ -62,9 +62,11 @@
             // 
             this.altitudeTrackBarValueTextBox.Location = new System.Drawing.Point(50, 219);
             this.altitudeTrackBarValueTextBox.Name = "altitudeTrackBarValueTextBox";
-            this.altitudeTrackBarValueTextBox.Size = new System.Drawing.Size(56, 20);
+            this.altitudeTrackBarValueTextBox.Size = new System.Drawing.Size(34, 20);
             this.altitudeTrackBarValueTextBox.TabIndex = 2;
-            this.altitudeTrackBarValueTextBox.TextChanged += new System.EventHandler(this.setTrackBarTextBoxLocationAndText);
+            this.altitudeTrackBarValueTextBox.Text = "0";
+            this.altitudeTrackBarValueTextBox.TextChanged += new System.EventHandler(this.altitudeTrackBarValueTextBox_TextChanged);
+            this.altitudeTrackBarValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.setTextBox_TextChange);
             // 
             // cameraResComboBox
             // 
