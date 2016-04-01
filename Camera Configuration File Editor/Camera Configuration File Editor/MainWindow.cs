@@ -345,12 +345,22 @@ namespace Camera_Configuration_File_Editor
             verToolStripMenuItem.Text = "v" + versionToolStripMenuItem.Text;
 
             List<CCFE_ConfigurationProperty> defaultProperties = CCFE_Default.getDefaultProperties(versionToolStripMenuItem.Text);
+            List<CCFE_ConfigurationProperty> extraProperties = new List<CCFE_ConfigurationProperty>();
 
-            //TODO: make extra properties that still exist in a previous version keep their values
-            //remove old extra properties
-            foreach(CCFE_GenericPropertyPanel genericPanel in genericPropertyPanels)
+            //if extra property still exists in this version, keep the value
+            foreach (CCFE_GenericPropertyPanel genericPanel in genericPropertyPanels)
             {
-                TriggerOptionsGroupBox.Controls.Remove(genericPanel);
+                if (defaultProperties.Exists(x => x.Name.Equals(genericPanel.getPropertyName())))
+                {
+                    extraProperties.Add(new CCFE_ConfigurationProperty(genericPanel.getPropertyName(), genericPanel.getPropertyValue()));
+                }
+            }
+
+            //remove old extra properties
+            foreach (CCFE_GenericPropertyPanel genericPanel in genericPropertyPanels)
+            {
+                triggerOptionsPanel.Controls.Remove(genericPanel);
+                genericPanel.Dispose();
             }
             genericPropertyPanels.Clear();
 
@@ -364,17 +374,27 @@ namespace Camera_Configuration_File_Editor
                     !property.Name.Equals("Time") &&
                     !property.Name.Equals("Distance") &&
                     !property.Name.Equals("WaitForGpsFix") &&
-                    !property.Name.Equals("Version"))
+                    !property.Name.Equals("Version") &&
+                    !genericPropertyPanels.Exists(x => x.getPropertyName().Equals(property.Name)))
                 {
-                    genericPropertyPanels.Add(new CCFE_GenericPropertyPanel(new Point(triggerDistancePanel.Location.X, triggerDistancePanel.Location.Y + triggerDistancePanel.Size.Height + 5), property.Name, property.Value));
+                    string propertyValue;
+                    Point newPanelLocation = new Point(triggerDistancePanel.Location.X, (triggerDistancePanel.Location.Y + triggerDistancePanel.Size.Height + 6) + genericPropertyPanels.Count * (triggerDistancePanel.Size.Height + 6));
+                    if (extraProperties.Exists(x => x.Name.Equals(property.Name)))
+                    {
+                        propertyValue = extraProperties.Find(x => x.Name.Equals(property.Name)).Value;
+                    }
+                    else
+                    {
+                        propertyValue = property.Value;
+                    }
+                    CCFE_GenericPropertyPanel newPanel = new CCFE_GenericPropertyPanel(newPanelLocation, property.Name, propertyValue);
+                    newPanel.Name = "GenericPropertyPanel" + genericPropertyPanels.Count;
+                    genericPropertyPanels.Add(newPanel);
                 }
             }
 
             //add extra panels to the group box
-            foreach (CCFE_GenericPropertyPanel genericPanel in genericPropertyPanels)
-            {
-                triggerOptionsPanel.Controls.Add(genericPanel);
-            }
+            triggerOptionsPanel.Controls.AddRange(genericPropertyPanels.ToArray());
         }
     }
 }
