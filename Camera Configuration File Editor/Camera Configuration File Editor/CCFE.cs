@@ -16,7 +16,7 @@ namespace Camera_Configuration_File_Editor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GSDWindow());
+            Application.Run(new MainWindow());
         }
     }
 }
