@@ -57,14 +57,7 @@ namespace Camera_Configuration_File_Editor
 
         private void altitudeTrackBarValueTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(altitudeTrackBarValueTextBox.Text) || (Convert.ToInt32(altitudeTrackBarValueTextBox.Text) <= 0))
-            {
-                altitudeTrackBarValueTextBox.Text = "0";
-            }
-            else if (Convert.ToInt32(altitudeTrackBarValueTextBox.Text) >= 500)
-            {
-                altitudeTrackBarValueTextBox.Text = "500";
-            }
+            sanitizeTextBox(altitudeTrackBarValueTextBox, 0, 500);
             altitudeTrackBar.Value = Convert.ToInt32(altitudeTrackBarValueTextBox.Text);
         }
 
@@ -173,15 +166,24 @@ namespace Camera_Configuration_File_Editor
 
         private void fieldofviewTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(fieldofviewTextBox.Text) || (Convert.ToInt32(fieldofviewTextBox.Text) <= 0))
-            {
-                fieldofviewTextBox.Text = "0";
-            }
-            else if (Convert.ToInt32(fieldofviewTextBox.Text) >= 90)
-            {
-                fieldofviewTextBox.Text = "90";
-            }
+            sanitizeTextBox(fieldofviewTextBox, 0, 90);
             updateGSD();
+        }
+
+        private void sanitizeTextBox(TextBox textbox, int min, int max)
+        {
+            if (string.IsNullOrEmpty(textbox.Text) || (Convert.ToInt32(textbox.Text) <= min))
+            {
+                textbox.Text = min.ToString();
+            }
+            else if (Convert.ToInt32(textbox.Text) >= max)
+            {
+                textbox.Text = max.ToString();
+            }
+            else
+            {
+                textbox.Text = Convert.ToInt32(textbox.Text).ToString();
+            }
         }
     }
 }
