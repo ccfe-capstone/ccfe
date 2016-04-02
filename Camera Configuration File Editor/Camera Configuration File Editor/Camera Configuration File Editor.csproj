@@ -101,8 +101,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\drone.png" />
-    <None Include="Resources\football-field.png" />
     <None Include="Resources\sky.png" />
+    <None Include="Resources\field.png" />
     <Content Include="senteraIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

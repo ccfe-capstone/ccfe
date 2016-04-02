@@ -73,9 +73,9 @@ namespace Camera_Configuration_File_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap football_field {
+        internal static System.Drawing.Bitmap field {
             get {
-                object obj = ResourceManager.GetObject("football_field", resourceCulture);
+                object obj = ResourceManager.GetObject("field", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
