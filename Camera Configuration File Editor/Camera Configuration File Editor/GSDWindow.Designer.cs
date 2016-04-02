@@ -40,7 +40,7 @@
             // 
             // altitudeTrackBar
             // 
-            this.altitudeTrackBar.Location = new System.Drawing.Point(12, 85);
+            this.altitudeTrackBar.Location = new System.Drawing.Point(12, 99);
             this.altitudeTrackBar.Maximum = 500;
             this.altitudeTrackBar.Name = "altitudeTrackBar";
             this.altitudeTrackBar.Orientation = System.Windows.Forms.Orientation.Vertical;
@@ -52,7 +52,7 @@
             // altitudeLabel
             // 
             this.altitudeLabel.AutoSize = true;
-            this.altitudeLabel.Location = new System.Drawing.Point(15, 69);
+            this.altitudeLabel.Location = new System.Drawing.Point(15, 83);
             this.altitudeLabel.Name = "altitudeLabel";
             this.altitudeLabel.Size = new System.Drawing.Size(69, 13);
             this.altitudeLabel.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             // altitudeTrackBarValueTextBox
             // 
-            this.altitudeTrackBarValueTextBox.Location = new System.Drawing.Point(50, 276);
+            this.altitudeTrackBarValueTextBox.Location = new System.Drawing.Point(50, 290);
             this.altitudeTrackBarValueTextBox.Name = "altitudeTrackBarValueTextBox";
             this.altitudeTrackBarValueTextBox.Size = new System.Drawing.Size(34, 20);
             this.altitudeTrackBarValueTextBox.TabIndex = 2;
@@ -75,7 +75,7 @@
             this.cameraResComboBox.Items.AddRange(new object[] {
             "1248 x 950",
             "3808 x 2754"});
-            this.cameraResComboBox.Location = new System.Drawing.Point(1017, 26);
+            this.cameraResComboBox.Location = new System.Drawing.Point(561, 32);
             this.cameraResComboBox.Name = "cameraResComboBox";
             this.cameraResComboBox.Size = new System.Drawing.Size(121, 21);
             this.cameraResComboBox.TabIndex = 3;
@@ -84,7 +84,7 @@
             // camerResLabel
             // 
             this.camerResLabel.AutoSize = true;
-            this.camerResLabel.Location = new System.Drawing.Point(1029, 10);
+            this.camerResLabel.Location = new System.Drawing.Point(573, 16);
             this.camerResLabel.Name = "camerResLabel";
             this.camerResLabel.Size = new System.Drawing.Size(96, 13);
             this.camerResLabel.TabIndex = 4;
@@ -93,7 +93,7 @@
             // fieldofviewLabel
             // 
             this.fieldofviewLabel.AutoSize = true;
-            this.fieldofviewLabel.Location = new System.Drawing.Point(1055, 69);
+            this.fieldofviewLabel.Location = new System.Drawing.Point(599, 75);
             this.fieldofviewLabel.Name = "fieldofviewLabel";
             this.fieldofviewLabel.Size = new System.Drawing.Size(67, 13);
             this.fieldofviewLabel.TabIndex = 5;
@@ -101,7 +101,7 @@
             // 
             // fieldofviewTextBox
             // 
-            this.fieldofviewTextBox.Location = new System.Drawing.Point(1038, 85);
+            this.fieldofviewTextBox.Location = new System.Drawing.Point(582, 91);
             this.fieldofviewTextBox.Name = "fieldofviewTextBox";
             this.fieldofviewTextBox.Size = new System.Drawing.Size(100, 20);
             this.fieldofviewTextBox.TabIndex = 6;
@@ -113,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1150, 835);
+            this.ClientSize = new System.Drawing.Size(694, 835);
             this.Controls.Add(this.fieldofviewTextBox);
             this.Controls.Add(this.fieldofviewLabel);
             this.Controls.Add(this.camerResLabel);

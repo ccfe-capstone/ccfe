@@ -17,6 +17,7 @@ namespace Camera_Configuration_File_Editor
 
         Image droneImage = Properties.Resources.drone;
         Image fieldImage = Properties.Resources.football_field;
+        Image skyImage = Properties.Resources.sky;
 
         double groundSampleDistanceX, groundSampleDistanceY;
         double groundCoverage;
@@ -93,6 +94,8 @@ namespace Camera_Configuration_File_Editor
 
             int fieldHeight = 200;
             int fieldWidth = ((fieldImage.Width / fieldImage.Height) * fieldHeight);
+            double fieldScaleX = fieldWidth / ACTUAL_FIELD_WIDTH;
+            double fieldScaleY = fieldHeight / ACTUAL_FIELD_HEIGHT;
             Size fieldSize = new Size(fieldWidth, fieldHeight);
 
             int fieldX = midWindowX - (fieldWidth / 2);
@@ -103,12 +106,25 @@ namespace Camera_Configuration_File_Editor
 
             g.DrawImage(fieldImage, fieldRect);
 
-            //draw coverage
-            double coverageScaleX = fieldWidth / ACTUAL_FIELD_WIDTH;
-            double coverageScaleY = fieldHeight / ACTUAL_FIELD_HEIGHT;
+            //draw sky
+            int skyWidth = fieldWidth;
+            int skyHeight = fieldY;
+            Size skySize = new Size(skyWidth, skyHeight);
 
-            int coverageWidth = Math.Min((int)(groundCoverage * coverageScaleX), fieldWidth);
-            int coverageHeight = Math.Min((int)(groundCoverage * coverageScaleY), fieldHeight);
+            int skyX = fieldX;
+            int skyY = 0;
+            Point skyLocation = new Point(skyX, skyY);
+
+            Rectangle skyRect = new Rectangle(skyLocation, skySize);
+
+            int skySrcX = 0;
+            int skySrcY = skyImage.Height - skyHeight;
+
+            g.DrawImage(skyImage, skyRect, skySrcX, skySrcY, skyWidth, skyHeight, GraphicsUnit.Pixel);
+
+            //draw coverage
+            int coverageWidth = Math.Min((int)(groundCoverage * fieldScaleX), fieldWidth);
+            int coverageHeight = Math.Min((int)(groundCoverage * fieldScaleY), fieldHeight);
             Size coverageSize = new Size(coverageWidth, coverageHeight);
 
             int fieldMidY = fieldLocation.Y + fieldSize.Height / 2;
@@ -129,7 +145,7 @@ namespace Camera_Configuration_File_Editor
             Size droneSize = new Size(droneWidth, droneHeight);
 
             int droneX = midWindowX - (droneWidth / 2);
-            int droneY = fieldY - droneHeight - (int)(droneAltitude * coverageScaleY);
+            int droneY = fieldY - droneHeight - (int)(droneAltitude * fieldScaleY);
             Point droneLocation = new Point(droneX, droneY);
 
             Rectangle droneRect = new Rectangle(droneLocation, droneSize);
@@ -143,7 +159,7 @@ namespace Camera_Configuration_File_Editor
             int fovBottomY = altitudeTrackBar.Location.Y + altitudeTrackBar.Size.Height;
             double fovHalfRadians = (Convert.ToDouble(fieldofviewTextBox.Text)/2)*(Math.PI/180.0);
             double fovBottomLeg = (int)(Math.Tan(fovHalfRadians) * (fovBottomY - fovTopPoint.Y));
-            int fovBottomWidth = Math.Min((int)(fovBottomLeg * coverageScaleX), fieldWidth / 2);
+            int fovBottomWidth = Math.Min((int)(fovBottomLeg * fieldScaleX), fieldWidth / 2);
 
             Point fovLeftPoint = new Point(droneMidX - fovBottomWidth, fovBottomY);
             Point fovRightPoint = new Point(droneMidX + fovBottomWidth, fovBottomY);
