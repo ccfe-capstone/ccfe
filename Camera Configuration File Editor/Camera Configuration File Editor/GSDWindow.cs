@@ -17,6 +17,8 @@ namespace Camera_Configuration_File_Editor
         private const int MIN_DRONE_ALTITUDE = 0;
         private const int MAX_FOV = 90;
         private const int MIN_FOV = 0;
+        private const int MAX_CAMERA_RESOLUTION = 15360; //used 16K digital cinema
+        private const int MIN_CAMERA_RESOLUTION = 0;
         private const int MAX_SKY_ALTITUDE = MAX_DRONE_ALTITUDE + 100;
 
         private const int ACTUAL_FIELD_WIDTH = 360;
@@ -45,35 +47,42 @@ namespace Camera_Configuration_File_Editor
         public GSDWindow()
         {
             InitializeComponent();
-            cameraResComboBox.SelectedIndex = 0;
 
             scaleFactor = (double)pictureBoxModel.ClientSize.Width / MAX_COVERAGE_FEET;
             MAX_COVERAGE = (int)(scaleFactor * MAX_COVERAGE_FEET);
-            pictureBoxModel.ClientSize = new Size(pictureBoxModel.ClientSize.Width, (int)(scaleFactor * (MAX_SKY_ALTITUDE + MAX_COVERAGE_FEET)));
-            altitudeTrackBar.Height = (int)(pictureBoxModel.ClientSize.Height - MAX_COVERAGE);
 
+            pictureBoxModel.ClientSize = new Size(pictureBoxModel.ClientSize.Width, (int)(scaleFactor * (MAX_SKY_ALTITUDE + MAX_COVERAGE_FEET)));
+
+            coverageUnitComboBox.SelectedIndex = 0;
+            gsdUnitComboBox.SelectedIndex = 0;
+
+            //set max and min
+            altitudeNumericUpDown.Maximum = MAX_DRONE_ALTITUDE;
+            altitudeNumericUpDown.Minimum = MIN_DRONE_ALTITUDE;
+
+            //set max and min
+            fovNumericUpDown.Maximum = MAX_FOV;
+            fovNumericUpDown.Minimum = MIN_FOV;
+
+            //set max and min
+            camResXNumericUpDown.Maximum = MAX_CAMERA_RESOLUTION;
+            camResXNumericUpDown.Minimum = MIN_CAMERA_RESOLUTION;
+            camResYNumericUpDown.Maximum = MAX_CAMERA_RESOLUTION;
+            camResYNumericUpDown.Minimum = MIN_CAMERA_RESOLUTION;
+            camResComboBox.SelectedIndex = 0;
+
+            //set max and min, height, and starting value
+            altitudeTrackBar.Height = (int)(pictureBoxModel.ClientSize.Height - MAX_COVERAGE);
             altitudeTrackBar.Maximum = MAX_DRONE_ALTITUDE;
             altitudeTrackBar.Minimum = MIN_DRONE_ALTITUDE;
             altitudeTrackBar.Value = altitudeTrackBar.Minimum;
-            followTrackBar();
-        }
-
-        private void altitudeTrackBar_Scroll(object sender, EventArgs e)
-        {
-            altitudeTextBox.Text = altitudeTrackBar.Value.ToString();
-            followTrackBar();
-            updateGSD();
-        }
-
-        private void altitudeTrackBar_ValueChanged(object sender, EventArgs e)
-        {
             followTrackBar();
             updateGSD();
         }
 
         private void followTrackBar()
         {
-            moveWithTrackBar(altitudeTextBox);
+            moveWithTrackBar(altitudeNumericUpDown);
             moveWithTrackBar(altitudeUnitLabel);
         }
 
@@ -86,49 +95,79 @@ namespace Camera_Configuration_File_Editor
             control.Location = new Point(control.Location.X, trackBarBottom - (int)(((trackBarBottom - trackBarTop) / (double)MAX_DRONE_ALTITUDE) * altitudeTrackBar.Value) - (control.Height / 2));
         }
 
-        private void altitudeTrackBarValueTextBox_TextChanged(object sender, EventArgs e)
-        {
-            sanitizeTextBox(altitudeTextBox, MIN_DRONE_ALTITUDE, MAX_DRONE_ALTITUDE);
-            altitudeTrackBar.Value = Convert.ToInt32(altitudeTextBox.Text);
-        }
-
-        private void altitudeTrackBarValueTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !(char.IsNumber(e.KeyChar) || char.IsControl(e.KeyChar));
-        }
-
         private Size getCameraResolution()
         {
-            string[] sizes = cameraResComboBox.Text.Split('x');
-            int x = Convert.ToInt32(sizes[0]);
-            int y = Convert.ToInt32(sizes[1]);
+            int x = (int)camResXNumericUpDown.Value;
+            int y = (int)camResYNumericUpDown.Value;
             return new Size(x, y);
         }
 
         private void updateGSD()
         {
-            groundCoverage = 2 * altitudeTrackBar.Value * Math.Tan((Convert.ToDouble(fieldofviewTextBox.Text) / 2) * (Math.PI / 180.0));
-            groundSampleDistanceX = groundCoverage / getCameraResolution().Width;
-            groundSampleDistanceY = groundCoverage / getCameraResolution().Height;
+            groundCoverage = 2 * altitudeTrackBar.Value * Math.Tan(((double)fovNumericUpDown.Value / 2) * (Math.PI / 180.0));
+            Size cameraResolution = getCameraResolution();
+            groundSampleDistanceX = groundCoverage / cameraResolution.Width;
+            groundSampleDistanceY = groundCoverage / cameraResolution.Height;
+
+            updatePictureInformation();
 
             //update model on screen
             pictureBoxModel.Invalidate();
         }
 
-        private void fieldofviewTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void updatePictureInformation()
         {
-            e.Handled = !(char.IsNumber(e.KeyChar) || char.IsControl(e.KeyChar));
-        }
+            //coverage
+            //calculate in square feet
+            double coverageArea = Math.Pow(groundCoverage, 2);
 
-        private void cameraResComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            updateGSD();
-        }
+            if (coverageUnitComboBox.Text.Equals("square yards"))
+            {
+                coverageArea = coverageArea / 9.0;
+            }
+            else if (coverageUnitComboBox.Text.Equals("square miles"))
+            {
+                coverageArea = coverageArea / (2.78784 * Math.Pow(10, 7));
+            }
+            else if (coverageUnitComboBox.Text.Equals("acres"))
+            {
+                coverageArea = coverageArea / 43560.0;
+            }
+            else if (coverageUnitComboBox.Text.Equals("hectares"))
+            {
+                coverageArea = coverageArea / 107639.1;
+            }
+            else if (coverageUnitComboBox.Text.Equals("square meters"))
+            {
+                coverageArea = coverageArea / 10.764;
+            }
+            else if (coverageUnitComboBox.Text.Equals("square kilometers"))
+            {
+                coverageArea = coverageArea / 10764000.0;
+            }
+            
+            if (coverageArea <= 0.0001 && coverageArea != 0) //coverage area is very small, we should use exponents to display it
+            {
+                coverageLabel.Text = string.Format("{0:#,0.000e-0}", coverageArea);
+            }
+            else
+            {
+                coverageLabel.Text = string.Format("{0:#,0.###}", coverageArea);
+            }
+            coverageUnitComboBox.Location = new Point(coverageLabel.Location.X + coverageLabel.Size.Width + coverageLabel.Margin.Right, coverageUnitComboBox.Location.Y);
 
-        private void fieldofviewTextBox_TextChanged(object sender, EventArgs e)
-        {
-            sanitizeTextBox(fieldofviewTextBox, MIN_FOV, MAX_FOV);
-            updateGSD();
+            //gsd
+            //calculate in inches by default
+            double convertedGSDX = groundSampleDistanceX * 12.0;
+            double convertedGSDY = groundSampleDistanceY * 12.0;
+
+            if (gsdUnitComboBox.Text.Equals("centimeters"))
+            {
+                convertedGSDX = groundSampleDistanceX * 30.48;
+                convertedGSDY = groundSampleDistanceY * 30.48;
+            }
+            gsdXLabel.Text = string.Format("{0:#,0.###}", convertedGSDX);
+            gsdYLabel.Text = string.Format("{0:#,0.###}", convertedGSDY);
         }
 
         private void pictureBoxModel_Paint(object sender, PaintEventArgs e)
@@ -230,20 +269,48 @@ namespace Camera_Configuration_File_Editor
             g.DrawLine(fovPen, fovLeftPoint, fovRightPoint);
         }
 
-        private void sanitizeTextBox(TextBox textbox, int min, int max)
+        private void altitudeTrackBar_ValueChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textbox.Text) || (Convert.ToInt32(textbox.Text) <= min))
-            {
-                textbox.Text = min.ToString();
-            }
-            else if (Convert.ToInt32(textbox.Text) >= max)
-            {
-                textbox.Text = max.ToString();
-            }
-            else
-            {
-                textbox.Text = Convert.ToInt32(textbox.Text).ToString();
-            }
+            altitudeNumericUpDown.Value = altitudeTrackBar.Value;
+            followTrackBar();
+            updateGSD();
+        }
+
+        private void altitudeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            altitudeTrackBar.Value = (int)altitudeNumericUpDown.Value;
+        }
+
+        private void fovNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            updateGSD();
+        }
+
+        private void cameraResComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] resolution = camResComboBox.Text.Split('x');
+            camResXNumericUpDown.Value = Convert.ToInt32(resolution[0]);
+            camResYNumericUpDown.Value = Convert.ToInt32(resolution[1]);
+        }
+
+        private void coverageUnitComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updatePictureInformation();
+        }
+
+        private void gsdUnitComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            updatePictureInformation();
+        }
+
+        private void camResXNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            updateGSD();
+        }
+
+        private void camResYNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            updateGSD();
         }
     }
 }
