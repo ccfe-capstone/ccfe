@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GSDWindow));
             this.altitudeTrackBar = new System.Windows.Forms.TrackBar();
             this.altitudeTitleLabel = new System.Windows.Forms.Label();
             this.camResComboBox = new System.Windows.Forms.ComboBox();
@@ -359,6 +360,7 @@
             this.Controls.Add(this.pictureBoxModel);
             this.Controls.Add(this.altitudeTitleLabel);
             this.Controls.Add(this.altitudeTrackBar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GSDWindow";
             this.Text = "GSDWindow";
             ((System.ComponentModel.ISupportInitialize)(this.altitudeTrackBar)).EndInit();
