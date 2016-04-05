@@ -53,6 +53,17 @@ namespace Camera_Configuration_File_Editor
 
             pictureBoxModel.ClientSize = new Size(pictureBoxModel.ClientSize.Width, (int)(scaleFactor * (MAX_SKY_ALTITUDE + MAX_COVERAGE_FEET)));
 
+            //resize components to match picturebox
+            outputPictureInfoGroupBox.Height = pictureBoxModel.Location.Y + pictureBoxModel.Size.Height - outputPictureInfoGroupBox.Location.Y;
+
+            //resize form to fit to picturebox
+            ClientSize = new Size(ClientSize.Width, pictureBoxModel.Location.Y + pictureBoxModel.Height + 2*pictureBoxModel.Margin.Bottom);
+
+            //set max and min form size to current size
+            MinimumSize = new Size(Width, Height);
+            MaximumSize = new Size(Width, Height);
+
+            //initialize combo boxes
             coverageUnitComboBox.SelectedIndex = 0;
             gsdUnitComboBox.SelectedIndex = 0;
 
@@ -77,6 +88,7 @@ namespace Camera_Configuration_File_Editor
             altitudeTrackBar.Minimum = MIN_DRONE_ALTITUDE;
             altitudeTrackBar.Value = altitudeTrackBar.Minimum;
             followTrackBar();
+
             updateGSD();
         }
 
