@@ -36,6 +36,8 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadDefaultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripComboBox();
             this.gSDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,41 +46,39 @@
             this.triggerModeComboBox = new System.Windows.Forms.ComboBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.TriggerOptionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.triggerOptionsPanel = new System.Windows.Forms.Panel();
             this.triggerDistancePanel = new System.Windows.Forms.Panel();
             this.triggerDistanceUnit = new System.Windows.Forms.Label();
             this.triggerDistanceLabel = new System.Windows.Forms.Label();
             this.triggerDistanceValue = new System.Windows.Forms.TextBox();
-            this.triggerPeriodPanel = new System.Windows.Forms.Panel();
-            this.triggerPeriodLabel = new System.Windows.Forms.Label();
-            this.triggerPeriodUnit = new System.Windows.Forms.Label();
-            this.triggerPeriodValue = new System.Windows.Forms.TextBox();
-            this.waitForGpsFixPanel = new System.Windows.Forms.Panel();
-            this.waitForGpsFixValue = new System.Windows.Forms.CheckBox();
-            this.knownHalAltPanel = new System.Windows.Forms.Panel();
-            this.knownHalLabel = new System.Windows.Forms.Label();
-            this.knownHalAltitudeValue = new System.Windows.Forms.TextBox();
-            this.knownHalAltitudeUnit = new System.Windows.Forms.ComboBox();
             this.overlapPanel = new System.Windows.Forms.Panel();
             this.overlapTrackBarValueLabel = new System.Windows.Forms.Label();
             this.overlapLabel = new System.Windows.Forms.Label();
             this.overlapTrackBarMinLabel = new System.Windows.Forms.Label();
             this.overlapTrackBarMaxLabel = new System.Windows.Forms.Label();
             this.overlapTrackBar = new System.Windows.Forms.TrackBar();
+            this.waitForGpsFixPanel = new System.Windows.Forms.Panel();
+            this.waitForGpsFixValue = new System.Windows.Forms.CheckBox();
+            this.triggerPeriodPanel = new System.Windows.Forms.Panel();
+            this.triggerPeriodLabel = new System.Windows.Forms.Label();
+            this.triggerPeriodUnit = new System.Windows.Forms.Label();
+            this.triggerPeriodValue = new System.Windows.Forms.TextBox();
+            this.knownHalAltPanel = new System.Windows.Forms.Panel();
+            this.knownHalLabel = new System.Windows.Forms.Label();
+            this.knownHalAltitudeValue = new System.Windows.Forms.TextBox();
+            this.knownHalAltitudeUnit = new System.Windows.Forms.ComboBox();
             this.saveConfigurationButton = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripComboBox();
-            this.triggerOptionsPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.TriggerModeGroupBox.SuspendLayout();
             this.TriggerOptionsGroupBox.SuspendLayout();
+            this.triggerOptionsPanel.SuspendLayout();
             this.triggerDistancePanel.SuspendLayout();
-            this.triggerPeriodPanel.SuspendLayout();
-            this.waitForGpsFixPanel.SuspendLayout();
-            this.knownHalAltPanel.SuspendLayout();
             this.overlapPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.overlapTrackBar)).BeginInit();
-            this.triggerOptionsPanel.SuspendLayout();
+            this.waitForGpsFixPanel.SuspendLayout();
+            this.triggerPeriodPanel.SuspendLayout();
+            this.knownHalAltPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -147,11 +147,27 @@
             this.loadDefaultsToolStripMenuItem.Text = "Load Defaults";
             this.loadDefaultsToolStripMenuItem.Click += new System.EventHandler(this.loadDefaultsToolStripMenuItem_Click);
             // 
+            // verToolStripMenuItem
+            // 
+            this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.versionToolStripMenuItem});
+            this.verToolStripMenuItem.Name = "verToolStripMenuItem";
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.verToolStripMenuItem.Text = "Version";
+            // 
+            // versionToolStripMenuItem
+            // 
+            this.versionToolStripMenuItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(152, 23);
+            this.versionToolStripMenuItem.SelectedIndexChanged += new System.EventHandler(this.versionToolStripMenuItem_SelectedIndexChanged);
+            // 
             // gSDToolStripMenuItem
             // 
             this.gSDToolStripMenuItem.Name = "gSDToolStripMenuItem";
             this.gSDToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.gSDToolStripMenuItem.Text = "GSD";
+            this.gSDToolStripMenuItem.Click += new System.EventHandler(this.gSDToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -224,6 +240,22 @@
             this.TriggerOptionsGroupBox.TabStop = false;
             this.TriggerOptionsGroupBox.Text = "Trigger Options";
             // 
+            // triggerOptionsPanel
+            // 
+            this.triggerOptionsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.triggerOptionsPanel.AutoScroll = true;
+            this.triggerOptionsPanel.Controls.Add(this.triggerDistancePanel);
+            this.triggerOptionsPanel.Controls.Add(this.overlapPanel);
+            this.triggerOptionsPanel.Controls.Add(this.waitForGpsFixPanel);
+            this.triggerOptionsPanel.Controls.Add(this.triggerPeriodPanel);
+            this.triggerOptionsPanel.Controls.Add(this.knownHalAltPanel);
+            this.triggerOptionsPanel.Location = new System.Drawing.Point(6, 19);
+            this.triggerOptionsPanel.Name = "triggerOptionsPanel";
+            this.triggerOptionsPanel.Size = new System.Drawing.Size(516, 227);
+            this.triggerOptionsPanel.TabIndex = 9;
+            // 
             // triggerDistancePanel
             // 
             this.triggerDistancePanel.AutoSize = true;
@@ -261,102 +293,6 @@
             this.triggerDistanceValue.Size = new System.Drawing.Size(52, 20);
             this.triggerDistanceValue.TabIndex = 6;
             this.triggerDistanceValue.TextChanged += new System.EventHandler(this.triggerDistanceValue_TextChanged);
-            // 
-            // triggerPeriodPanel
-            // 
-            this.triggerPeriodPanel.Controls.Add(this.triggerPeriodLabel);
-            this.triggerPeriodPanel.Controls.Add(this.triggerPeriodUnit);
-            this.triggerPeriodPanel.Controls.Add(this.triggerPeriodValue);
-            this.triggerPeriodPanel.Location = new System.Drawing.Point(3, 143);
-            this.triggerPeriodPanel.Name = "triggerPeriodPanel";
-            this.triggerPeriodPanel.Size = new System.Drawing.Size(204, 37);
-            this.triggerPeriodPanel.TabIndex = 7;
-            // 
-            // triggerPeriodLabel
-            // 
-            this.triggerPeriodLabel.AutoSize = true;
-            this.triggerPeriodLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.triggerPeriodLabel.Location = new System.Drawing.Point(3, 9);
-            this.triggerPeriodLabel.Name = "triggerPeriodLabel";
-            this.triggerPeriodLabel.Size = new System.Drawing.Size(88, 15);
-            this.triggerPeriodLabel.TabIndex = 3;
-            this.triggerPeriodLabel.Text = "Trigger Period:";
-            // 
-            // triggerPeriodUnit
-            // 
-            this.triggerPeriodUnit.AutoSize = true;
-            this.triggerPeriodUnit.Location = new System.Drawing.Point(152, 11);
-            this.triggerPeriodUnit.Name = "triggerPeriodUnit";
-            this.triggerPeriodUnit.Size = new System.Drawing.Size(47, 13);
-            this.triggerPeriodUnit.TabIndex = 7;
-            this.triggerPeriodUnit.Text = "seconds";
-            // 
-            // triggerPeriodValue
-            // 
-            this.triggerPeriodValue.Location = new System.Drawing.Point(94, 8);
-            this.triggerPeriodValue.Name = "triggerPeriodValue";
-            this.triggerPeriodValue.Size = new System.Drawing.Size(52, 20);
-            this.triggerPeriodValue.TabIndex = 5;
-            // 
-            // waitForGpsFixPanel
-            // 
-            this.waitForGpsFixPanel.Controls.Add(this.waitForGpsFixValue);
-            this.waitForGpsFixPanel.Location = new System.Drawing.Point(3, 63);
-            this.waitForGpsFixPanel.Name = "waitForGpsFixPanel";
-            this.waitForGpsFixPanel.Size = new System.Drawing.Size(134, 25);
-            this.waitForGpsFixPanel.TabIndex = 7;
-            // 
-            // waitForGpsFixValue
-            // 
-            this.waitForGpsFixValue.AutoSize = true;
-            this.waitForGpsFixValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.waitForGpsFixValue.Location = new System.Drawing.Point(6, 3);
-            this.waitForGpsFixValue.Name = "waitForGpsFixValue";
-            this.waitForGpsFixValue.Size = new System.Drawing.Size(118, 19);
-            this.waitForGpsFixValue.TabIndex = 4;
-            this.waitForGpsFixValue.Text = "Wait For GPS Fix";
-            this.waitForGpsFixValue.UseVisualStyleBackColor = true;
-            // 
-            // knownHalAltPanel
-            // 
-            this.knownHalAltPanel.Controls.Add(this.knownHalLabel);
-            this.knownHalAltPanel.Controls.Add(this.knownHalAltitudeValue);
-            this.knownHalAltPanel.Controls.Add(this.knownHalAltitudeUnit);
-            this.knownHalAltPanel.Location = new System.Drawing.Point(3, 94);
-            this.knownHalAltPanel.Name = "knownHalAltPanel";
-            this.knownHalAltPanel.Size = new System.Drawing.Size(242, 43);
-            this.knownHalAltPanel.TabIndex = 6;
-            // 
-            // knownHalLabel
-            // 
-            this.knownHalLabel.AutoSize = true;
-            this.knownHalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.knownHalLabel.Location = new System.Drawing.Point(3, 16);
-            this.knownHalLabel.Name = "knownHalLabel";
-            this.knownHalLabel.Size = new System.Drawing.Size(113, 15);
-            this.knownHalLabel.TabIndex = 0;
-            this.knownHalLabel.Text = "Known Hal Altitude:";
-            // 
-            // knownHalAltitudeValue
-            // 
-            this.knownHalAltitudeValue.Location = new System.Drawing.Point(122, 16);
-            this.knownHalAltitudeValue.Name = "knownHalAltitudeValue";
-            this.knownHalAltitudeValue.Size = new System.Drawing.Size(43, 20);
-            this.knownHalAltitudeValue.TabIndex = 1;
-            this.knownHalAltitudeValue.TextChanged += new System.EventHandler(this.knownHalAltitudeValue_TextChanged);
-            // 
-            // knownHalAltitudeUnit
-            // 
-            this.knownHalAltitudeUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.knownHalAltitudeUnit.FormattingEnabled = true;
-            this.knownHalAltitudeUnit.Items.AddRange(new object[] {
-            "feet",
-            "meters"});
-            this.knownHalAltitudeUnit.Location = new System.Drawing.Point(171, 16);
-            this.knownHalAltitudeUnit.Name = "knownHalAltitudeUnit";
-            this.knownHalAltitudeUnit.Size = new System.Drawing.Size(63, 21);
-            this.knownHalAltitudeUnit.TabIndex = 2;
-            this.knownHalAltitudeUnit.SelectedIndexChanged += new System.EventHandler(this.knownHalAltitudeUnit_SelectedIndexChanged);
             // 
             // overlapPanel
             // 
@@ -416,6 +352,102 @@
             this.overlapTrackBar.TabIndex = 0;
             this.overlapTrackBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
+            // waitForGpsFixPanel
+            // 
+            this.waitForGpsFixPanel.Controls.Add(this.waitForGpsFixValue);
+            this.waitForGpsFixPanel.Location = new System.Drawing.Point(3, 63);
+            this.waitForGpsFixPanel.Name = "waitForGpsFixPanel";
+            this.waitForGpsFixPanel.Size = new System.Drawing.Size(134, 25);
+            this.waitForGpsFixPanel.TabIndex = 7;
+            // 
+            // waitForGpsFixValue
+            // 
+            this.waitForGpsFixValue.AutoSize = true;
+            this.waitForGpsFixValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waitForGpsFixValue.Location = new System.Drawing.Point(6, 3);
+            this.waitForGpsFixValue.Name = "waitForGpsFixValue";
+            this.waitForGpsFixValue.Size = new System.Drawing.Size(118, 19);
+            this.waitForGpsFixValue.TabIndex = 4;
+            this.waitForGpsFixValue.Text = "Wait For GPS Fix";
+            this.waitForGpsFixValue.UseVisualStyleBackColor = true;
+            // 
+            // triggerPeriodPanel
+            // 
+            this.triggerPeriodPanel.Controls.Add(this.triggerPeriodLabel);
+            this.triggerPeriodPanel.Controls.Add(this.triggerPeriodUnit);
+            this.triggerPeriodPanel.Controls.Add(this.triggerPeriodValue);
+            this.triggerPeriodPanel.Location = new System.Drawing.Point(3, 143);
+            this.triggerPeriodPanel.Name = "triggerPeriodPanel";
+            this.triggerPeriodPanel.Size = new System.Drawing.Size(204, 37);
+            this.triggerPeriodPanel.TabIndex = 7;
+            // 
+            // triggerPeriodLabel
+            // 
+            this.triggerPeriodLabel.AutoSize = true;
+            this.triggerPeriodLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.triggerPeriodLabel.Location = new System.Drawing.Point(3, 9);
+            this.triggerPeriodLabel.Name = "triggerPeriodLabel";
+            this.triggerPeriodLabel.Size = new System.Drawing.Size(88, 15);
+            this.triggerPeriodLabel.TabIndex = 3;
+            this.triggerPeriodLabel.Text = "Trigger Period:";
+            // 
+            // triggerPeriodUnit
+            // 
+            this.triggerPeriodUnit.AutoSize = true;
+            this.triggerPeriodUnit.Location = new System.Drawing.Point(152, 11);
+            this.triggerPeriodUnit.Name = "triggerPeriodUnit";
+            this.triggerPeriodUnit.Size = new System.Drawing.Size(47, 13);
+            this.triggerPeriodUnit.TabIndex = 7;
+            this.triggerPeriodUnit.Text = "seconds";
+            // 
+            // triggerPeriodValue
+            // 
+            this.triggerPeriodValue.Location = new System.Drawing.Point(94, 8);
+            this.triggerPeriodValue.Name = "triggerPeriodValue";
+            this.triggerPeriodValue.Size = new System.Drawing.Size(52, 20);
+            this.triggerPeriodValue.TabIndex = 5;
+            // 
+            // knownHalAltPanel
+            // 
+            this.knownHalAltPanel.Controls.Add(this.knownHalLabel);
+            this.knownHalAltPanel.Controls.Add(this.knownHalAltitudeValue);
+            this.knownHalAltPanel.Controls.Add(this.knownHalAltitudeUnit);
+            this.knownHalAltPanel.Location = new System.Drawing.Point(3, 94);
+            this.knownHalAltPanel.Name = "knownHalAltPanel";
+            this.knownHalAltPanel.Size = new System.Drawing.Size(242, 43);
+            this.knownHalAltPanel.TabIndex = 6;
+            // 
+            // knownHalLabel
+            // 
+            this.knownHalLabel.AutoSize = true;
+            this.knownHalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.knownHalLabel.Location = new System.Drawing.Point(3, 16);
+            this.knownHalLabel.Name = "knownHalLabel";
+            this.knownHalLabel.Size = new System.Drawing.Size(113, 15);
+            this.knownHalLabel.TabIndex = 0;
+            this.knownHalLabel.Text = "Known Hal Altitude:";
+            // 
+            // knownHalAltitudeValue
+            // 
+            this.knownHalAltitudeValue.Location = new System.Drawing.Point(122, 16);
+            this.knownHalAltitudeValue.Name = "knownHalAltitudeValue";
+            this.knownHalAltitudeValue.Size = new System.Drawing.Size(43, 20);
+            this.knownHalAltitudeValue.TabIndex = 1;
+            this.knownHalAltitudeValue.TextChanged += new System.EventHandler(this.knownHalAltitudeValue_TextChanged);
+            // 
+            // knownHalAltitudeUnit
+            // 
+            this.knownHalAltitudeUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.knownHalAltitudeUnit.FormattingEnabled = true;
+            this.knownHalAltitudeUnit.Items.AddRange(new object[] {
+            "feet",
+            "meters"});
+            this.knownHalAltitudeUnit.Location = new System.Drawing.Point(171, 16);
+            this.knownHalAltitudeUnit.Name = "knownHalAltitudeUnit";
+            this.knownHalAltitudeUnit.Size = new System.Drawing.Size(63, 21);
+            this.knownHalAltitudeUnit.TabIndex = 2;
+            this.knownHalAltitudeUnit.SelectedIndexChanged += new System.EventHandler(this.knownHalAltitudeUnit_SelectedIndexChanged);
+            // 
             // saveConfigurationButton
             // 
             this.saveConfigurationButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -435,37 +467,6 @@
             this.saveFileDialog.Filter = "Configuration Files|*.txt|All Files|*.*";
             this.saveFileDialog.Title = "Save Configuration File";
             // 
-            // verToolStripMenuItem
-            // 
-            this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.versionToolStripMenuItem});
-            this.verToolStripMenuItem.Name = "verToolStripMenuItem";
-            this.verToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.verToolStripMenuItem.Text = "Version";
-            // 
-            // versionToolStripMenuItem
-            // 
-            this.versionToolStripMenuItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(152, 23);
-            this.versionToolStripMenuItem.SelectedIndexChanged += new System.EventHandler(this.versionToolStripMenuItem_SelectedIndexChanged);
-            // 
-            // triggerOptionsPanel
-            // 
-            this.triggerOptionsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.triggerOptionsPanel.AutoScroll = true;
-            this.triggerOptionsPanel.Controls.Add(this.triggerDistancePanel);
-            this.triggerOptionsPanel.Controls.Add(this.overlapPanel);
-            this.triggerOptionsPanel.Controls.Add(this.waitForGpsFixPanel);
-            this.triggerOptionsPanel.Controls.Add(this.triggerPeriodPanel);
-            this.triggerOptionsPanel.Controls.Add(this.knownHalAltPanel);
-            this.triggerOptionsPanel.Location = new System.Drawing.Point(6, 19);
-            this.triggerOptionsPanel.Name = "triggerOptionsPanel";
-            this.triggerOptionsPanel.Size = new System.Drawing.Size(516, 227);
-            this.triggerOptionsPanel.TabIndex = 9;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -484,19 +485,19 @@
             this.menuStrip1.PerformLayout();
             this.TriggerModeGroupBox.ResumeLayout(false);
             this.TriggerOptionsGroupBox.ResumeLayout(false);
+            this.triggerOptionsPanel.ResumeLayout(false);
+            this.triggerOptionsPanel.PerformLayout();
             this.triggerDistancePanel.ResumeLayout(false);
             this.triggerDistancePanel.PerformLayout();
-            this.triggerPeriodPanel.ResumeLayout(false);
-            this.triggerPeriodPanel.PerformLayout();
-            this.waitForGpsFixPanel.ResumeLayout(false);
-            this.waitForGpsFixPanel.PerformLayout();
-            this.knownHalAltPanel.ResumeLayout(false);
-            this.knownHalAltPanel.PerformLayout();
             this.overlapPanel.ResumeLayout(false);
             this.overlapPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.overlapTrackBar)).EndInit();
-            this.triggerOptionsPanel.ResumeLayout(false);
-            this.triggerOptionsPanel.PerformLayout();
+            this.waitForGpsFixPanel.ResumeLayout(false);
+            this.waitForGpsFixPanel.PerformLayout();
+            this.triggerPeriodPanel.ResumeLayout(false);
+            this.triggerPeriodPanel.PerformLayout();
+            this.knownHalAltPanel.ResumeLayout(false);
+            this.knownHalAltPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
