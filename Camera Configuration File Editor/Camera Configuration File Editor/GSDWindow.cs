@@ -99,7 +99,7 @@ namespace Camera_Configuration_File_Editor
         }
 
         //moves control with the trackbar as it scrolls vertically
-        private void moveWithTrackBar(Control control)
+        public void moveWithTrackBar(Control control)
         {
             int trackBarFF = 10;
             int trackBarBottom = altitudeTrackBar.Location.Y + altitudeTrackBar.Size.Height - trackBarFF;
@@ -114,7 +114,7 @@ namespace Camera_Configuration_File_Editor
             return new Size(x, y);
         }
 
-        private void updateGSD()
+        public void updateGSD()
         {
             groundCoverage = 2 * altitudeTrackBar.Value * Math.Tan(((double)fovNumericUpDown.Value / 2) * (Math.PI / 180.0));
             Size cameraResolution = getCameraResolution();
@@ -127,7 +127,7 @@ namespace Camera_Configuration_File_Editor
             pictureBoxModel.Invalidate();
         }
 
-        private void updatePictureInformation()
+        public void updatePictureInformation()
         {
             //coverage
             //calculate in square feet
@@ -182,7 +182,7 @@ namespace Camera_Configuration_File_Editor
             gsdYLabel.Text = string.Format("{0:#,0.###}", convertedGSDY);
         }
 
-        private void pictureBoxModel_Paint(object sender, PaintEventArgs e)
+        public void pictureBoxModel_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
 
@@ -281,46 +281,46 @@ namespace Camera_Configuration_File_Editor
             g.DrawLine(fovPen, fovLeftPoint, fovRightPoint);
         }
 
-        private void altitudeTrackBar_ValueChanged(object sender, EventArgs e)
+        public void altitudeTrackBar_ValueChanged(object sender, EventArgs e)
         {
             altitudeNumericUpDown.Value = altitudeTrackBar.Value;
             followTrackBar();
             updateGSD();
         }
 
-        private void altitudeNumericUpDown_ValueChanged(object sender, EventArgs e)
+        public void altitudeNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             altitudeTrackBar.Value = (int)altitudeNumericUpDown.Value;
         }
 
-        private void fovNumericUpDown_ValueChanged(object sender, EventArgs e)
+        public void fovNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             updateGSD();
         }
 
-        private void cameraResComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        public void cameraResComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string[] resolution = camResComboBox.Text.Split('x');
             camResXNumericUpDown.Value = Convert.ToInt32(resolution[0]);
             camResYNumericUpDown.Value = Convert.ToInt32(resolution[1]);
         }
 
-        private void coverageUnitComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        public void coverageUnitComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             updatePictureInformation();
         }
 
-        private void gsdUnitComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        public void gsdUnitComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             updatePictureInformation();
         }
 
-        private void camResXNumericUpDown_ValueChanged(object sender, EventArgs e)
+        public void camResXNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             updateGSD();
         }
 
-        private void camResYNumericUpDown_ValueChanged(object sender, EventArgs e)
+        public void camResYNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             updateGSD();
         }

@@ -55,6 +55,8 @@
     <Compile Include="CCFE_ConfigurationTests.cs" />
     <Compile Include="CCFE_DefaultTests.cs" />
     <Compile Include="CCFE_FileHandlerTests.cs" />
+    <Compile Include="GSDWindowTests.cs" />
+    <Compile Include="MainWindowTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

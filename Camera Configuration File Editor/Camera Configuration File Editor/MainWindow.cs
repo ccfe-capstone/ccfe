@@ -22,7 +22,7 @@ namespace Camera_Configuration_File_Editor
             InitializeComponent();
         }
 
-        private void MainWindow_Load(object sender, EventArgs e)
+        public void MainWindow_Load(object sender, EventArgs e)
         {
             genericPropertyPanels = new List<CCFE_GenericPropertyPanel>();
             populateVersions();
@@ -30,7 +30,7 @@ namespace Camera_Configuration_File_Editor
             loadConfiguration(configuration);
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        public void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fileHandler = null;
             newConfiguration(versionToolStripMenuItem.Text);
@@ -38,12 +38,12 @@ namespace Camera_Configuration_File_Editor
             MessageBox.Show("A new Configuration page has been created");
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        public void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fileSearch();
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        public void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (checkSave())
             {
@@ -51,7 +51,7 @@ namespace Camera_Configuration_File_Editor
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        public void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -63,13 +63,13 @@ namespace Camera_Configuration_File_Editor
             }
         }
 
-        private void loadDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
+        public void loadDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             newConfiguration(versionToolStripMenuItem.Text);
             loadConfiguration(configuration);
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        public void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((string)triggerModeComboBox.SelectedItem == "Time (for systems without GPS only)")
             {
@@ -138,27 +138,27 @@ namespace Camera_Configuration_File_Editor
 
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        public void trackBar1_Scroll(object sender, EventArgs e)
         {
             setTrackBarLabelLocationAndText();
         }
 
-        private void knownHalAltitudeValue_TextChanged(object sender, EventArgs e)
+        public void knownHalAltitudeValue_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void triggerDistanceValue_TextChanged(object sender, EventArgs e)
+        public void triggerDistanceValue_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void knownHalAltitudeUnit_SelectedIndexChanged(object sender, EventArgs e)
+        public void knownHalAltitudeUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void saveConfigurationButton_Click(object sender, EventArgs e)
+        public void saveConfigurationButton_Click(object sender, EventArgs e)
         {
             if(checkSave())
             {
@@ -166,14 +166,14 @@ namespace Camera_Configuration_File_Editor
             }
         }
 
-        private void setTrackBarLabelLocationAndText()
+        public void setTrackBarLabelLocationAndText()
         {
             overlapTrackBarValueLabel.Text = overlapTrackBar.Value.ToString() + "%";
             overlapTrackBarValueLabel.Location = determineCoordsOfOverlapTrackBar();
         }
 
         //needed to move the trackbarLabel with the trackbar as it scrolls horizontally
-        private Point determineCoordsOfOverlapTrackBar()
+        public Point determineCoordsOfOverlapTrackBar()
         {
             int xValue;
             if (overlapTrackBar.Value < 10)
@@ -191,7 +191,7 @@ namespace Camera_Configuration_File_Editor
             return new Point(xValue + (overlapTrackBar.Value * 3), overlapTrackBarValueLabel.Location.Y);
         }
 
-        private void saveConfiguration()
+        public void saveConfiguration()
         {
             //sanitize inputs (remove separators, etc)
             double knownHalAltitude;
@@ -340,7 +340,7 @@ namespace Camera_Configuration_File_Editor
             versionToolStripMenuItem.SelectedIndex = 0;
         }
 
-        private void versionToolStripMenuItem_SelectedIndexChanged(object sender, EventArgs e)
+        public void versionToolStripMenuItem_SelectedIndexChanged(object sender, EventArgs e)
         {
             verToolStripMenuItem.Text = "v" + versionToolStripMenuItem.Text;
 
@@ -397,10 +397,15 @@ namespace Camera_Configuration_File_Editor
             triggerOptionsPanel.Controls.AddRange(genericPropertyPanels.ToArray());
         }
 
-        private void gSDToolStripMenuItem_Click(object sender, EventArgs e)
+        public void gSDToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GSDWindow groundSampleDistaceWindow = new GSDWindow();
             groundSampleDistaceWindow.Show();
+        }
+
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
