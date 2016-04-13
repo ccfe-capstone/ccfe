@@ -300,9 +300,12 @@ namespace Camera_Configuration_File_Editor
 
         private void cameraResComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string[] resolution = camResComboBox.Text.Split('x');
-            camResXNumericUpDown.Value = Convert.ToInt32(resolution[0]);
-            camResYNumericUpDown.Value = Convert.ToInt32(resolution[1]);
+            if (!camResComboBox.Text.Equals("Custom"))
+            {
+                string[] resolution = camResComboBox.Text.Split(); //1248 x 950 - 1.2MP
+                camResXNumericUpDown.Value = Convert.ToInt32(resolution[0]);
+                camResYNumericUpDown.Value = Convert.ToInt32(resolution[2]);
+            }
         }
 
         private void coverageUnitComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -317,12 +320,32 @@ namespace Camera_Configuration_File_Editor
 
         private void camResXNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            camResCustomCheck();
             updateGSD();
         }
 
         private void camResYNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            camResCustomCheck();
             updateGSD();
+        }
+
+        //depending on what is in the camera resolution x and y, the combo box may be changed to custom
+        private void camResCustomCheck()
+        {
+            for (int i = 0; i < camResComboBox.Items.Count - 1; i++)
+            {
+                string[] resolution = camResComboBox.Items[i].ToString().Split();
+                if ((camResXNumericUpDown.Value == Convert.ToDecimal(resolution[0])) && (camResYNumericUpDown.Value == Convert.ToDecimal(resolution[2])))
+                {
+                    camResComboBox.SelectedIndex = camResComboBox.FindString(camResComboBox.Items[i].ToString());
+                    return;
+                }
+                else
+                {
+                    camResComboBox.SelectedIndex = camResComboBox.FindString("Custom");
+                }
+            }
         }
     }
 }

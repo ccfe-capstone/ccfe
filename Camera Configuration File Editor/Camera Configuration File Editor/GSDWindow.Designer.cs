@@ -93,11 +93,12 @@
             this.camResComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.camResComboBox.FormattingEnabled = true;
             this.camResComboBox.Items.AddRange(new object[] {
-            "1248 x 950",
-            "3808 x 2754"});
+            "1248 x 950 - 1.2 MP",
+            "3808 x 2754 - 10.5 MP",
+            "Custom"});
             this.camResComboBox.Location = new System.Drawing.Point(6, 19);
             this.camResComboBox.Name = "camResComboBox";
-            this.camResComboBox.Size = new System.Drawing.Size(100, 21);
+            this.camResComboBox.Size = new System.Drawing.Size(131, 21);
             this.camResComboBox.TabIndex = 3;
             this.camResComboBox.SelectedIndexChanged += new System.EventHandler(this.cameraResComboBox_SelectedIndexChanged);
             // 
@@ -127,7 +128,7 @@
             this.cameraParametersGroupBox.Location = new System.Drawing.Point(413, 9);
             this.cameraParametersGroupBox.Name = "cameraParametersGroupBox";
             this.cameraParametersGroupBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cameraParametersGroupBox.Size = new System.Drawing.Size(301, 130);
+            this.cameraParametersGroupBox.Size = new System.Drawing.Size(341, 130);
             this.cameraParametersGroupBox.TabIndex = 9;
             this.cameraParametersGroupBox.TabStop = false;
             this.cameraParametersGroupBox.Text = "Camera Parameters";
@@ -139,7 +140,7 @@
             this.fovGroupBox.Location = new System.Drawing.Point(6, 75);
             this.fovGroupBox.Name = "fovGroupBox";
             this.fovGroupBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.fovGroupBox.Size = new System.Drawing.Size(289, 47);
+            this.fovGroupBox.Size = new System.Drawing.Size(329, 47);
             this.fovGroupBox.TabIndex = 12;
             this.fovGroupBox.TabStop = false;
             this.fovGroupBox.Text = "Field of View";
@@ -173,14 +174,14 @@
             this.camResGroupBox.Location = new System.Drawing.Point(6, 19);
             this.camResGroupBox.Name = "camResGroupBox";
             this.camResGroupBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.camResGroupBox.Size = new System.Drawing.Size(289, 50);
+            this.camResGroupBox.Size = new System.Drawing.Size(329, 50);
             this.camResGroupBox.TabIndex = 11;
             this.camResGroupBox.TabStop = false;
             this.camResGroupBox.Text = "Camera Resolution";
             // 
             // camResYNumericUpDown
             // 
-            this.camResYNumericUpDown.Location = new System.Drawing.Point(222, 19);
+            this.camResYNumericUpDown.Location = new System.Drawing.Point(258, 19);
             this.camResYNumericUpDown.Name = "camResYNumericUpDown";
             this.camResYNumericUpDown.Size = new System.Drawing.Size(57, 20);
             this.camResYNumericUpDown.TabIndex = 12;
@@ -188,7 +189,7 @@
             // 
             // camResXNumericUpDown
             // 
-            this.camResXNumericUpDown.Location = new System.Drawing.Point(134, 19);
+            this.camResXNumericUpDown.Location = new System.Drawing.Point(170, 19);
             this.camResXNumericUpDown.Name = "camResXNumericUpDown";
             this.camResXNumericUpDown.Size = new System.Drawing.Size(59, 20);
             this.camResXNumericUpDown.TabIndex = 11;
@@ -198,7 +199,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(112, 22);
+            this.label2.Location = new System.Drawing.Point(148, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(16, 13);
             this.label2.TabIndex = 10;
@@ -208,7 +209,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(199, 17);
+            this.label1.Location = new System.Drawing.Point(235, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(16, 20);
             this.label1.TabIndex = 9;
@@ -230,7 +231,7 @@
             this.outputPictureInfoGroupBox.Location = new System.Drawing.Point(413, 146);
             this.outputPictureInfoGroupBox.Name = "outputPictureInfoGroupBox";
             this.outputPictureInfoGroupBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.outputPictureInfoGroupBox.Size = new System.Drawing.Size(301, 323);
+            this.outputPictureInfoGroupBox.Size = new System.Drawing.Size(341, 323);
             this.outputPictureInfoGroupBox.TabIndex = 11;
             this.outputPictureInfoGroupBox.TabStop = false;
             this.outputPictureInfoGroupBox.Text = "Output Picture Information";
@@ -245,7 +246,7 @@
             this.groupBox1.Location = new System.Drawing.Point(6, 68);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(289, 50);
+            this.groupBox1.Size = new System.Drawing.Size(329, 50);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ground Sample Distance (GSD)";
@@ -307,7 +308,7 @@
             this.groundCoverageGroupBox.Location = new System.Drawing.Point(6, 19);
             this.groundCoverageGroupBox.Name = "groundCoverageGroupBox";
             this.groundCoverageGroupBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groundCoverageGroupBox.Size = new System.Drawing.Size(289, 43);
+            this.groundCoverageGroupBox.Size = new System.Drawing.Size(329, 43);
             this.groundCoverageGroupBox.TabIndex = 0;
             this.groundCoverageGroupBox.TabStop = false;
             this.groundCoverageGroupBox.Text = "Ground Coverage";
@@ -352,7 +353,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(726, 481);
+            this.ClientSize = new System.Drawing.Size(766, 481);
             this.Controls.Add(this.outputPictureInfoGroupBox);
             this.Controls.Add(this.altitudeNumericUpDown);
             this.Controls.Add(this.cameraParametersGroupBox);
