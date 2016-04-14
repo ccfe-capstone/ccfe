@@ -395,6 +395,9 @@ namespace Camera_Configuration_File_Editor
 
             //add extra panels to the group box
             triggerOptionsPanel.Controls.AddRange(genericPropertyPanels.ToArray());
+
+            //update configuration with new properties
+            configuration = CCFE_Default.getDefaultConfiguration(versionToolStripMenuItem.Text);
         }
 
         private void gSDToolStripMenuItem_Click(object sender, EventArgs e)
