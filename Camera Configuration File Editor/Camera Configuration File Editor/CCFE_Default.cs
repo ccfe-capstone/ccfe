@@ -10,7 +10,7 @@ namespace Camera_Configuration_File_Editor
 {
     public class CCFE_Default
     {
-        public const string programVersion = "0.3.0";
+        public const string programVersion = "0.4.0";
 
         public static readonly ReadOnlyCollection<string> hardVersions =
             new ReadOnlyCollection<string>(new[]
