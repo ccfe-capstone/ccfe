@@ -307,10 +307,10 @@
             // 
             this.outputPictureInfoGroupBox.Controls.Add(this.groupBox1);
             this.outputPictureInfoGroupBox.Controls.Add(this.groundCoverageGroupBox);
-            this.outputPictureInfoGroupBox.Location = new System.Drawing.Point(413, 190);
+            this.outputPictureInfoGroupBox.Location = new System.Drawing.Point(413, 145);
             this.outputPictureInfoGroupBox.Name = "outputPictureInfoGroupBox";
             this.outputPictureInfoGroupBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.outputPictureInfoGroupBox.Size = new System.Drawing.Size(341, 323);
+            this.outputPictureInfoGroupBox.Size = new System.Drawing.Size(341, 368);
             this.outputPictureInfoGroupBox.TabIndex = 11;
             this.outputPictureInfoGroupBox.TabStop = false;
             this.outputPictureInfoGroupBox.Text = "Output Picture Information";
