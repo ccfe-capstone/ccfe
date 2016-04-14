@@ -39,7 +39,7 @@ namespace Camera_Configuration_File_Editor
         Image skyImage = Properties.Resources.sky;
 
         double groundSampleDistanceX, groundSampleDistanceY;
-        double groundCoverage;
+        double groundCoverageX, groundCoverageY;
 
         double scaleFactor;
         #endregion
@@ -72,8 +72,16 @@ namespace Camera_Configuration_File_Editor
             altitudeNumericUpDown.Minimum = MIN_DRONE_ALTITUDE;
 
             //set max and min
-            fovNumericUpDown.Maximum = MAX_FOV;
-            fovNumericUpDown.Minimum = MIN_FOV;
+            fovHNumericUpDown.Maximum = MAX_FOV;
+            fovHNumericUpDown.Minimum = MIN_FOV;
+            fovVNumericUpDown.Maximum = MAX_FOV;
+            fovVNumericUpDown.Minimum = MIN_FOV;
+            fovHTrackBar.Maximum = MAX_FOV;
+            fovHTrackBar.Minimum = MIN_FOV;
+            fovHTrackBar.Value = (int)fovHNumericUpDown.Value;
+            fovVTrackBar.Maximum = MAX_FOV;
+            fovVTrackBar.Minimum = MIN_FOV;
+            fovVTrackBar.Value = (int)fovVNumericUpDown.Value;
 
             //set max and min
             camResXNumericUpDown.Maximum = MAX_CAMERA_RESOLUTION;
@@ -86,7 +94,7 @@ namespace Camera_Configuration_File_Editor
             altitudeTrackBar.Height = (int)(pictureBoxModel.ClientSize.Height - MAX_COVERAGE);
             altitudeTrackBar.Maximum = MAX_DRONE_ALTITUDE;
             altitudeTrackBar.Minimum = MIN_DRONE_ALTITUDE;
-            altitudeTrackBar.Value = altitudeTrackBar.Minimum;
+            altitudeTrackBar.Value = (altitudeTrackBar.Maximum - altitudeTrackBar.Minimum) / 2;
             followTrackBar();
 
             updateGSD();
@@ -116,10 +124,11 @@ namespace Camera_Configuration_File_Editor
 
         private void updateGSD()
         {
-            groundCoverage = 2 * altitudeTrackBar.Value * Math.Tan(((double)fovNumericUpDown.Value / 2) * (Math.PI / 180.0));
+            groundCoverageX = 2 * altitudeTrackBar.Value * Math.Tan(((double)fovHNumericUpDown.Value / 2) * (Math.PI / 180.0));
+            groundCoverageY = 2 * altitudeTrackBar.Value * Math.Tan(((double)fovVNumericUpDown.Value / 2) * (Math.PI / 180.0));
             Size cameraResolution = getCameraResolution();
-            groundSampleDistanceX = groundCoverage / cameraResolution.Width;
-            groundSampleDistanceY = groundCoverage / cameraResolution.Height;
+            groundSampleDistanceX = groundCoverageX / cameraResolution.Width;
+            groundSampleDistanceY = groundCoverageY / cameraResolution.Height;
 
             updatePictureInformation();
 
@@ -131,7 +140,7 @@ namespace Camera_Configuration_File_Editor
         {
             //coverage
             //calculate in square feet
-            double coverageArea = Math.Pow(groundCoverage, 2);
+            double coverageArea = groundCoverageX * groundCoverageY;
 
             if (coverageUnitComboBox.Text.Equals("square yards"))
             {
@@ -234,8 +243,8 @@ namespace Camera_Configuration_File_Editor
             g.DrawImage(skyImage, skyRect, skySrcX, skySrcY, skyWidth, skyHeight, GraphicsUnit.Pixel);
 
             //draw coverage
-            int coverageWidth = Math.Min((int)(groundCoverage * scaleFactor), outsideWidth - 1);
-            int coverageHeight = Math.Min((int)(groundCoverage * scaleFactor), outsideHeight - 1);
+            int coverageWidth = Math.Min((int)(groundCoverageX * scaleFactor), outsideWidth - 1);
+            int coverageHeight = Math.Min((int)(groundCoverageY * scaleFactor), outsideHeight - 1);
             Size coverageSize = new Size(coverageWidth, coverageHeight);
 
             int fieldMixX = fieldLocation.X + fieldSize.Width / 2;
@@ -293,16 +302,14 @@ namespace Camera_Configuration_File_Editor
             altitudeTrackBar.Value = (int)altitudeNumericUpDown.Value;
         }
 
-        private void fovNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            updateGSD();
-        }
-
         private void cameraResComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string[] resolution = camResComboBox.Text.Split('x');
-            camResXNumericUpDown.Value = Convert.ToInt32(resolution[0]);
-            camResYNumericUpDown.Value = Convert.ToInt32(resolution[1]);
+            if (!camResComboBox.Text.Equals("Custom"))
+            {
+                string[] resolution = camResComboBox.Text.Split(); //1248 x 950 - 1.2MP
+                camResXNumericUpDown.Value = Convert.ToInt32(resolution[0]);
+                camResYNumericUpDown.Value = Convert.ToInt32(resolution[2]);
+            }
         }
 
         private void coverageUnitComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -315,14 +322,56 @@ namespace Camera_Configuration_File_Editor
             updatePictureInformation();
         }
 
+        private void fovHNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            fovHTrackBar.Value = (int)fovHNumericUpDown.Value;
+            updateGSD();
+        }
+
+        private void fovVNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            fovVTrackBar.Value = (int)fovVNumericUpDown.Value;
+            updateGSD();
+        }
+
+        private void fovHTrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            fovHNumericUpDown.Value = fovHTrackBar.Value;
+        }
+
+        private void fovVTrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            fovVNumericUpDown.Value = fovVTrackBar.Value;
+        }
+
         private void camResXNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            camResCustomCheck();
             updateGSD();
         }
 
         private void camResYNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            camResCustomCheck();
             updateGSD();
+        }
+
+        //depending on what is in the camera resolution x and y, the combo box may be changed to custom
+        private void camResCustomCheck()
+        {
+            for (int i = 0; i < camResComboBox.Items.Count - 1; i++)
+            {
+                string[] resolution = camResComboBox.Items[i].ToString().Split();
+                if ((camResXNumericUpDown.Value == Convert.ToDecimal(resolution[0])) && (camResYNumericUpDown.Value == Convert.ToDecimal(resolution[2])))
+                {
+                    camResComboBox.SelectedIndex = camResComboBox.FindString(camResComboBox.Items[i].ToString());
+                    return;
+                }
+                else
+                {
+                    camResComboBox.SelectedIndex = camResComboBox.FindString("Custom");
+                }
+            }
         }
     }
 }
