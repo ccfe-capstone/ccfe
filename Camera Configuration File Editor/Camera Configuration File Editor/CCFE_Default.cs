@@ -10,6 +10,8 @@ namespace Camera_Configuration_File_Editor
 {
     public class CCFE_Default
     {
+        public const string programVersion = "0.3.0";
+
         public static readonly ReadOnlyCollection<string> hardVersions =
             new ReadOnlyCollection<string>(new[]
                 {
@@ -96,6 +98,152 @@ namespace Camera_Configuration_File_Editor
             }
 
             return versionList;
+        }
+
+        public static List<CCFE_ConfigurationProperty> getCommentPropertyPairs(string configurationVersion)
+        {
+            List<CCFE_ConfigurationProperty> propertyList = new List<CCFE_ConfigurationProperty>();
+
+            //check if default config file exists
+            string fileLocation = AppDomain.CurrentDomain.BaseDirectory + "/config/" + configurationVersion + ".txt";
+            if (File.Exists(fileLocation))
+            {
+                CCFE_FileHandler fileHandler = new CCFE_FileHandler(fileLocation);
+                propertyList = fileHandler.parseComments();
+            }
+            else //use hardcoded values
+            {
+                if (configurationVersion.Equals("1.0"))
+                {
+                    string property = "TriggerMode";
+                    string comment =
+                        "# TriggerMode\n" +
+                        "# 0: Time (for systems without GPS only)\n" +
+                        "# 1: Network\n" +
+                        "# 2: MAVlink\n" +
+                        "# 3: GPS Distance\n" +
+                        "# 4: GPS Time\n" +
+                        "# 5: GPS Overlap - Auto Detect Altitude\n" +
+                        "# 6: GPS Overlap - Known Altitude\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "OverlapPercent";
+                    comment =
+                        "\n" +
+                        "# --------- GPS Overlap Trigger Options ---------\n" +
+                        "# Only used when TriggerMode is 5 or 6 (GPS Overlap - Auto Detect OR Known Altitude)\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "KnownHalAltitudeUnits";
+                    comment =
+                        "\n" +
+                        "# Only used when TriggerMode is 6 (GPS Overlap - Known Altitude)\n" +
+                        "# KnownAltitudeUnits options: feet, meters\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "KnownHalAltitude";
+                    comment =
+                        "";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "Time";
+                    comment =
+                        "\n" +
+                        "# --------- Time Trigger Options ---------\n" +
+                        "# Only used when TriggerMode is 0 or 4 (Time)\n" +
+                        "# Time in seconds\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "Distance";
+                    comment =
+                        "\n" +
+                        "# --------- GPS Distance Trigger Options ---------\n" +
+                        "# Only used when TriggerMode is 3 (Distance)\n" +
+                        "# Distance in meters\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "WaitForGpsFix";
+                    comment =
+                        "\n" +
+                        "# --------- General GPS Options -------------------\n" +
+                        "# Only used when TriggerMode is 3,4,5,6\n" +
+                        "# Options: yes, no\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "Version";
+                    comment =
+                        "\n" +
+                        "# Indicates version of this file, to know what fields are available\n" +
+                        "# Minor number increments when new fields are added\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+                }
+                else //default to 1.0
+                {
+                    string property = "TriggerMode";
+                    string comment =
+                        "# TriggerMode\n" +
+                        "# 0: Time (for systems without GPS only)\n" +
+                        "# 1: Network\n" +
+                        "# 2: MAVlink\n" +
+                        "# 3: GPS Distance\n" +
+                        "# 4: GPS Time\n" +
+                        "# 5: GPS Overlap - Auto Detect Altitude\n" +
+                        "# 6: GPS Overlap - Known Altitude\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "OverlapPercent";
+                    comment =
+                        "\n" +
+                        "# --------- GPS Overlap Trigger Options ---------\n" +
+                        "# Only used when TriggerMode is 5 or 6 (GPS Overlap - Auto Detect OR Known Altitude)\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "KnownHalAltitudeUnits";
+                    comment =
+                        "\n" +
+                        "# Only used when TriggerMode is 6 (GPS Overlap - Known Altitude)\n" +
+                        "# KnownAltitudeUnits options: feet, meters\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "KnownHalAltitude";
+                    comment =
+                        "";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "Time";
+                    comment =
+                        "\n" +
+                        "# --------- Time Trigger Options ---------\n" +
+                        "# Only used when TriggerMode is 0 or 4 (Time)\n" +
+                        "# Time in seconds\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "Distance";
+                    comment =
+                        "\n" +
+                        "# --------- GPS Distance Trigger Options ---------\n" +
+                        "# Only used when TriggerMode is 3 (Distance)\n" +
+                        "# Distance in meters\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "WaitForGpsFix";
+                    comment =
+                        "\n" +
+                        "# --------- General GPS Options -------------------\n" +
+                        "# Only used when TriggerMode is 3,4,5,6\n" +
+                        "# Options: yes, no\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+
+                    property = "Version";
+                    comment =
+                        "\n" +
+                        "# Indicates version of this file, to know what fields are available\n" +
+                        "# Minor number increments when new fields are added\n";
+                    propertyList.Add(new CCFE_ConfigurationProperty(property, comment));
+                }
+            }
+
+            return propertyList;
         }
     }
 }
