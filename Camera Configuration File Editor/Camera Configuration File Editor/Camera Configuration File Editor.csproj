@@ -104,7 +104,6 @@
     <None Include="Resources\field.png" />
     <None Include="Resources\sky.jpg" />
     <Content Include="icon.ico" />
-    <Content Include="senteraIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -39,9 +39,7 @@
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripComboBox();
             this.gSDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchCalculatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TriggerModeGroupBox = new System.Windows.Forms.GroupBox();
             this.triggerModeComboBox = new System.Windows.Forms.ComboBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -86,8 +84,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.verToolStripMenuItem,
-            this.gSDToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.gSDToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(553, 24);
@@ -152,7 +149,7 @@
             this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.versionToolStripMenuItem});
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
-            this.verToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.verToolStripMenuItem.Text = "Version";
             // 
             // versionToolStripMenuItem
@@ -164,31 +161,20 @@
             // 
             // gSDToolStripMenuItem
             // 
+            this.gSDToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.launchCalculatorToolStripMenuItem});
             this.gSDToolStripMenuItem.Name = "gSDToolStripMenuItem";
             this.gSDToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.gSDToolStripMenuItem.Text = "GSD";
-            this.gSDToolStripMenuItem.Click += new System.EventHandler(this.gSDToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
+            // launchCalculatorToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.helpToolStripMenuItem1,
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // helpToolStripMenuItem1
-            // 
-            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
-            this.helpToolStripMenuItem1.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.launchCalculatorToolStripMenuItem.Name = "launchCalculatorToolStripMenuItem";
+            this.launchCalculatorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.L)));
+            this.launchCalculatorToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.launchCalculatorToolStripMenuItem.Text = "Launch Calculator";
+            this.launchCalculatorToolStripMenuItem.Click += new System.EventHandler(this.launchCalculatorToolStripMenuItem_Click);
             // 
             // TriggerModeGroupBox
             // 
@@ -464,6 +450,7 @@
             // saveFileDialog
             // 
             this.saveFileDialog.DefaultExt = "txt";
+            this.saveFileDialog.FileName = "UserSettings";
             this.saveFileDialog.Filter = "Configuration Files|*.txt|All Files|*.*";
             this.saveFileDialog.Title = "Save Configuration File";
             // 
@@ -479,7 +466,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(569, 430);
             this.Name = "MainWindow";
-            this.Text = "Sentera Camera Configurator";
+            this.Text = "Camera Configuration File Editor";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -511,11 +498,8 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadDefaultsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.GroupBox TriggerModeGroupBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gSDToolStripMenuItem;
         private System.Windows.Forms.ComboBox triggerModeComboBox;
         private System.Windows.Forms.GroupBox TriggerOptionsGroupBox;
@@ -544,6 +528,7 @@
         private System.Windows.Forms.ToolStripMenuItem verToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox versionToolStripMenuItem;
         private System.Windows.Forms.Panel triggerOptionsPanel;
+        private System.Windows.Forms.ToolStripMenuItem launchCalculatorToolStripMenuItem;
     }
 }
 

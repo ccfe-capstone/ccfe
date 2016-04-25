@@ -442,7 +442,7 @@
             this.Controls.Add(this.altitudeTrackBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GSDWindow";
-            this.Text = "GSDWindow";
+            this.Text = "GSD Calcuator";
             ((System.ComponentModel.ISupportInitialize)(this.altitudeTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxModel)).EndInit();
             this.cameraParametersGroupBox.ResumeLayout(false);

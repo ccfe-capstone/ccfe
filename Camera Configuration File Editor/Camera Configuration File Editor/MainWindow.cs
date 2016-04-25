@@ -400,7 +400,7 @@ namespace Camera_Configuration_File_Editor
             configuration = CCFE_Default.getDefaultConfiguration(versionToolStripMenuItem.Text);
         }
 
-        private void gSDToolStripMenuItem_Click(object sender, EventArgs e)
+        private void launchCalculatorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GSDWindow groundSampleDistaceWindow = new GSDWindow();
             groundSampleDistaceWindow.Show();
